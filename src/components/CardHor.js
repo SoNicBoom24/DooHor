@@ -1,9 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import Card from "react-native-card-component";
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 export default function CardHor() {
     return (
