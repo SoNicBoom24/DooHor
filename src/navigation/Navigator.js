@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
@@ -8,41 +8,23 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Card from "react-native-card-component";
 import CardHor from '../components/CardHor';
+import Toggle from '../components/Toggle';
 
 function HomeScreen({ navigation }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: "#FFDA79", }}>
+            {/* <ScrollView> */}
             <CardHor/>
-            {/* <Text>Home Screen</Text>
-            <Button
-                title="Go to Details"
-                onPress={() => navigation.navigate('Details')}
-            /> */}
-            {/* <View style={{ borderRadius: 20, backgroundColor: "#fff", width: 400, height: 200 }}>
-                <Card.Row>
-                    <Card.Thumbnail source={{ uri: 'https://picsum.photos/200' }}
-                        style={{ height: 200, width: 200, borderRadius: 20 }} />
-                    <Card.Content>
-                        <Card.Col>
-                            <Card.Row>
-                                <Card.Title text='หอ1' style={{ fontSize: 30, paddingHorizontal: 10 }} />
-                                <Card.Title text='4500 $' style={{ alignSelf: "center", justifyContent: "center", paddingLeft: 40 }} />
-                            </Card.Row>
-                        </Card.Col>
-                        <Card.Col>
-                            <Card.Title text='คำอธิบายเพิ่มเติม' style={{alignSelf: "flex-end", paddingLeft: 40, paddingTop: 50, color: "gray"}} />
-                        </Card.Col>
-                    </Card.Content>
-                </Card.Row>
-            </View> */}
+            {/* <Toggle/> */}
+        {/* </ScrollView> */}
         </View>
     );
 }
 
-function DetailsScreen({ navigation }) {
+function ChatScreen({ navigation }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: "#FFDA79", }}>
-            <Text>Details Screen</Text>
+            <Text>Chat Screen</Text>
             {/* <Button
         title="Go back to first screen in stack"
         onPress={() => navigation.popToTop()}
@@ -91,7 +73,7 @@ export default function App() {
                     ),
                     tabBarShowLabel: false,
                 }} />
-                <Stack.Screen name="Details" component={DetailsScreen} options={{
+                <Stack.Screen name="Details" component={ChatScreen} options={{
                     tabBarIcon: () => (
                         <FontAwesome5 name="comment" size={25} color={"black"} />
                     ),
