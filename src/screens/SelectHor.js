@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions, Switch } from 'react-native';
 
-import { ToggleButton } from 'react-native-paper';
+import SwitchSelector from 'react-native-switch-selector';
 
 import CardHor from "../components/CardHor";
 
-export default function selestHor() {
-    // const [status, setStatus] = React.useState('checked');
-    // const onButtonToggle = value => {
-    //     setStatus(status === 'checked' ? 'unchecked' : 'checked');
-    //   };
-    return (
-        <View style={styles.container}>
-            {/* <ToggleButton
-      icon="bluetooth"
-      value="bluetooth"
-      status={status}
-      onPress={onButtonToggle}
-      size={50}
-      color={"white"}
-    ></ToggleButton> */}
-            <View style={styles.slide}>
-            </View>
-        </View>
+const options = [
+    { label: 'เครื่องปรับอากาศ', value: '1' },
+    { label: 'พัดลม', value: '0' },
+];
 
+export default function selestHor() {
+    return (
+        <>
+        <SwitchSelector options={options} 
+        initial={0} 
+        textColor={"black"}
+        selectedColor={"black"}
+        backgroundColor={"#FFA927"}
+        borderColor={"black"}
+        buttonColor={"white"}
+        style={{width: "90%", borderRadius: 20, marginTop: 20, backgroundColor: "#FFA927", padding: 5}}
+        onPress={value => console.log(`Call onPress with value: ${value}`)} />
+        </>
     );
 }
 const styles = StyleSheet.create({

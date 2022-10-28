@@ -148,7 +148,6 @@ export default function App() {
                         display: 'flex',
                         flexDirection: 'row',
                     }}>
-                        {/* <Text>DooHor</Text> */}
                         <Image source={imgDooHor} style={{resizeMode: "contain", width: "25%"}} />
                     </View>
                     <View style={{
