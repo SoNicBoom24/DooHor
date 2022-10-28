@@ -21,19 +21,26 @@ export default function CardHor() {
 
     );
 }
-
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         flexWrap: 'wrap',
         width: "90%",
-        height: "130px",
+        height: 130,
         backgroundColor: "white",
         borderRadius: 20,
+        marginTop: 20,
+        shadowColor: "#000",
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
+        shadowOffset: {
+            width: 0,
+            height: 10
+        }
     },
     img: {
-        width: "130px",
-        height: "130px",
+        width: 130,
+        height: 130,
         borderRadius: 20,
         flexWrap: 'wrap',
         resizeMode: "cover",

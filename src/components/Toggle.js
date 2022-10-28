@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions } from 'react-native';
 import Toggle from "react-native-toggle-element";
