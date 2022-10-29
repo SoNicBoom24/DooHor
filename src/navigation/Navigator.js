@@ -7,8 +7,8 @@ import imgDooHor from "../../assets/logoDooHor.png"
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from '@expo/vector-icons';
 
-import CardHor from "../components/CardHor";
 import ScreenHor from "../screens/SelectHor";
+import ScreenRegister from "../screens/Registration";
 
 function HomeScreen() {
 
@@ -23,57 +23,6 @@ function HomeScreen() {
         >
             <Text>Home Screen</Text>
         </View>
-        // <>
-        //     <View
-        //         style={{
-        //             flex: 0,
-        //             alignItems: 'center',
-        //             height: 10,
-        //             padding: 10,
-        //             flexDirection: "row",
-        //             backgroundColor: "white",
-        //             borderRadius: 20,
-        //             justifyContent: "space-between",
-        //             marginHorizontal: 20,
-        //             paddingVertical: 20,
-        //             marginTop: 40
-        //         }}
-        //     >
-        //         <View>
-        //             <Text>DooHor</Text>
-        //         </View>
-        //         <View style={{
-        //             display: 'flex',
-        //             flexDirection: 'row',
-        //         }}>
-        //             <FontAwesome style={{ marginRight: 20 }} name="comment" size={25} color={"black"} />
-        //             <FontAwesome name="user" size={25} color={"black"} />
-        //             {/* <Ionicons name="md-checkmark-circle" size={32} color="green" /> */}
-        //         </View>
-        //     </View>
-        //     <ScrollView>
-        //         <View
-        //             style={{
-        //                 flex: 1,
-        //                 alignItems: "center",
-        //                 justifyContent: "center",
-        //                 backgroundColor: "#FFDA79",
-        //             }}
-        //         >
-        //             <CardHor />
-        //             <CardHor />
-        //             <CardHor />
-        //             <CardHor />
-        //             <CardHor />
-        //             <CardHor />
-        //             <CardHor />
-        //             <CardHor />
-        //             <CardHor />
-        //             <CardHor />
-        //             {/* <Toggle/> */}
-        //         </View>
-        //     </ScrollView>
-        // </>
     );
 }
 
@@ -126,8 +75,6 @@ export default function App() {
                     backgroundColor: "#FFDA79",
                 }}
             >
-                {/* <Text>Hello</Text> */}
-                {/* <HomeScreen /> */}
                 <>
                 <View
                     style={{
@@ -167,17 +114,8 @@ export default function App() {
                             backgroundColor: "#FFDA79",
                         }}
                     >
-                        
-                        <ScreenHor />
-                        <CardHor />
-                        <CardHor />
-                        <CardHor />
-                        <CardHor />
-                        <CardHor />
-                        <CardHor />
-                        <CardHor />
-                        <CardHor />
-                        <CardHor />
+                        {/* <ScreenHor /> */}
+                        <ScreenRegister />
                     </View>
                 </ScrollView>
                 </>

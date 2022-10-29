@@ -10,10 +10,10 @@ const options = [
     { label: 'พัดลม', value: '0' },
 ];
 
-export default function selestHor() {
+export default function selectHor() {
     return (
         <>
-        <SwitchSelector options={options} 
+        <SwitchSelector options={options}
         initial={0} 
         textColor={"black"}
         selectedColor={"black"}
@@ -22,6 +22,12 @@ export default function selestHor() {
         buttonColor={"white"}
         style={{width: "90%", borderRadius: 20, marginTop: 20, backgroundColor: "#FFA927", padding: 5}}
         onPress={value => console.log(`Call onPress with value: ${value}`)} />
+        <CardHor />
+        <CardHor />
+        <CardHor />
+        <CardHor />
+        <CardHor />
+        <CardHor />
         </>
     );
 }
