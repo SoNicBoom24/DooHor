@@ -8,10 +8,9 @@ import {
     Animated,
 } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
-import CardHor from '../components/CardHor';
 
 const TabBarHeight = 48;
-const HeaderHeight = 500;
+const HeaderHeight = 800;
 const tab1ItemSize = (Dimensions.get('window').width - 30) / 2;
 const tab2ItemSize = (Dimensions.get('window').width - 40) / 3;
 
@@ -28,27 +27,28 @@ const TabScene = ({
     const windowHeight = Dimensions.get('window').height;
 
     return (
-        <Animated.FlatList
-            numColumns={numCols}
-            ref={onGetRef}
-            onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
-                useNativeDriver: true,
-            })}
-            onMomentumScrollBegin={onMomentumScrollBegin}
-            onScrollEndDrag={onScrollEndDrag}
-            onMomentumScrollEnd={onMomentumScrollEnd}
-            ItemSeparatorComponent={() => <View style={{ height: 15 }} />}
-            ListHeaderComponent={() => <View style={{ height: 15 }} />}
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            renderItem={renderItem}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-                paddingTop: HeaderHeight + TabBarHeight,
-                paddingHorizontal: 10,
-                minHeight: windowHeight - TabBarHeight,
-            }}
-        />
+        <SafeAreaView style={{ backgroundColor: "#FFDA79" }}>
+            <Animated.FlatList
+                numColumns={numCols}
+                ref={onGetRef}
+                onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
+                    useNativeDriver: true,
+                })}
+                onMomentumScrollBegin={onMomentumScrollBegin}
+                onScrollEndDrag={onScrollEndDrag}
+                onMomentumScrollEnd={onMomentumScrollEnd}
+                ItemSeparatorComponent={() => <View style={{ height: 15 }} />}
+                ListHeaderComponent={() => <View style={{ height: 15 }} />}
+                data={data}
+                renderItem={renderItem}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                    paddingTop: HeaderHeight + TabBarHeight,
+                    paddingHorizontal: 55,
+                    minHeight: windowHeight - TabBarHeight,
+                }}
+            />
+        </SafeAreaView>
     );
 };
 
@@ -133,8 +133,16 @@ const Profile = () => {
 
     const rednerTab1Item = ({ item, index }) => {
         return (
-            <View>
-                <CardHor />
+            <View
+                style={{
+                    borderRadius: 16,
+                    width: Dimensions.get('window').width - 100,
+                    height: tab1ItemSize,
+                    backgroundColor: '#aaa',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                <Text>{index}</Text>
             </View>
         );
     };
@@ -144,7 +152,7 @@ const Profile = () => {
             <View
                 style={{
                     borderRadius: 16,
-                    width: Dimensions.get('window').width - 20,
+                    width: Dimensions.get('window').width - 100,
                     height: tab1ItemSize,
                     backgroundColor: '#aaa',
                     justifyContent: 'center',
@@ -230,7 +238,7 @@ const Profile = () => {
                     }}
                     style={styles.tab}
                     renderLabel={renderLabel}
-                    indicatorStyle={styles.indicator}
+
                 />
             </Animated.View>
         );
@@ -261,16 +269,23 @@ const Profile = () => {
 
 const styles = StyleSheet.create({
     header: {
-        top: 0,
-        height: HeaderHeight,
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
+        top: "7.5%",
+        left: "7.5%",
+        height: HeaderHeight - 250,
+        width: '85%',
         position: 'absolute',
+        borderRadius: 25,
+        backgroundColor: "white",
+        padding: 15
     },
     label: { fontSize: 16, color: '#222' },
-    tab: { elevation: 0, shadowOpacity: 0, backgroundColor: '#FFCC80' },
-    indicator: { backgroundColor: '#222' },
+    tab: {
+        elevation: 0, shadowOpacity: 0,
+        backgroundColor: '#FFCC80',
+        borderRadius: 25,
+        width: '90%',
+        left: "5%"
+    },
 });
 
 export default Profile
