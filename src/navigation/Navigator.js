@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
-import ScreenProfile from "../screens/profile";
+import ScreenProfile from "../screens/Profile";
 
 function HomeScreen() {
 
