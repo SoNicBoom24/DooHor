@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
+import ScreenProfile from "../screens/profile";
 
 function HomeScreen() {
 
@@ -76,48 +77,48 @@ export default function App() {
                 }}
             >
                 <>
-                <View
-                    style={{
-                        flex: 0,
-                        alignItems: 'center',
-                        height: 10,
-                        padding: 10,
-                        flexDirection: "row",
-                        backgroundColor: "white",
-                        borderRadius: 20,
-                        justifyContent: "space-between",
-                        marginHorizontal: 20,
-                        paddingVertical: 20,
-                        marginTop: 40
-                    }}
-                >
-                    <View style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                    }}>
-                        <Image source={imgDooHor} style={{resizeMode: "contain", width: "25%"}} />
-                    </View>
-                    <View style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                    }}>
-                        <Ionicons name="chatbubble-outline" size={24} color="black" style={{position: "absolute", left: -60, top: -15}} />
-                        <FontAwesome name="user" size={25} color={"black"} style={{position: "absolute", left: -25, top: -15}} />
-                    </View>
-                </View>
-                <ScrollView>
                     <View
                         style={{
-                            flex: 1,
-                            alignItems: "center",
-                            justifyContent: "center",
-                            backgroundColor: "#FFDA79",
+                            flex: 0,
+                            alignItems: 'center',
+                            height: 10,
+                            padding: 10,
+                            flexDirection: "row",
+                            backgroundColor: "white",
+                            borderRadius: 20,
+                            justifyContent: "space-between",
+                            marginHorizontal: 20,
+                            paddingVertical: 20,
+                            marginTop: 40
                         }}
                     >
-                        {/* <ScreenHor /> */}
-                        <ScreenRegister />
+                        <View style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                        }}>
+                            <Image source={imgDooHor} style={{ resizeMode: "contain", width: "25%" }} />
+                        </View>
+                        <View style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                        }}>
+                            <Ionicons name="chatbubble-outline" size={24} color="black" style={{ position: "absolute", left: -60, top: -15 }} />
+                            <FontAwesome name="user" size={25} color={"black"} style={{ position: "absolute", left: -25, top: -15 }} />
+                        </View>
                     </View>
-                </ScrollView>
+                    <ScrollView>
+                        <View
+                            style={{
+                                flex: 1,
+                                alignItems: "center",
+                                justifyContent: "center",
+                                backgroundColor: "#FFDA79",
+                            }}
+                        >
+                            {/* <ScreenHor /> */}
+                            <ScreenHor />
+                        </View>
+                    </ScrollView>
                 </>
             </View>
         </>
