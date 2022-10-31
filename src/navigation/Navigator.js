@@ -10,6 +10,8 @@ import { Ionicons } from '@expo/vector-icons';
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
 
+import { NativeRouter, Route, Link } from "react-router-native";
+
 function HomeScreen() {
 
     return (
@@ -67,6 +69,7 @@ function ProfileScreen() {
 
 export default function App() {
     return (
+        <NativeRouter>
         <>
             <View
                 style={{
@@ -121,6 +124,7 @@ export default function App() {
                 </>
             </View>
         </>
+        </NativeRouter>
     );
 }
 
