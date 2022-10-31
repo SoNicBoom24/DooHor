@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
 import ScreenProfile from "../screens/Profile";
+import ScreenDetailroom from "../screens/Detailroom"
 
 import { NativeRouter, Route, Link } from "react-router-native";
 
@@ -71,16 +72,9 @@ function ProfileScreen() {
 export default function App() {
     return (
         <>
-            <View
-                style={{
-                    flex: 1,
-                    flexGrow: 1,
-                    backgroundColor: "#FFDA79",
-                }}
-            >
+            <View style={{ flex: 1, flexGrow: 1, backgroundColor: "#FFDA79", }}>
                 <>
-                    <View
-                        style={{
+                    <View style={{
                             flex: 0,
                             alignItems: 'center',
                             height: 10,
@@ -92,8 +86,7 @@ export default function App() {
                             marginHorizontal: 20,
                             paddingVertical: 20,
                             marginTop: 40
-                        }}
-                    >
+                        }}>
                         <View style={{
                             display: 'flex',
                             flexDirection: 'row',
@@ -111,16 +104,24 @@ export default function App() {
                     {/* <ScrollView>
                         <View
                             style={{
-                                flex: 1,
-                                alignItems: "center",
-                                justifyContent: "center",
-                                backgroundColor: "#FFDA79",
+                                flex: 0,
+                                alignItems: 'center',
+                                height: 10,
+                                padding: 10,
+                                flexDirection: "row",
+                                backgroundColor: "white",
+                                borderRadius: 20,
+                                justifyContent: "space-between",
+                                marginHorizontal: 20,
+                                paddingVertical: 20,
+                                marginTop: 40,
+                                zIndex: 2
                             }}
                         > */}
-                            {/* <ScreenHor /> */}
-                            {/* <ScreenHor /> */}
-                            <ScreenProfile />
-                        {/* </View>
+                    {/* <ScreenHor /> */}
+                    <ScreenRegister />
+                    {/* <ScreenProfile /> */}
+                    {/* </View>
                     </ScrollView> */}
                 </>
             </View>
