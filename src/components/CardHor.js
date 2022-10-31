@@ -9,7 +9,7 @@ export default function CardHor() {
         <View style={styles.container}>
             <Image style={styles.img} source={{ uri: "https://picsum.photos/200" }} />
             <View style={{ position: "absolute", left: 150, top: 10, overflow: "hidden" }}>
-                <Text style={{ fontSize: 25}}>หอ1</Text>
+                <Text style={{ fontSize: 25 }}>หอ1</Text>
             </View>
             <View style={{ position: "absolute", right: 40, top: 15, overflow: "hidden" }}>
                 <Text style={{ fontSize: 15 }}>4500$</Text>

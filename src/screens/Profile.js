@@ -11,8 +11,7 @@ import { TabView, TabBar } from 'react-native-tab-view';
 
 const TabBarHeight = 48;
 const HeaderHeight = 800;
-const tab1ItemSize = (Dimensions.get('window').width - 30) / 2;
-const tab2ItemSize = (Dimensions.get('window').width - 40) / 3;
+const tabitem = (Dimensions.get('window').width - 30) / 2;
 
 const TabScene = ({
     numCols,
@@ -120,7 +119,7 @@ const Profile = () => {
 
     const renderHeader = () => {
         const y = scrollY.interpolate({
-            inputRange: [0, HeaderHeight],
+            inputRange: [100, HeaderHeight],
             outputRange: [0, -HeaderHeight],
             extrapolateRight: 'clamp',
         });
@@ -137,7 +136,7 @@ const Profile = () => {
                 style={{
                     borderRadius: 16,
                     width: Dimensions.get('window').width - 100,
-                    height: tab1ItemSize,
+                    height: tabitem,
                     backgroundColor: '#aaa',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -153,7 +152,7 @@ const Profile = () => {
                 style={{
                     borderRadius: 16,
                     width: Dimensions.get('window').width - 100,
-                    height: tab1ItemSize,
+                    height: tabitem,
                     backgroundColor: '#aaa',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -223,9 +222,7 @@ const Profile = () => {
         return (
             <Animated.View
                 style={{
-                    top: 0,
                     zIndex: 1,
-                    position: 'absolute',
                     transform: [{ translateY: y }],
                     width: '100%',
                 }}>
@@ -269,7 +266,6 @@ const Profile = () => {
 
 const styles = StyleSheet.create({
     header: {
-        top: "7.5%",
         left: "7.5%",
         height: HeaderHeight - 250,
         width: '85%',
@@ -277,6 +273,7 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         backgroundColor: "white",
         padding: 15
+
     },
     label: { fontSize: 16, color: '#222' },
     tab: {

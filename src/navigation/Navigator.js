@@ -89,14 +89,15 @@ export default function App() {
                             justifyContent: "space-between",
                             marginHorizontal: 20,
                             paddingVertical: 20,
-                            marginTop: 40
+                            marginTop: 40,
+                            zIndex: 2
                         }}
                     >
                         <View style={{
                             display: 'flex',
                             flexDirection: 'row',
                         }}>
-                            <Image source={imgDooHor} style={{ resizeMode: "contain", width: "25%" }} />
+                            <Image source={imgDooHor} style={{ resizeMode: "contain", width: "15%", bottom: 10, }} />
                         </View>
                         <View style={{
                             display: 'flex',
@@ -106,19 +107,8 @@ export default function App() {
                             <FontAwesome name="user" size={25} color={"black"} style={{ position: "absolute", left: -25, top: -15 }} />
                         </View>
                     </View>
-                    <ScrollView>
-                        <View
-                            style={{
-                                flex: 1,
-                                alignItems: "center",
-                                justifyContent: "center",
-                                backgroundColor: "#FFDA79",
-                            }}
-                        >
-                            {/* <ScreenHor /> */}
-                            <ScreenHor />
-                        </View>
-                    </ScrollView>
+                    <ScreenProfile />
+
                 </>
             </View>
         </>
