@@ -24,6 +24,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-modal-dropdown": "^1.0.2",
     "react-native-navbar-color": "^1.0.3",
+    "react-native-pager-view": "5.4.24",
     "react-native-paper": "^4.12.5",
     "react-native-reanimated": "~2.9.1",
     "react-native-responsive-image": "^2.3.1",

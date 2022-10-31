@@ -70,7 +70,6 @@ function ProfileScreen() {
 
 export default function App() {
     return (
-        <NativeRouter>
         <>
             <View
                 style={{
@@ -99,7 +98,7 @@ export default function App() {
                             display: 'flex',
                             flexDirection: 'row',
                         }}>
-                            <Image source={imgDooHor} style={{ resizeMode: "contain", width: "25%" }} />
+                            <Image source={imgDooHor} style={{ resizeMode: "contain", width: 100 }} />
                         </View>
                         <View style={{
                             display: 'flex',
@@ -109,7 +108,7 @@ export default function App() {
                             <FontAwesome name="user" size={25} color={"black"} style={{ position: "absolute", left: -25, top: -15 }} />
                         </View>
                     </View>
-                    <ScrollView>
+                    {/* <ScrollView>
                         <View
                             style={{
                                 flex: 1,
@@ -117,15 +116,15 @@ export default function App() {
                                 justifyContent: "center",
                                 backgroundColor: "#FFDA79",
                             }}
-                        >
+                        > */}
                             {/* <ScreenHor /> */}
-                            <ScreenHor />
-                        </View>
-                    </ScrollView>
+                            {/* <ScreenHor /> */}
+                            <ScreenProfile />
+                        {/* </View>
+                    </ScrollView> */}
                 </>
             </View>
         </>
-        </NativeRouter>
     );
 }
 

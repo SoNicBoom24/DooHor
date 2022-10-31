@@ -280,7 +280,8 @@ const styles = StyleSheet.create({
     },
     label: { fontSize: 16, color: '#222' },
     tab: {
-        elevation: 0, shadowOpacity: 0,
+        elevation: 0,
+        shadowOpacity: 0,
         backgroundColor: '#FFCC80',
         borderRadius: 25,
         width: '90%',
