@@ -39,7 +39,7 @@ export default function register() {
                     <View style={{padding: 5, flexDirection: "row", justifyContent: "space-between"}}>
                         <TextInput style={styles.inputContainer} 
                         keyboardType="numeric"
-                        maxLength="8"
+                        maxLength={1000}
                         placeholder="รหัสนักศึกษา"></TextInput>
                         {/* https://www.npmjs.com/package/react-native-select-dropdown */}
                         <ModalDropdown options={['1', '2' , '3', '4']}
@@ -81,7 +81,7 @@ export default function register() {
                         <TextInput style={styles.inputContainer}
                         placeholder="รหัสไปรษณีย์"
                         keyboardType='numeric'
-                        maxLength="5"></TextInput>
+                        maxLength={1000}></TextInput>
                     </View>
                 </View>
                 </>
