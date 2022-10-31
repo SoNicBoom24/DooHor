@@ -7,9 +7,9 @@ import ModalDropdown from 'react-native-modal-dropdown';
 
 export default function register() {
     return (
-        <SafeAreaView style={{ width: "100%", height: "100%" }}>
+        <SafeAreaView style={{ width: "100%"}}>
             {/* <> */}
-                <KeyboardAwareScrollView extraHeight={300}>
+                <KeyboardAwareScrollView extraHeight={100}>
                     <>
                         <Image style={styles.img} source={{ uri: "https://picsum.photos/200" }} />
                     </>
