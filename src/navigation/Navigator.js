@@ -11,6 +11,8 @@ import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
 import ScreenProfile from "../screens/Profile";
 
+import { NativeRouter, Route, Link } from "react-router-native";
+
 function HomeScreen() {
 
     return (
@@ -68,6 +70,7 @@ function ProfileScreen() {
 
 export default function App() {
     return (
+        <NativeRouter>
         <>
             <View
                 style={{
@@ -112,6 +115,7 @@ export default function App() {
                 </>
             </View>
         </>
+        </NativeRouter>
     );
 }
 
