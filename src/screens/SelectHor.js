@@ -12,8 +12,8 @@ const options = [
 
 export default function selectHor() {
     return (
-        <ScrollView>
-            <View style={{ alignItems: "center", backgroundColor: "#FFDA79", paddingBottom: 30}}>
+        <ScrollView style={{ flex: 1, backgroundColor: "#FFDA79" }}>
+            <View style={{ alignItems: "center", paddingBottom: 30 }}>
                 <SwitchSelector
                     options={options}
                     initial={0}

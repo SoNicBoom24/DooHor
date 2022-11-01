@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import {StyleSheet, Text, View, Button, ScrollView, Image} from "react-native";
+import { StyleSheet, Text, View, Button, ScrollView, Image } from "react-native";
 
 import imgDooHor from "../../assets/logoDooHor.png";
 import { FontAwesome } from "@expo/vector-icons";
@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 
 function HomeScreen() {
     return (
-        <View style={{flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#FFDA79"}}>
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#FFDA79" }}>
             <Text>Home Screen</Text>
         </View>
     );
@@ -25,7 +25,7 @@ function HomeScreen() {
 
 function ChatScreen() {
     return (
-        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#FFDA79"}}>
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#FFDA79" }}>
             <Text>Chat Screen</Text>
             {/* <Button
         title="Go back to first screen in stack"
@@ -37,7 +37,7 @@ function ChatScreen() {
 
 function ProfileScreen() {
     return (
-        <View style={{flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#FFDA79",}}>
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#FFDA79", }}>
             <Text>Profile Screen</Text>
             {/* <Button
         title="Go back to first screen in stack"
@@ -72,6 +72,7 @@ function NavBar() {
                     marginHorizontal: 20,
                     paddingVertical: 20,
                     marginTop: 40,
+                    marginBottom: 40
                 }}
             >
                 <View style={{ display: "flex", flexDirection: "row" }}>
