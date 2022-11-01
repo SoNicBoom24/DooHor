@@ -87,16 +87,16 @@ export default function App() {
                         paddingVertical: 20,
                         marginTop: 40,
                     }}>
-                        <View style={{display: 'flex', flexDirection: 'row',}}>
+                        <View style={{ display: 'flex', flexDirection: 'row', }}>
                             <Image source={imgDooHor} style={{ resizeMode: "contain", width: 100 }} />
                         </View>
-                        <View style={{ display: 'flex', flexDirection: 'row',}}>
+                        <View style={{ display: 'flex', flexDirection: 'row', }}>
                             <Ionicons name="chatbubble-outline" size={24} color="black" style={{ position: "absolute", left: -60, top: -15 }} />
                             <FontAwesome name="user" size={25} color={"black"} style={{ position: "absolute", left: -25, top: -15 }} />
                         </View>
                     </View>
                     {/* <ScreenHor /> */}
-                    <ScreenRegister />
+                    <ScreenDetailroom />
                     {/* <ScreenProfile /> */}
                 </>
             </View>
