@@ -17,6 +17,13 @@
   },
 
 ```
+ถ้าไม่ได้ ทักมาน้ะ น่าจะติดตั้ง ไอพวกนี้ด้วยแต่กุติดตั้งไปแล้วไม่น่าต้องทำอีกรอบ ลองทำอันบนก่อนถ้าไม่ได้ค่อยทำอันนี้
+1. ทำแต่แรก npm i patch-package
+2. ต่อมา npm install deprecated-react-native-prop-types
+3. แล้วไปทำข้างบน
+4. ทำข้างบนเสร็จแล้ว ค่อยทำตามนี้ npx patch-package react-native 
+
+
 เอกสารอ้างอิง 
 
 https://gist.github.com/amjed-ali-k/759aadb265694e0da8590205ccb733c6#file-carousel-js
