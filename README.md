@@ -2,7 +2,7 @@
 *********** แก้ error บน nodmodule น้า **************
 1. เปิดไฟล์ node_modules/react-native/index.js 
 2. ไปที่บันทัด 436 แก้ตามนี้
-```
+``
   get ColorPropType(): $FlowFixMe {
     return require('deprecated-react-native-prop-types').ColorPropType;
   },
@@ -14,9 +14,7 @@
   },
   get ViewPropTypes(): $FlowFixMe {
     return require('deprecated-react-native-prop-types').ViewPropTypes;
-  },```
-
-
+  },``
 
 
 เอกสารอ้างอิง 
