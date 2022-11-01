@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button, ScrollView, Image } from "react-native";
+import { StyleSheet, Text, View, Button, ScrollView, Image, TouchableOpacity } from "react-native";
 
 import imgDooHor from "../../assets/logoDooHor.png";
 import { FontAwesome } from "@expo/vector-icons";
@@ -76,12 +76,17 @@ function NavBar() {
                 }}
             >
                 <View style={{ display: "flex", flexDirection: "row" }}>
-                    <Image
-                        source={imgDooHor}
-                        style={{ resizeMode: "contain", width: 100 }}
-                    />
+                    <TouchableOpacity style={{ position: "absolute", top: -25 }}
+                        onPress={() => { linkTo.navigate("ScreenMain"); }}>
+                        <Image
+                            source={imgDooHor}
+                            style={{ resizeMode: "contain", width: 100, height: 50 }}
+                        />
+                    </TouchableOpacity>
                 </View>
                 <View style={{ display: "flex", flexDirection: "row" }}>
+
+
                     <Ionicons
                         name="chatbubble-outline"
                         size={24}
@@ -91,6 +96,7 @@ function NavBar() {
                             linkTo.navigate("ScreenDetailroom");
                         }}
                     />
+
                     <FontAwesome
                         name="user"
                         size={25}
