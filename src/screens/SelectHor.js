@@ -1,28 +1,36 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, ScrollView } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, ScrollView } from "react-native";
 
-import SwitchSelector from 'react-native-switch-selector';
+import SwitchSelector from "react-native-switch-selector";
 
 import CardHor from "../components/CardHor";
 
 const options = [
-    { label: 'เครื่องปรับอากาศ', value: '1' },
-    { label: 'พัดลม', value: '0' },
+    { label: "เครื่องปรับอากาศ", value: "1" },
+    { label: "พัดลม", value: "0" },
 ];
 
 export default function selectHor() {
     return (
-        <ScrollView >
-            <View style={{ alignItems: "center" }}>
-                <SwitchSelector options={options}
+        <ScrollView>
+            <View style={{ alignItems: "center", backgroundColor: "#FFDA79", paddingBottom: 30}}>
+                <SwitchSelector
+                    options={options}
                     initial={0}
                     textColor={"black"}
                     selectedColor={"black"}
                     backgroundColor={"#FFA927"}
                     borderColor={"black"}
                     buttonColor={"white"}
-                    style={{ width: "90%", borderRadius: 20, marginTop: 20, backgroundColor: "#FFA927", padding: 5 }}
-                    onPress={value => console.log(`Call onPress with value: ${value}`)} />
+                    style={{
+                        width: "90%",
+                        borderRadius: 20,
+                        marginTop: 20,
+                        backgroundColor: "#FFA927",
+                        padding: 5,
+                    }}
+                    onPress={(value) => console.log(`Call onPress with value: ${value}`)}
+                />
                 <CardHor />
                 <CardHor />
                 <CardHor />
@@ -30,13 +38,13 @@ export default function selectHor() {
                 <CardHor />
                 <CardHor />
             </View>
-        </ScrollView >
+        </ScrollView>
     );
 }
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        flexWrap: 'wrap',
+        flexWrap: "wrap",
         width: "90%",
         height: 50,
         backgroundColor: "#FFA927",
@@ -49,10 +57,10 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         borderRadius: 20,
         alignSelf: "center",
-        flexWrap: 'wrap',
+        flexWrap: "wrap",
         alignItems: "center",
         marginTop: 10,
         marginLeft: "2.5%",
         position: "absolute",
-    }
+    },
 });

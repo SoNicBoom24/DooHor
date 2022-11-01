@@ -257,7 +257,8 @@ const Profile = () => {
     };
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ backgroundColor: "pink", flex: 1 }} >
+            {/* style={{ flex: 1 }} */}
             {renderTabView()}
             {renderHeader()}
         </View>

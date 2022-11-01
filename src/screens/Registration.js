@@ -9,7 +9,7 @@ export default function register() {
     const countries = ["ชาย", "หญิง", "ไม่ระบุ"]
 
     return (
-        <SafeAreaView style={{ width: "100%" }}>
+        <SafeAreaView style={{ width: "100%", backgroundColor: "#FFDA79", height: "100%"}}>
             <KeyboardAwareScrollView extraHeight={100}>
                 <>
                     <Image style={styles.img} source={{ uri: "https://picsum.photos/200" }} />
