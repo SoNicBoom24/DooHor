@@ -72,6 +72,7 @@ function NavBar() {
                     marginHorizontal: 20,
                     paddingVertical: 20,
                     marginTop: 40,
+                    marginBottom: 40
                 }}
             >
                 <View style={{ display: "flex", flexDirection: "row" }}>

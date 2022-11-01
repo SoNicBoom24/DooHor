@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 
-const TabBarHeight = 48;
-const HeaderHeight = 800;
+const TabBarHeight = 5;
+const HeaderHeight = 600;
 const tabitem = (Dimensions.get('window').width - 30) / 2;
 
 const TabScene = ({
@@ -26,7 +26,7 @@ const TabScene = ({
     const windowHeight = Dimensions.get('window').height;
 
     return (
-        <SafeAreaView style={{ backgroundColor: "#FFDA79" }}>
+        <SafeAreaView >
             <Animated.FlatList
                 numColumns={numCols}
                 ref={onGetRef}
@@ -119,7 +119,7 @@ const Profile = () => {
 
     const renderHeader = () => {
         const y = scrollY.interpolate({
-            inputRange: [100, HeaderHeight],
+            inputRange: [40, HeaderHeight],
             outputRange: [0, -HeaderHeight],
             extrapolateRight: 'clamp',
         });
@@ -257,7 +257,7 @@ const Profile = () => {
     };
 
     return (
-        <View style={{ backgroundColor: "pink", flex: 1 }} >
+        <View style={{ backgroundColor: "#FFDA79", flex: 1 }} >
             {/* style={{ flex: 1 }} */}
             {renderTabView()}
             {renderHeader()}
@@ -268,7 +268,7 @@ const Profile = () => {
 const styles = StyleSheet.create({
     header: {
         left: "7.5%",
-        height: HeaderHeight - 250,
+        height: HeaderHeight - 80,
         width: '85%',
         position: 'absolute',
         borderRadius: 25,

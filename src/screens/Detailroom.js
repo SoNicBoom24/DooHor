@@ -6,7 +6,8 @@ import {
     Image,
     ScrollView,
     Dimensions,
-    Text
+    Text,
+    SafeAreaView
 } from "react-native";
 
 // Default Sample Data
@@ -100,13 +101,14 @@ export default function Carousal({
     };
 
     return (
-        <View style={{ top: 50 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#FFDA79" }}>
             <ScrollView
                 ref={scrollView}
                 horizontal
                 pagingEnabled
                 onMomentumScrollEnd={setIndex}
                 onContentSizeChange={() => scrollView.current.scrollToEnd()}
+
             >
                 <View style={styles.carousalContainer}>
                     {data.map((item) => (
@@ -120,7 +122,7 @@ export default function Carousal({
                     ))}
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }
 
