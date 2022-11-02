@@ -25,7 +25,5 @@
 
 
 เอกสารอ้างอิง 
-
-https://gist.github.com/amjed-ali-k/759aadb265694e0da8590205ccb733c6#file-carousel-js
-
-https://github.com/JungHsuan/react-native-collapsible-tabview
+1. https://gist.github.com/amjed-ali-k/759aadb265694e0da8590205ccb733c6#file-carousel-js
+2. https://github.com/JungHsuan/react-native-collapsible-tabview
