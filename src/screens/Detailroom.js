@@ -7,8 +7,10 @@ import {
     ScrollView,
     Dimensions,
     Text,
-    SafeAreaView
+    SafeAreaView,
+    Button
 } from "react-native";
+import { Card, Title, Paragraph } from 'react-native-paper';
 
 // Default Sample Data
 const DATA = [
@@ -48,9 +50,9 @@ const defaults = {
 // Default Image Item
 const Item = ({ title, image, height, width, onPress, subtitle }) => (
     <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={1}
         onPress={onPress}
-        style={[styles.imageContainer, { height: height, width: width }]}
+        style={{ height: height, width: width }}
     >
         <Image source={{ uri: image }} style={[styles.image, { height: height }]} />
         <View style={styles.titleContainer}>
@@ -60,6 +62,10 @@ const Item = ({ title, image, height, width, onPress, subtitle }) => (
     </TouchableOpacity>
 );
 
+
+buttonClickListener = () => {
+    alert("ลงชื่อแล้ว");
+}
 // Carousal Component
 export default function Carousal({
     data = DATA,
@@ -101,7 +107,7 @@ export default function Carousal({
     };
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#FFDA79" }}>
+        <View style={{ backgroundColor: "#FFDA79" }}>
             <ScrollView
                 ref={scrollView}
                 horizontal
@@ -110,7 +116,7 @@ export default function Carousal({
                 onContentSizeChange={() => scrollView.current.scrollToEnd()}
 
             >
-                <View style={styles.carousalContainer}>
+                <View style={styles.carousalContainer} >
                     {data.map((item) => (
                         <ItemElement
                             key={item.id}
@@ -121,17 +127,45 @@ export default function Carousal({
                         />
                     ))}
                 </View>
-            </ScrollView>
-        </SafeAreaView>
+            </ScrollView >
+            <View style={{ alignItems: "center", marginTop: 30, marginBottom: 30, }}>
+                <Text style={{ fontSize: 25 }}> รายละเอียดหอพัก </Text>
+                <Text style={{ fontSize: 20 }}> หอพักแอร์ จำนวน 4 คน </Text>
+                <Text style={{ fontSize: 20 }}>  ค่าเช่า 5000</Text>
+            </View>
+
+            <View style={{ alignItems: "center", height: "63%" }}>
+                <Button
+
+                    onPress={buttonClickListener}
+                    title="ลงชื่อเข้าหอพัก"
+                    color="#594545"
+                />
+                <Card style={{
+                    borderRadius: 15, width: "95%", marginBottom: 10, marginTop: 50
+                }} >
+                    <Card.Content>
+                        <Title>นายกิตติภพ ปังตระกูล</Title>
+                        <Paragraph style={{ fontSize: 20 }}>คณะ IT เวลาเรียนช่วง 12.00 - 18.00</Paragraph>
+                        <Paragraph style={{ fontSize: 20 }}>สถานะ</Paragraph>
+                    </Card.Content>
+                </Card>
+
+            </View>
+
+        </View>
     );
+
+
 }
+
 
 const styles = StyleSheet.create({
     carousalContainer: {
         flexDirection: "row",
         width: "100%",
     },
-    imageContainer: { backgroundColor: "yellow" },
+
     item: {
         backgroundColor: "rgba(91, 91, 91, 0.3)",
         marginVertical: 8,

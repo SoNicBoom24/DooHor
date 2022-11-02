@@ -8,8 +8,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
-import ScreenProfile from "../screens/Profile";
 import ScreenDetailroom from "../screens/Detailroom";
+import ScreenProfile from "../screens/Profile";
 
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
