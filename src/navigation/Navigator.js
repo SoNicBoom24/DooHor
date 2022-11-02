@@ -8,8 +8,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
-import ScreenProfile from "../screens/Profile";
 import ScreenDetailroom from "../screens/Detailroom";
+import ScreenProfile from "../screens/Profile";
 import ScreenNotification from "../screens/Notification";
 
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
@@ -109,11 +109,6 @@ function NavBar() {
                     />
                 </View>
             </View>
-            {/* <View style={{ width: "100%", height: "100%" }}>
-        <ScreenHor />
-        <ScreenRegister />
-        <ScreenProfile />
-      </View> */}
         </View>
     );
 }
