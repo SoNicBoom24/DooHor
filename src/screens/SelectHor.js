@@ -25,9 +25,9 @@ export default function selectHor() {
                     style={{
                         width: "90%",
                         borderRadius: 20,
-                        marginTop: 20,
                         backgroundColor: "#FFA927",
                         padding: 5,
+                        marginBottom: 5
                     }}
                     onPress={(value) => console.log(`Call onPress with value: ${value}`)}
                 />

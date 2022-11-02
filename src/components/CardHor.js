@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { color } from 'react-native-reanimated';
 import Toggle from "react-native-toggle-element";
 
 
 export default function CardHor() {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => { console.log("รายระเอียดหอ") }}>
             <Image style={styles.img} source={{ uri: "https://picsum.photos/200" }} />
             <View style={{ position: "absolute", left: 150, top: 10, overflow: "hidden" }}>
                 <Text style={{ fontSize: 25 }}>หอ1</Text>
@@ -17,7 +17,7 @@ export default function CardHor() {
             <View style={{ position: "absolute", right: 40, bottom: 20, overflow: "hidden" }}>
                 <Text style={{ fontSize: 15, color: "gray" }}>คำอธิบายเพิ่มเติม</Text>
             </View>
-        </View>
+        </TouchableOpacity>
 
     );
 }

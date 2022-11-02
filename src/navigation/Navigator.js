@@ -10,6 +10,7 @@ import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
 import ScreenProfile from "../screens/Profile";
 import ScreenDetailroom from "../screens/Detailroom";
+import ScreenNotification from "../screens/Notification";
 
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -128,6 +129,7 @@ export default function App() {
                     <Stack.Screen name="ScreenRegister" component={ScreenRegister} />
                     <Stack.Screen name="ScreenProfile" component={ScreenProfile} />
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
+                    <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
                 </Stack.Navigator>
             </NavigationContainer>
         </>
