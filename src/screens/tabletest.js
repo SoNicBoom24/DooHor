@@ -4,19 +4,18 @@ import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 
 export const TableTest = () => {
 
-    const [tableHead, setTableHead] = useState(['Head', 'Head2', 'Head3']);
-    const [tableData, setTableData] = useState([
-        { stundet_name: 'Chicken Biryani', select: false, Stundet_id: "63070010" }, //If user select this row then this whole object will return to you with select true in this case
-        { stundet_name: 'Chiken koofta', select: true, Stundet_id: "63070011" },
-        { stundet_name: 'Chicken sharwma', select: false, Stundet_id: "63070012" }
-    ]);
-
 
     const rawdata = [
         { stundet_name: 'Chicken Biryani', select: false, Stundet_id: "63070010" }, //If user select this row then this whole object will return to you with select true in this case
         { stundet_name: 'Chiken koofta', select: true, Stundet_id: "63070011" },
         { stundet_name: 'Chicken sharwma', select: false, Stundet_id: "63070012" }
     ]
+
+
+
+    const [tableHead, setTableHead] = useState(['Head', 'Head2', 'Head3']);
+    const [tableData, setTableData] = useState(rawdata);
+
 
 
     const showModal = (studentId) => {
