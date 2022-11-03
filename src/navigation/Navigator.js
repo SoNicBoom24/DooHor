@@ -9,7 +9,8 @@ import { Ionicons } from "@expo/vector-icons";
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
 import ScreenDetailroom from "../screens/Detailroom";
-import ScreenProfile from "../screens/Profile";
+//เอาหน้าโปรไฟล์ไว้ลองงับ
+import ScreenProfile from "../screens/Datatable";
 import ScreenNotification from "../screens/Notification";
 
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
@@ -77,8 +78,8 @@ function NavBar() {
                 }}
             >
                 <View style={{ display: "flex", flexDirection: "row" }}>
-                    <TouchableOpacity style={{position:"absolute", top: -16}}
-                    onPress={() => { linkTo.navigate("ScreenMain"); }}>
+                    <TouchableOpacity style={{ position: "absolute", top: -16 }}
+                        onPress={() => { linkTo.navigate("ScreenMain"); }}>
                         <Image
                             source={imgDooHor}
                             style={{ resizeMode: "contain", width: 100, height: 35 }}
