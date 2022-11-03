@@ -1,4 +1,14 @@
 # DooHor
+```
+ใช้อันนี้ถ้า npm i ไม่ได้
+npm i --legacy-peer-deps
+```
+
+
+
+
+
+
 *********** แก้ error บน nodmodule น้า **************
 1. เปิดไฟล์ node_modules/react-native/index.js 
 2. ไปที่บันทัด 436 แก้ตามนี้
