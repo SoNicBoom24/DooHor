@@ -1,6 +1,6 @@
 # DooHor
 
-เพิ่มข้อมูลใน nodemudule  npm i --legacy-peer-deps เสร็จแล้วทำตามนี้
+เพิ่มข้อมูลใน nodemudule => npm i --legacy-peer-deps เสร็จแล้วทำตามนี้
  1. ไปที่ไฟล์ โปรเจ็ค ไปที่ไฟล์ node_modules\react-native-datatable-component\src
  2. เอาไฟล์ใน โฟลเด้อ edit ก้อปวางลงไปทั้งหมด
 
