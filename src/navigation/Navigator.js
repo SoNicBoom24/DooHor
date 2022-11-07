@@ -10,7 +10,8 @@ import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
 import ScreenDetailroom from "../screens/Detailroom";
 //เอาหน้าโปรไฟล์ไว้ลองงับ
-import ScreenProfile from "../screens/Datatable";
+import { DataTableTest } from "../screens/Datatable";
+
 import ScreenNotification from "../screens/Notification";
 
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
@@ -105,7 +106,7 @@ function NavBar() {
                         color={"black"}
                         style={{ position: "absolute", left: -25, top: -15 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenProfile");
+                            linkTo.navigate("DataTableTest");
                         }}
                     />
                 </View>
@@ -123,7 +124,7 @@ export default function App() {
                     <Stack.Screen name="ScreenMain" component={TestNavigate} />
                     <Stack.Screen name="ScreenHor" component={ScreenHor} />
                     <Stack.Screen name="ScreenRegister" component={ScreenRegister} />
-                    <Stack.Screen name="ScreenProfile" component={ScreenProfile} />
+                    <Stack.Screen name="DataTableTest" component={DataTableTest} />
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
                     <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
                 </Stack.Navigator>

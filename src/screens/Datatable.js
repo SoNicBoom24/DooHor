@@ -1,7 +1,7 @@
-import { Text, TextInput, View, StyleSheet, Button } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Button, Alert } from 'react-native';
 import DataTable, { COL_TYPES } from 'react-native-datatable-component';
 import React from "react";
-const DataTableTest = () => {
+export const DataTableTest = () => {
     const [text, onChangeText] = React.useState("");
 
     //You can pass COL_TYPES.CHECK_BOX Column's value in true/false, by default it will be false means checkBox will be uncheck!
@@ -11,17 +11,18 @@ const DataTableTest = () => {
         { stundet_name: 'Chiken koofta', select: true, Stundet_id: "63070011" },
         { stundet_name: 'Chicken sharwma', select: false, Stundet_id: "63070012" }
     ]
-
+    const showModal = () => {
+        Alert.alert(`This is row`);
+    }
     const data = rawdata.filter(x => String(x.Stundet_id).includes(text));
-    console.log(data);
+
     const Settings =
         [
-            { name: 'stundet_name', type: COL_TYPES.STRING, width: "25%", },
-            { name: 'Stundet_id', type: COL_TYPES.STRING, width: "25%", },
-            { name: 'select', type: COL_TYPES.CHECK_BOX, width: "25%" },
-            { name: 'detail_student', type: COL_TYPES.Button, width: "25%" }
+            { name: 'stundet_name', type: COL_TYPES.STRING, },
+            { name: 'Stundet_id', type: COL_TYPES.STRING, },
+            { name: 'detail_student', type: COL_TYPES.Button, }
         ]
-    const nameOfCols = ['stundet_name', 'Stundet_id', 'select', "detail_student"];
+    const nameOfCols = ['stundet_name', 'Stundet_id', "detail_student"];
     return (
         <View style={{ top: "5%" }}>
             <Text style={{ alignSelf: 'center', fontSize: 20 }}>ตารางนักศึกษา </Text>
@@ -34,7 +35,11 @@ const DataTableTest = () => {
                 <DataTable
                     colSettings={Settings}
                     noOfPages="1"
-                    onRowSelect={(row) => { console.log('ROW => ', row) }}
+                    onRowSelect={(row) => {
+                        Alert.alert(`ชื่อนักศึกษา` + " " + JSON.parse(JSON.stringify((row.stundet_name))
+
+                        ));
+                    }}
                     data={data}
                     colNames={nameOfCols}
                     headerLabelStyle={{ color: 'grey', fontSize: 20 }}

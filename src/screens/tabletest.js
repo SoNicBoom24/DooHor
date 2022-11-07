@@ -1,66 +1,58 @@
-import React, { Component, useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
-import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
+import { Text, TextInput, View, StyleSheet, Button, Alert } from 'react-native';
+import DataTable, { COL_TYPES } from 'react-native-datatable-component';
+import React from "react";
+export const DataTableTest = () => {
+    const [text, onChangeText] = React.useState("");
 
-export const TableTest = () => {
-
+    //You can pass COL_TYPES.CHECK_BOX Column's value in true/false, by default it will be false means checkBox will be uncheck!
 
     const rawdata = [
         { stundet_name: 'Chicken Biryani', select: false, Stundet_id: "63070010" }, //If user select this row then this whole object will return to you with select true in this case
         { stundet_name: 'Chiken koofta', select: true, Stundet_id: "63070011" },
         { stundet_name: 'Chicken sharwma', select: false, Stundet_id: "63070012" }
     ]
-
-
-
-    const [tableHead, setTableHead] = useState(['Head', 'Head2', 'Head3']);
-    const [tableData, setTableData] = useState(rawdata);
-
-
-
-    const showModal = (studentId) => {
-        Alert.alert(`This is row ${studentId + 1}`);
+    const showModal = () => {
+        Alert.alert(`This is row`);
     }
+    const data = rawdata.filter(x => String(x.Stundet_id).includes(text));
 
-    const button = (studentId) => (
-        <TouchableOpacity onPress={() => showModal(studentId)}>
-            <View style={styles.btn}>
-                <Text style={styles.btnText}>button</Text>
-            </View>
-        </TouchableOpacity>
-    );
-
-
+    const Settings =
+        [
+            { name: 'stundet_name', type: COL_TYPES.STRING, },
+            { name: 'Stundet_id', type: COL_TYPES.STRING, },
+            { name: 'detail_student', type: COL_TYPES.CHECK_BOX, }
+        ]
+    const nameOfCols = ['stundet_name', 'Stundet_id', "detail_student"];
     return (
-        <View style={styles.container}>
-            <Table borderStyle={{ borderColor: 'transparent' }}>
-                <Row data={tableHead} style={styles.head} textStyle={styles.text} />
-                {
-                    tableData.map((rowData, index) => (
-                        <TableWrapper key={index} style={styles.row}>
-                            {
-                                <Cell data={rowData.Stundet_id} textStyle={styles.text} />
-                            }
-                            {
-                                <Cell data={rowData.stundet_name} textStyle={styles.text} />
-                            }
+        <View style={{ top: "5%" }}>
+            <Text style={{ alignSelf: 'center', fontSize: 20 }}>ตารางนักศึกษา </Text>
 
-                            {
-                                button(rowData.Stundet_id)
-                            }
-                        </TableWrapper>
-                    ))
-                }
-            </Table>
-        </View>
+            <TextInput placeholder="รหัสนักศึกษา" style={styles.input}
+                onChangeText={onChangeText}
+                value={text}
+            />
+            <View style={{ margin: 20, height: "100%" }}>
+                <DataTable
+                    colSettings={Settings}
+                    noOfPages="1"
+                    data={data}
+                    colNames={nameOfCols}
+                    headerLabelStyle={{ color: 'grey', fontSize: 20 }}
+
+                />
+            </View>
+
+        </View >
+
     )
 }
-
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-    head: { height: 40, backgroundColor: '#808B97' },
-    text: { margin: 6 },
-    row: { flexDirection: 'row', backgroundColor: '#FFF1C1' },
-    btn: { width: 58, height: 18, backgroundColor: '#78B7BB', borderRadius: 2 },
-    btnText: { textAlign: 'center', color: '#fff' }
+    input: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+        width: "20%",
+    },
 });
+export default DataTableTest;
