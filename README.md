@@ -5,7 +5,11 @@ npm i --legacy-peer-deps
 ```
 
 
-
+```
+แก้แดง ไฟล์ row.js ใน table component ใน nodemodule บันทัด 29
+// textStyle={[cellTextStyle && cellTextStyle(item), textStyle]}   // This throws browser Warning: Failed prop type: Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`.
+textStyle={textStyle} 
+```
 
 
 
@@ -37,3 +41,5 @@ npm i --legacy-peer-deps
 เอกสารอ้างอิง 
 1. https://gist.github.com/amjed-ali-k/759aadb265694e0da8590205ccb733c6#file-carousel-js
 2. https://github.com/JungHsuan/react-native-collapsible-tabview
+3. https://www.npmjs.com/package/react-native-table-component
+4. https://www.npmjs.com/package/react-native-datatable-component
