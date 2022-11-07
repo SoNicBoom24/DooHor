@@ -5,7 +5,11 @@ npm i --legacy-peer-deps
 ```
 
 
-
+```
+แก้แดง ไฟล์ row.js ใน table component ใน nodemodule บันทัด 29
+// textStyle={[cellTextStyle && cellTextStyle(item), textStyle]}   // This throws browser Warning: Failed prop type: Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`.
+textStyle={textStyle} 
+```
 
 
 
