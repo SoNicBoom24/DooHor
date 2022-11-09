@@ -1,32 +1,62 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import ModalDropdown from 'react-native-modal-dropdown';
+import { AntDesign } from '@expo/vector-icons';
 
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+
+
+const options = {
+    title: 'Select Image',
+    type: 'library',
+    options: {
+        selectionLimit: 1,
+        mediaType: 'photo',
+        includeBase64: false,
+    },
+}
 export default function register() {
     const countries = ["ชาย", "หญิง", "ไม่ระบุ"]
+    
+    const openGallery = async () => {
+        const images = await launchImageLibrary(options);
+        console.log(images)
+        const formdata = new FormData()
+        // formdata.append("file", )
+    }
 
     return (
-        <SafeAreaView style={{ width: "100%", backgroundColor: "#FFDA79", height: "100%"}}>
+        <SafeAreaView style={{ width: "100%", backgroundColor: "#FFDA79", height: "100%" }}>
             <KeyboardAwareScrollView extraHeight={100}>
                 <>
                     <Image style={styles.img} source={{ uri: "https://picsum.photos/200" }} />
                 </>
                 <>
                     <View style={{ backgroundColor: "#FFB053", width: "90%", alignSelf: "center", padding: 10, borderRadius: 20 }}>
-                        <View style={{ padding: 5 }}>
-                            <Text style={{ fontSize: 18, padding: 5 }}>สำเนาบัตรประจำตัวประชาชน</Text>
-                        </View>
+                        <TouchableOpacity onPress={openGallery}>
+                            <View style={{ padding: 5, flexDirection: "row" }}>
+                                <Text style={{ fontSize: 18, padding: 5 }}>สำเนาบัตรประจำตัวประชาชน</Text>
+                                <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginLeft: 2, overflow: "hidden" }} />
+                            </View>
+                        </TouchableOpacity>
 
-                        <View style={{ padding: 5 }}>
-                            <Text style={{ fontSize: 18, padding: 5 }}>สำเนาทะเบียนบ้าน</Text>
-                        </View>
+                        <TouchableOpacity>
+                            <View style={{ padding: 5, flexDirection: "row" }}>
+                                <Text style={{ fontSize: 18, padding: 5 }}>สำเนาทะเบียนบ้าน</Text>
+                                <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginLeft: 2, overflow: "hidden" }} />
+                            </View>
+                        </TouchableOpacity>
 
-                        <View style={{ padding: 5 }}>
-                            <Text style={{ fontSize: 18, padding: 5 }}>รูปถ่าย</Text>
-                        </View>
+                        <TouchableOpacity>
+                            <View style={{ padding: 5, flexDirection: "row" }}>
+                                <Text style={{ fontSize: 18, padding: 5 }}>รูปถ่าย</Text>
+                                <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginLeft: 2, overflow: "hidden" }} />
+                                {/* download มันต้องเป็นรูปไหนดีวะ */}
+                            </View>
+                        </TouchableOpacity>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
                             <TextInput style={styles.inputContainer} placeholder="ชื่อ" />

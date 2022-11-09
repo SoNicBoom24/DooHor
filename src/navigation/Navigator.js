@@ -52,9 +52,10 @@ function ProfileScreen() {
 
 function TestNavigate() {
     return (
-        <View>
-            <Text>Hello</Text>
-        </View>
+        // <View>
+        //     <Text>Hello</Text>
+        // </View>
+        <ScreenRegister></ScreenRegister>
     );
 }
 
@@ -106,7 +107,7 @@ function NavBar() {
                         color={"black"}
                         style={{ position: "absolute", left: -25, top: -15 }}
                         onPress={() => {
-                            linkTo.navigate("DataTableTest");
+                            linkTo.navigate("ScreenRegister");
                         }}
                     />
                 </View>
@@ -114,7 +115,7 @@ function NavBar() {
         </View>
     );
 }
-
+// npm i react-native-document-picker --legacy-peer-deps
 export default function App() {
     return (
         <>
