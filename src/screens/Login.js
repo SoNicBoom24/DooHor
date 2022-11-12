@@ -1,16 +1,35 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import firebase from '../Database/firebaseDB'
 
 export default function register() {
+    const [email, setEmail] = useState({ value: '', error: '' })
+    const [password, setPassword] = useState({ value: '', error: '' })
 
+    const onLoginPressed = () => {
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email.value, password.value)
+            .then((res) => {
+                console.log('User logged-in successfully!')
+                alert("User logged-in successfully!")
+                setEmail({ value: '', error: '' })
+                setPassword({ value: '', error: '' })
+
+            })
+    }
     return (
         <View style={styles.container} >
             <Text style={styles.logintext}>Login</Text>
-            <TextInput style={styles.inputContainer} placeholder="Username" />
-            <TextInput style={styles.inputContainer} placeholder="Password" />
+            <TextInput style={styles.inputContainer} placeholder="Username" value={email.value}
+                onChangeText={(text) => setEmail({ value: text, error: '' })}
+            />
+            <TextInput style={styles.inputContainer} value={password.value}
+                placeholder="Password" onChangeText={(text) => setPassword({ value: text, error: '' })}
+            />
             <View style={styles.buttonLogin}>
-                <Button title="Login" color={"white"}/>
+                <Button title="Login" color={"white"} onPress={onLoginPressed} />
                 <AntDesign name="caretright" size={24} color="#FFE664" />
             </View>
         </View>

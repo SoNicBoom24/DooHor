@@ -8,7 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
-import ScreenDetailroom from "../screens/Detailroom";
+import ScreenDetailroom from "../screens/Login";
 //เอาหน้าโปรไฟล์ไว้ลองงับ
 import { DataTableTest } from "../screens/Datatable";
 
@@ -55,7 +55,7 @@ function TestNavigate() {
         // <View>
         //     <Text>Hello</Text>
         // </View>
-        <ScreenRegister></ScreenRegister>
+        <DataTableTest></DataTableTest>
     );
 }
 

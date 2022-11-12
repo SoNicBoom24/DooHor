@@ -1,7 +1,27 @@
 import { Text, TextInput, View, StyleSheet, Button, Alert } from 'react-native';
 import DataTable, { COL_TYPES } from 'react-native-datatable-component';
-import React from "react";
+import React, { useState } from "react";
+import firebase from '../Database/firebaseDB'
+
+
 export const DataTableTest = () => {
+    const [userData, setUserData] = useState({})
+    const user = firebase.auth().currentUser
+    if (user) {
+        const uid = firebase.auth().currentUser.uid
+        firebase.firestore()
+            .collection('Users')
+            .where('uid', '==', uid)
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach(documentSnapshot => {
+                    setUserData(documentSnapshot.data())
+                });
+            });
+    }
+    else {
+        alert("ยังไม่ได้ล็อคอิน")
+    }
     const [text, onChangeText] = React.useState("");
 
     //You can pass COL_TYPES.CHECK_BOX Column's value in true/false, by default it will be false means checkBox will be uncheck!
