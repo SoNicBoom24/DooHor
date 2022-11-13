@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button, ScrollView, Image, TouchableOpacity } from "react-native";
 
@@ -16,6 +16,7 @@ import ScreenNotification from "../screens/Notification";
 
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useRouteLoaderData } from "react-router-native";
 const Stack = createNativeStackNavigator();
 
 function HomeScreen() {
@@ -107,7 +108,7 @@ function NavBar() {
                         color={"black"}
                         style={{ position: "absolute", left: -25, top: -15 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenRegister");
+                            linkTo.navigate("ScreenNotification");
                         }}
                     />
                 </View>
