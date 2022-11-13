@@ -13,7 +13,7 @@ import ScreenDetailroom from "../screens/Login";
 import { DataTableTest } from "../screens/Datatable";
 
 import ScreenNotification from "../screens/Notification";
-
+import ScreenProflie from "../screens/Profile";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
@@ -107,7 +107,7 @@ function NavBar() {
                         color={"black"}
                         style={{ position: "absolute", left: -25, top: -15 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenRegister");
+                            linkTo.navigate("ScreenProflie");
                         }}
                     />
                 </View>
@@ -128,6 +128,7 @@ export default function App() {
                     <Stack.Screen name="DataTableTest" component={DataTableTest} />
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
                     <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
+                    <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
                 </Stack.Navigator>
             </NavigationContainer>
         </>

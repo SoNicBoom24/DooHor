@@ -145,8 +145,8 @@ export default function Carousal({
                     borderRadius: 15, width: "95%", marginBottom: 10, marginTop: 50
                 }} >
                     <Card.Content>
-                        <Title>นายกิตติภพ ปังตระกูล</Title>
-                        <Paragraph style={{ fontSize: 20 }}>คณะ IT เวลาเรียนช่วง 12.00 - 18.00</Paragraph>
+                        <Title>{item.title}</Title>
+                        <Paragraph style={{ fontSize: 20 }}>{item.desc}</Paragraph>
                         <Paragraph style={{ fontSize: 20 }}>สถานะ</Paragraph>
                     </Card.Content>
                 </Card>
