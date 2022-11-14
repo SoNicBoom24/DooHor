@@ -10,7 +10,7 @@ const options = [
     { label: "พัดลม", value: "0" },
 ];
 
-export default function selectHor() {
+export default function SelectHor() {
     return (
         <ScrollView style={{ flex: 1, backgroundColor: "#FFDA79" }}>
             <View style={{ alignItems: "center", paddingBottom: 30 }}>

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView
 import { AntDesign } from '@expo/vector-icons';
 import { color } from 'react-native-reanimated';
 
-export default function register() {
+export default function Notification() {
 
     return (
         <ScrollView style={styles.container}>

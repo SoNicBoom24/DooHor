@@ -1,122 +1,91 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity, Keyboard } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { firebase } from "../config";
 
 import ModalDropdown from 'react-native-modal-dropdown';
 import { AntDesign } from '@expo/vector-icons';
 
-// import { firebase } from "../../config";
+const Home = () => {
+    const todoRef = firebase.firestore().collection("newDataRegister");
+    const [addDataFirstName, setDataFirst] = useState("");
+    const [addDataLastName, setDataLast] = useState("");
+    const [addDataSex, setDataSex] = useState("");
+    const [addDataAge, setDataAge] = useState("");
+    const [addDataEmail, setDataEmail] = useState("");
+    const [addDataStudentId, setDataStudentId] = useState("");
+    const [addDataYear, setDataYear] = useState("");
+    const [addDataFaculty, setDataFaculty] = useState("");
+    const [addDataBit, setDataBit] = useState("");
 
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-
-
-// const options = {
-//     title: 'Select Image',
-//     type: 'library',
-//     options: {
-//         selectionLimit: 1,
-//         mediaType: 'photo',
-//         includeBase64: false,
-//     },
-// }
-
-export default function Register() {
-    const countries = ["ชาย", "หญิง", "ไม่ระบุ"]
-    
-    // const openGallery = async () => {
-    //     const images = await launchImageLibrary(options);
-    //     console.log(images)
-    //     const formdata = new FormData()
-    // }
-
-    // const todoRef = firebase.firestore().collection("DataRegister");
-    // const [addDataFirstName, setDataFirst] = useState("");
-    // const [addDataLastName, setDataLast] = useState("");
-    // const [addDataSex, setDataSex] = useState("");
-    // const [addDataAge, setDataAge] = useState("");
-    // const [addDataEmail, setDataEmail] = useState("");
-    // const [addDataStudentId, setDataStudentId] = useState("");
-    // const [addDataYear, setDataYear] = useState("");
-    // const [addDataFaculty, setDataFaculty] = useState("");
-    // const [addDataBit, setDataBit] = useState("");
-
-    // const addField = () => {
-    //     if (addDataFirstName && addDataFirstName.length > 0) {
-    //         const data = {
-    //             firstName: addDataFirstName,
-    //             lasstName: addDataLastName,
-    //             age: addDataAge,
-    //             e_mail: addDataEmail,
-    //             student_id: addDataStudentId,
-    //             year: addDataYear,
-    //             faculty: addDataFaculty,
-    //             bit: addDataBit
-    //         };
-    //         todoRef
-    //             .add(data)
-    //             .then(() => {
-    //                 setDataFirst("");
-    //                 setDataLast("");
-    //                 setDataSex("");
-    //                 setDataAge("");
-    //                 setDataEmail("");
-    //                 setDataStudentId("");
-    //                 setDataYear("");
-    //                 setDataFaculty("");
-    //                 setDataBit("");
-    //                 Keyboard.dismiss();
-    //             })
-    //             .catch((error) => {
-    //                 alert(error);
-    //             })
-    //     };
-    // }
-
-
+    const addField = () => {
+        if (addDataFirstName && addDataFirstName.length > 0) {
+            const data = {
+                firstName: addDataFirstName,
+                lasstName: addDataLastName,
+                sex: addDataSex,
+                age: addDataAge,
+                e_mail: addDataEmail,
+                student_id: addDataStudentId,
+                year: addDataYear,
+                faculty: addDataFaculty,
+                bit: addDataBit
+            };
+            todoRef
+                .add(data)
+                .then(() => {
+                    setDataFirst("");
+                    setDataLast("");
+                    setDataSex("");
+                    setDataAge("");
+                    setDataEmail("");
+                    setDataStudentId("");
+                    setDataYear("");
+                    setDataFaculty("");
+                    setDataBit("");
+                    Keyboard.dismiss();
+                })
+                .catch((error) => {
+                    alert(error);
+                })
+        };
+    }
 
     return (
-        <SafeAreaView style={{ width: "100%", backgroundColor: "#FFDA79", height: "100%" }}>
-            <KeyboardAwareScrollView extraHeight={100}>
-                <>
-                    <Image style={styles.img} source={{ uri: "https://picsum.photos/200" }} />
-                </>
-                <>
-                    <View style={{ backgroundColor: "#FFB053", width: "90%", alignSelf: "center", padding: 10, borderRadius: 20 }}>
-                        <TouchableOpacity>
-                            <View style={{ padding: 5, flexDirection: "row" }}>
-                                <Text style={{ fontSize: 18, padding: 5 }}>สำเนาบัตรประจำตัวประชาชน</Text>
-                                <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginLeft: 2, overflow: "hidden" }} />
-                            </View>
-                        </TouchableOpacity>
+        <View style={{ flex: 1, justifyContent: "center" }}>
+            {/* <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
+                <TextInput
+                    style={styles.inputContainer}
+                    placeholder="ชื่อ"
+                    onChangeText={(firstName) => setDataFirst(firstName)}
+                    value={addDataFirstName} />
 
-                        <TouchableOpacity>
-                            <View style={{ padding: 5, flexDirection: "row" }}>
-                                <Text style={{ fontSize: 18, padding: 5 }}>สำเนาทะเบียนบ้าน</Text>
-                                <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginLeft: 2, overflow: "hidden" }} />
-                            </View>
-                        </TouchableOpacity>
+                <TextInput
+                    style={styles.inputContainer}
+                    placeholder="นามสกุล"
+                    onChangeText={(lastName) => setDataLast(lastName)}
+                    value={addDataLastName} />
 
-                        <TouchableOpacity>
-                            <View style={{ padding: 5, flexDirection: "row" }}>
-                                <Text style={{ fontSize: 18, padding: 5 }}>รูปถ่าย</Text>
-                                <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginLeft: 2, overflow: "hidden" }} />
-                                {/* download มันต้องเป็นรูปไหนดีวะ */}
-                            </View>
-                        </TouchableOpacity>
-
-                        <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
+            </View>
+                <TouchableOpacity onPress={addField}>
+                    <View style={{ backgroundColor: "#77CF32", padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10 }}>
+                        <Text style={{ color: "white", alignSelf: "center", fontSize: 16 }}>
+                            ยืนยัน
+                        </Text>
+                    </View>
+                </TouchableOpacity> */}
+            <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
                             <TextInput 
                                 style={styles.inputContainer} 
                                 placeholder="ชื่อ"
-                                // onChangeText={(firstName) => setDataFirst(firstName)}
-                                // value={addDataFirstName}
+                                onChangeText={(firstName) => setDataFirst(firstName)}
+                                value={addDataFirstName}
                                 />
 
                             <TextInput 
                                 style={styles.inputContainer} 
                                 placeholder="นามสกุล"
-                                // onChangeText={(lastName) => setDataLast(lastName)} 
-                                // value={addDataLastName} 
+                                onChangeText={(lastName) => setDataLast(lastName)} 
+                                value={addDataLastName} 
                                 />
                         </View>
 
@@ -129,21 +98,22 @@ export default function Register() {
                                 style={{ backgroundColor: "white", borderRadius: 10, width: "15%", justifyContent: "center" }}
                                 // onChangeText={(sex) => setDataLast(sex)} 
                                 // value={addDataSex}
+                                onSelect={(txt) => console.log(txt)}
                                 />
 
                             <TextInput style={{ width: "15%", backgroundColor: "white", padding: 5, borderRadius: 10, marginHorizontal: 5 }}
                                 keyboardType='numeric'
                                 maxLength={3}
                                 placeholder="อายุ"
-                                // onChangeText={(age) => setDataLast(age)} 
-                                // value={addDataAge} 
+                                onChangeText={(age) => setDataAge(age)} 
+                                value={addDataAge} 
                                 />
 
                             <TextInput style={{ width: "65%", backgroundColor: "white", padding: 5, borderRadius: 10 }}
                                 keyboardType="email-address"
                                 placeholder="E-mail"
-                                // onChangeText={(e_mail) => setDataLast(e_mail)} 
-                                // value={addDataEmail} 
+                                onChangeText={(e_mail) => setDataEmail(e_mail)} 
+                                value={addDataEmail} 
                                 />
                         </View>
 
@@ -152,8 +122,8 @@ export default function Register() {
                                 keyboardType="numeric"
                                 maxLength={8}
                                 placeholder="รหัสนักศึกษา"
-                                // onChangeText={(student_id) => setDataLast(student_id)} 
-                                // value={addDataStudentId}
+                                onChangeText={(student_id) => setDataStudentId(student_id)} 
+                                value={addDataStudentId}
                                  />
 
                             <ModalDropdown options={['1', '2', '3', '4']}
@@ -162,8 +132,8 @@ export default function Register() {
                                 dropdownStyle={{ width: "40%", borderRadius: 20, backgroundColor: "white" }}
                                 defaultTextStyle={{ color: "#Bbbbbd" }}
                                 style={{ backgroundColor: "white", borderRadius: 10, width: "48%", justifyContent: "center" }}
-                                // onChangeText={(year) => setDataLast(year)} 
-                                // value={addDataYear} 
+                                onChangeText={(year) => setDataYear(year)} 
+                                value={addDataYear} 
                                 />
                         </View>
 
@@ -174,15 +144,15 @@ export default function Register() {
                                 dropdownStyle={{ width: "40%", borderRadius: 20, backgroundColor: "white" }}
                                 defaultTextStyle={{ color: "#Bbbbbd" }}
                                 style={{ backgroundColor: "white", borderRadius: 10, width: "48%", justifyContent: "center" }}
-                                // onChangeText={(faculty) => setDataLast(faculty)} 
-                                // value={addDataFaculty}
+                                onChangeText={(faculty) => setDataFaculty(faculty)} 
+                                value={addDataFaculty}
                                  />
 
                             <TextInput 
                                 style={styles.inputContainer} 
                                 placeholder="สาขา"
-                                // onChangeText={(bit) => setDataLast(bit)} 
-                                // value={addDataBit} 
+                                onChangeText={(bit) => setDataBit(bit)} 
+                                value={addDataBit} 
                                 />
                         </View>
 
@@ -212,39 +182,24 @@ export default function Register() {
                                 keyboardType='numeric'
                                 maxLength={5} />
                         </View>
-                        <TouchableOpacity 
-                        // onPress={addField}
-                        >
+                        <TouchableOpacity onPress={addField} >
                             <View style={{backgroundColor: "#77CF32", padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10}}>
                                 <Text style={{color: "white", alignSelf: "center", fontSize: 16}}>
                                     ยืนยัน
                                 </Text>
                             </View>
                         </TouchableOpacity>
-                    </View>
-                </>
-            </KeyboardAwareScrollView>
-        </SafeAreaView>
-    );
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
-    img: {
-        width: "90%",
-        height: 200,
-        borderRadius: 20,
-        flexWrap: 'wrap',
-        resizeMode: "cover",
-        overflow: "hidden",
-        zIndex: 2,
-        alignSelf: "center",
-        marginVertical: 25,
-    },
     inputContainer: {
         backgroundColor: "white",
         padding: 5,
         borderRadius: 10,
         width: "48%",
-
     },
 });
+
+export default Home;
