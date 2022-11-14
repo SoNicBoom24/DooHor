@@ -11,7 +11,7 @@ import ScreenRegister from "../screens/Registration";
 // import ScreenDetailroom from "../screens/Detailroom";
 import ScreenLogin from "../screens/Login";
 
-import { DataTableTest } from "../screens/Datatable";
+import { ScoreTable } from "../screens/ScoreTable";
 import ScreenDetailroom from "../screens/Detailroom"
 import ScreenNotification from "../screens/Notification";
 import ScreenProflie from "../screens/Profile";
@@ -58,7 +58,7 @@ function TestNavigate() {
         // <View>
         //     <Text>Hello</Text>
         // </View>
-        <DataTableTest></DataTableTest>
+        <ScoreTable></ScoreTable>
     );
 }
 
@@ -130,7 +130,7 @@ export default function App() {
                     <Stack.Screen name="ScreenHor" component={ScreenHor} />
                     <Stack.Screen name="ScreenMain" component={TestNavigate} />
                     <Stack.Screen name="ScreenRegister" component={ScreenRegister} />
-                    <Stack.Screen name="DataTableTest" component={DataTableTest} />
+                    <Stack.Screen name="ScoreTable" component={ScoreTable} />
                     {/* <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} /> */}
                     <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />

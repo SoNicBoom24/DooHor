@@ -50,7 +50,6 @@ export default function Register() {
     const [addDataProvince, setDataProvince] = useState("");
     const [addDataPostCode, setDataPostCode] = useState("");
     const [imageProflie, setimageProflie] = useState(null);
-    const [uploading, setuploading] = useState(false)
 
 
     const pickImage = async () => {
@@ -60,15 +59,13 @@ export default function Register() {
             aspect: [4, 3],
             quality: 1
         })
-
+        console.log(result)
         const source = { uri: result.uri };
-        console.log(source);
         setimageProflie(source);
 
     };
 
     const uploadImage = async () => {
-        setuploading(true);
         const response = await fetch(imageProflie.uri)
         const blob = await response.blob();
         const filename = imageProflie.uri
@@ -80,7 +77,6 @@ export default function Register() {
         catch (e) {
             console.log(e)
         }
-        setuploading(false);
         Alert.alert(
             'success'
         )
