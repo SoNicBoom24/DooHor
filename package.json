@@ -30,6 +30,7 @@
     "react-native-datatable-component": "^2.1.11",
     "react-native-document-picker": "^8.1.2",
     "react-native-dropdown-picker": "^5.4.2",
+    "react-native-elements": "^3.4.2",
     "react-native-image-picker": "^3.3.2",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-modal-dropdown": "^1.0.2",

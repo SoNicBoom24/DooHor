@@ -6,9 +6,12 @@ import {
     Text,
     Dimensions,
     Animated,
+    Image
 } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
-
+import firebase from '../Database/firebaseDB'
+import Bill from '../components/bill'
+///////////////////////////////////
 const TabBarHeight = 5;
 const HeaderHeight = 600;
 const tabitem = (Dimensions.get('window').width - 30) / 2;
@@ -50,19 +53,33 @@ const TabScene = ({
         </SafeAreaView>
     );
 };
-
+////////////////////////////////////////////////////////////
 const Profile = () => {
     const [tabIndex, setIndex] = useState(0);
     const [routes] = useState([
         { key: 'tab1', title: 'เอกสารทั่วไป' },
         { key: 'tab2', title: 'เอกสารสำนักงาน' },
     ]);
-    const [tab1Data] = useState(Array(4).fill(0));
-    const [tab2Data] = useState(Array(4).fill(0));
+    const [tab1Data] = useState(Array(null).fill(0));
+    const [tab2Data] = useState(Array(null).fill(0));
     const scrollY = useRef(new Animated.Value(0)).current;
     let listRefArr = useRef([]);
     let listOffset = useRef({});
     let isListGliding = useRef(false);
+    const [userData, setUserData] = useState({});
+
+    ///////////ดึงข้อมูลผู้ใช้
+    firebase.firestore()
+        .collection('Users')
+        .where('uid', '==', "LvTaBmip7DUjgaZwLJnWpRIR32o1")
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach((res) => {
+                setUserData(res.data())
+            });
+        });
+
+    //////// 
 
     useEffect(() => {
         scrollY.addListener(({ value }) => {
@@ -125,7 +142,16 @@ const Profile = () => {
         });
         return (
             <Animated.View style={[styles.header, { transform: [{ translateY: y }] }]}>
-                <Text>{'Header'}</Text>
+                <View
+                >
+                    <Image style={styles.img} source={{ uri: userData.imageprofile }} />
+                    <View style={{ position: "absolute", left: 280, top: 10, overflow: "hidden" }}>
+                        <Text style={{ fontSize: 25 }}>ชื่อนักศึกษา: {userData.first_name} {userData.last_name}</Text>
+                    </View>
+                    <View style={{ position: "absolute", left: 280, top: 35, overflow: "hidden" }}>
+                        <Text style={{ fontSize: 25 }}>รหัสนักศึกษา: {userData.student_id}</Text>
+                    </View>
+                </View>
             </Animated.View>
         );
     };
@@ -133,16 +159,9 @@ const Profile = () => {
     const rednerTab1Item = ({ item, index }) => {
         return (
             <View
-                style={{
-                    borderRadius: 16,
-                    width: Dimensions.get('window').width - 100,
-                    height: tabitem,
-                    backgroundColor: '#aaa',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                <Text>{index}</Text>
+            >
             </View>
+
         );
     };
 
@@ -150,14 +169,12 @@ const Profile = () => {
         return (
             <View
                 style={{
-                    borderRadius: 16,
                     width: Dimensions.get('window').width - 100,
-                    height: tabitem,
-                    backgroundColor: '#aaa',
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                    height: Dimensions.get('window').height,
+                    backgroundColor: '#fff',
+
                 }}>
-                <Text>{index}</Text>
+                <Bill></Bill>
             </View>
         );
     };
@@ -285,6 +302,15 @@ const styles = StyleSheet.create({
         width: '90%',
         left: "5%"
     },
+    img: {
+        width: 250,
+        height: 250,
+        borderRadius: 20,
+        flexWrap: 'wrap',
+        resizeMode: "cover",
+        overflow: "hidden",
+        zIndex: 2
+    }
 });
 
-export default Profile
+export default Profile;

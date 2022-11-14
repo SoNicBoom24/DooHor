@@ -133,6 +133,13 @@ export default function register() {
                                 keyboardType='numeric'
                                 maxLength={5} />
                         </View>
+                        <TouchableOpacity>
+                            <View style={{backgroundColor: "#77CF32", padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10}}>
+                                <Text style={{color: "white", alignSelf: "center", fontSize: 16}}>
+                                    ยืนยัน
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </>
             </KeyboardAwareScrollView>

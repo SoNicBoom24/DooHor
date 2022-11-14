@@ -8,15 +8,17 @@ import { Ionicons } from "@expo/vector-icons";
 
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
-import ScreenDetailroom from "../screens/Login";
-//เอาหน้าโปรไฟล์ไว้ลองงับ
+// import ScreenDetailroom from "../screens/Detailroom";
+import ScreenLogin from "../screens/Login";
+
 import { DataTableTest } from "../screens/Datatable";
 
 import ScreenNotification from "../screens/Notification";
-
+import ScreenProflie from "../screens/Profile";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useRouteLoaderData } from "react-router-native";
+
 const Stack = createNativeStackNavigator();
 
 function HomeScreen() {
@@ -98,7 +100,7 @@ function NavBar() {
                         color="black"
                         style={{ position: "absolute", left: -60, top: -15 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenDetailroom");
+                            linkTo.navigate("ScreenRegister");
                         }}
                     />
 
@@ -108,7 +110,7 @@ function NavBar() {
                         color={"black"}
                         style={{ position: "absolute", left: -25, top: -15 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenNotification");
+                            linkTo.navigate("ScreenProflie");
                         }}
                     />
                 </View>
@@ -116,19 +118,40 @@ function NavBar() {
         </View>
     );
 }
-// npm i react-native-document-picker --legacy-peer-deps
+
 export default function App() {
     return (
         <>
             <NavigationContainer>
                 <NavBar />
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="ScreenMain" component={TestNavigate} />
+                <Stack.Screen name="ScreenLogin" component={ScreenLogin} />
+                    <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
                     <Stack.Screen name="ScreenHor" component={ScreenHor} />
+                    <Stack.Screen name="ScreenMain" component={TestNavigate} />
+                    <Stack.Screen name="ScreenRegister" component={ScreenRegister} />
+                    <Stack.Screen name="DataTableTest" component={DataTableTest} />
+                    {/* <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} /> */}
+                    <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
+                {/* isSignedIn ? (
+                    <>
+                    <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
+                    <Stack.Screen name="ScreenHor" component={ScreenHor} />
+                    <Stack.Screen name="ScreenMain" component={TestNavigate} />
                     <Stack.Screen name="ScreenRegister" component={ScreenRegister} />
                     <Stack.Screen name="DataTableTest" component={DataTableTest} />
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
-                    <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
+                    <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
+                    </>
+                ) : (
+                    <>
+                        <Stack.Screen name="ScreenLogin" component={ScreenLogin} />
+                    </>
+                ) */}
+                    
+
+
+                    
                 </Stack.Navigator>
             </NavigationContainer>
         </>

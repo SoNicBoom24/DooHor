@@ -12,6 +12,7 @@ npm i --legacy-peer-deps
 
 
 *********** แก้ error บน nodmodule น้า **************
+ViewPropTypes has been removed from React Native. Migrate to ViewPropTypes exported from 'deprecated-react-native-prop-types'.
 1. เปิดไฟล์ node_modules/react-native/index.js 
 2. ไปที่บันทัด 436 แก้ตามนี้
 ```

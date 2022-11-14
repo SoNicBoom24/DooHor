@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import firebase from '../Database/firebaseDB'
 
-export default function register() {
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+export default function Login() {
     const [email, setEmail] = useState({ value: '', error: '' })
     const [password, setPassword] = useState({ value: '', error: '' })
+
+    const navigation = useNavigation();
 
     const onLoginPressed = () => {
         firebase
@@ -16,8 +21,9 @@ export default function register() {
                 alert("User logged-in successfully!")
                 setEmail({ value: '', error: '' })
                 setPassword({ value: '', error: '' })
-
             })
+            navigation.navigate("ScreenNotification")
+
     }
     return (
         <View style={styles.container} >
@@ -29,8 +35,14 @@ export default function register() {
                 placeholder="Password" onChangeText={(text) => setPassword({ value: text, error: '' })}
             />
             <View style={styles.buttonLogin}>
-                <Button title="Login" color={"white"} onPress={onLoginPressed} />
-                <AntDesign name="caretright" size={24} color="#FFE664" />
+                <TouchableOpacity onPress={onLoginPressed}>
+                <View style={{backgroundColor: "transparent", padding: 5, borderRadius: 5, flexDirection: "row"}}>
+                    <Text style={{color: "white", fontSize: 18}}>
+                        Login
+                    </Text>
+                    <AntDesign name="caretright" size={24} color="#FFE664" />
+                </View>
+                </TouchableOpacity>
             </View>
         </View>
     );
