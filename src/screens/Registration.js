@@ -5,7 +5,7 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import ModalDropdown from 'react-native-modal-dropdown';
 import { AntDesign } from '@expo/vector-icons';
 
-import { firebase } from "../../config";
+import { firebase } from "../Database/firebaseDB";
 
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 

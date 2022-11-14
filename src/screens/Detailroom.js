@@ -11,77 +11,52 @@ import {
     Button
 } from "react-native";
 import { Card, Title, Paragraph } from 'react-native-paper';
+import firebase from '../Database/firebaseDB'
 
-// Default Sample Data
-const DATA = [
-    {
-        id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-        title: "The most beutiful railway track!",
-        subtitle:
-            "This is a long subtitle. Which also can be used to display flashnews.",
-        image:
-            "https://i.picsum.photos/id/524/700/500.jpg?hmac=PuAKCqRNlpa6_UJLeKABjXH9l3MFgsv-LHMm0bDfey4",
-    },
-    {
-        id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-        title: "Memories lives in this home",
-        subtitle:
-            "This is a long subtitle. Which also can be used to display flashnews.",
-        image:
-            "https://i.picsum.photos/id/193/700/500.jpg?hmac=q5QJ9ieureq_dXwwsUmh7ub2pN-V1arRrqpMV7czc9g",
-    },
-    {
-        id: "58694a0f-3da1-471f-bd96-145571e29d72",
-        title: "Snow and Fun! How can we forget",
-        subtitle:
-            "This is a long subtitle. Which also can be used to display flashnews.",
-        image:
-            "https://i.picsum.photos/id/971/700/500.jpg?hmac=kNTldtPvd24NEOfvd39iwsRBun4As0dYChiWQuyCFo4",
-    },
-];
-
-// Default Props
-const defaults = {
-    height: 500,
-    width: Dimensions.get("window").width,
-    delay: 5000,
-};
 
 // Default Image Item
-const Item = ({ title, image, height, width, onPress, subtitle }) => (
-    <TouchableOpacity
-        activeOpacity={1}
-        onPress={onPress}
-        style={{ height: height, width: width }}
-    >
-        <Image source={{ uri: image }} style={[styles.image, { height: height }]} />
-        <View style={styles.titleContainer}>
-            {title && <Text style={styles.title}>{title} </Text>}
-            {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
-        </View>
-    </TouchableOpacity>
-);
-
 
 buttonClickListener = () => {
     alert("ลงชื่อแล้ว");
 }
 // Carousal Component
 export default function Carousal({
-    data = DATA,
-    height = defaults.height,
-    width = defaults.width,
-    delay = defaults.delay,
+    height = 500,
+    width = Dimensions.get("window").width,
+    delay = 5000,
     ItemElement = Item,
 }) {
+    const [DATA, SetDATA] = useState([]);
     const [selectedIndex, setselectedIndex] = useState(0);
     const scrollView = useRef();
+    const all_data = [];
+    const set = [];
+
+    firebase.firestore()
+        .collection('Room')
+        .where('idroom', '==', 1)
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach((res) => {
+                all_data.push(res.data());
+            })
+            {
+                all_data[0].image_room.forEach(d => {
+                    set.push({
+                        image: d
+                    })
+                })
+                SetDATA(set)
+            }
+
+        });
+
 
     // Script which will only executed when component initilizes
     useEffect(() => {
         const fn = setInterval(() => {
             setselectedIndex((oldCount) =>
-                oldCount === data.length - 1 ? 0 : oldCount + 1
+                oldCount === DATA.length - 1 ? 0 : oldCount + 1
             );
         }, delay);
         return () => {
@@ -117,9 +92,8 @@ export default function Carousal({
 
             >
                 <View style={styles.carousalContainer} >
-                    {data.map((item) => (
+                    {DATA.map((item) => (
                         <ItemElement
-                            key={item.id}
                             height={height}
                             width={width}
                             {...item}
@@ -145,8 +119,8 @@ export default function Carousal({
                     borderRadius: 15, width: "95%", marginBottom: 10, marginTop: 50
                 }} >
                     <Card.Content>
-                        <Title>{item.title}</Title>
-                        <Paragraph style={{ fontSize: 20 }}>{item.desc}</Paragraph>
+                        <Title>นายกิตติภพ ปังตระกูล</Title>
+                        <Paragraph style={{ fontSize: 20 }}>คณะ IT เวลาเรียนช่วง 12.00 - 18.00</Paragraph>
                         <Paragraph style={{ fontSize: 20 }}>สถานะ</Paragraph>
                     </Card.Content>
                 </Card>
@@ -157,8 +131,18 @@ export default function Carousal({
     );
 
 
-}
 
+}
+const Item = ({ image, height, width, onPress, }) => (
+    <TouchableOpacity
+        activeOpacity={1}
+        onPress={onPress}
+        style={{ height: height, width: width }}
+    >
+        <Image source={{ uri: image }} style={[styles.image, { height: height }]} />
+
+    </TouchableOpacity>
+);
 
 const styles = StyleSheet.create({
     carousalContainer: {
@@ -188,7 +172,7 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     image: {
-        width: defaults.width,
-        height: defaults.height,
+        width: Dimensions.get("window").width,
+        height: 500,
     },
 });
