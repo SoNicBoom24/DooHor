@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import ModalDropdown from 'react-native-modal-dropdown';
 import { AntDesign } from '@expo/vector-icons';
 
-// import { firebase } from "../../config";
+import { firebase } from "../../config";
 
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
@@ -21,7 +21,11 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 // }
 
 export default function Register() {
-    const countries = ["ชาย", "หญิง", "ไม่ระบุ"]
+    const navigation = useNavigation();
+
+    const allSex = ['ชาย', 'หญิง'];
+    const allYear = ['1', '2', '3', '4'];
+    const allFaculty = ['IT', 'วิศวะ', 'ครุ', 'วิทย์'];
     
     // const openGallery = async () => {
     //     const images = await launchImageLibrary(options);
@@ -29,50 +33,50 @@ export default function Register() {
     //     const formdata = new FormData()
     // }
 
-    // const todoRef = firebase.firestore().collection("DataRegister");
-    // const [addDataFirstName, setDataFirst] = useState("");
-    // const [addDataLastName, setDataLast] = useState("");
-    // const [addDataSex, setDataSex] = useState("");
-    // const [addDataAge, setDataAge] = useState("");
-    // const [addDataEmail, setDataEmail] = useState("");
-    // const [addDataStudentId, setDataStudentId] = useState("");
-    // const [addDataYear, setDataYear] = useState("");
-    // const [addDataFaculty, setDataFaculty] = useState("");
-    // const [addDataBit, setDataBit] = useState("");
+    const todoRef = firebase.firestore().collection("DataRegister");
+    const [addDataFirstName, setDataFirst] = useState("");
+    const [addDataLastName, setDataLast] = useState("");
+    const [addDataSex, setDataSex] = useState("");
+    const [addDataAge, setDataAge] = useState("");
+    const [addDataEmail, setDataEmail] = useState("");
+    const [addDataStudentId, setDataStudentId] = useState("");
+    const [addDataYear, setDataYear] = useState("");
+    const [addDataFaculty, setDataFaculty] = useState("");
+    const [addDataBit, setDataBit] = useState("");
+    const [addDataHouseNo, setDataHouseNo] = useState("");
+    const [addDataMoo, setDataMoo] = useState("");
+    const [addDataVillage, setDataVillage] = useState("");
+    const [addDataAlley_Lane, setDataAlley_Lane] = useState("");
+    const [addDataSub_district, setDataSub_district] = useState("");
+    const [addDataDistrict, setDataDistrict] = useState("");
+    const [addDataProvince, setDataProvince] = useState("");
+    const [addDataPostCode, setDataPostCode] = useState("");
 
-    // const addField = () => {
-    //     if (addDataFirstName && addDataFirstName.length > 0) {
-    //         const data = {
-    //             firstName: addDataFirstName,
-    //             lasstName: addDataLastName,
-    //             age: addDataAge,
-    //             e_mail: addDataEmail,
-    //             student_id: addDataStudentId,
-    //             year: addDataYear,
-    //             faculty: addDataFaculty,
-    //             bit: addDataBit
-    //         };
-    //         todoRef
-    //             .add(data)
-    //             .then(() => {
-    //                 setDataFirst("");
-    //                 setDataLast("");
-    //                 setDataSex("");
-    //                 setDataAge("");
-    //                 setDataEmail("");
-    //                 setDataStudentId("");
-    //                 setDataYear("");
-    //                 setDataFaculty("");
-    //                 setDataBit("");
-    //                 Keyboard.dismiss();
-    //             })
-    //             .catch((error) => {
-    //                 alert(error);
-    //             })
-    //     };
-    // }
-
-
+    const addField = () => {
+        // if (addDataFirstName && addDataFirstName.length > 0) {
+            const data = {
+                firstName: addDataFirstName,
+                lasstName: addDataLastName,
+                sex: addDataSex,
+                age: addDataAge,
+                e_mail: addDataEmail,
+                student_id: addDataStudentId,
+                year: addDataYear,
+                faculty: addDataFaculty,
+                bit: addDataBit,
+                houseNo: addDataHouseNo,
+                moo: addDataMoo,
+                village: addDataVillage,
+                alley_lane: addDataAlley_Lane,
+                subDistrict: addDataSub_district,
+                district: addDataDistrict,
+                province: addDataProvince,
+                postCode: addDataPostCode
+            };
+            todoRef.add(data)
+            navigation.navigate("ScreenNotification")
+        // };
+    }
 
     return (
         <SafeAreaView style={{ width: "100%", backgroundColor: "#FFDA79", height: "100%" }}>
@@ -108,42 +112,42 @@ export default function Register() {
                             <TextInput 
                                 style={styles.inputContainer} 
                                 placeholder="ชื่อ"
-                                // onChangeText={(firstName) => setDataFirst(firstName)}
-                                // value={addDataFirstName}
+                                onChangeText={(firstName) => setDataFirst(firstName)}
+                                value={addDataFirstName}
                                 />
 
                             <TextInput 
                                 style={styles.inputContainer} 
                                 placeholder="นามสกุล"
-                                // onChangeText={(lastName) => setDataLast(lastName)} 
-                                // value={addDataLastName} 
+                                onChangeText={(lastName) => setDataLast(lastName)} 
+                                value={addDataLastName} 
                                 />
                         </View>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
-                            <ModalDropdown options={['ชาย', 'หญิง', 'ไม่ระบุ']}
+                            <ModalDropdown options={allSex}
                                 defaultValue={"เพศ"}
                                 textStyle={{ paddingLeft: 5, paddingBottom: 5, fontSize: 14, paddingTop: 3 }}
-                                dropdownStyle={{ width: "10%", borderRadius: 20, backgroundColor: "white", height: 100 }}
+                                dropdownStyle={{ width: "10%", borderRadius: 10, backgroundColor: "white", height: 70, overflow: "hidden" }}
                                 defaultTextStyle={{ color: "#Bbbbbd" }}
-                                style={{ backgroundColor: "white", borderRadius: 10, width: "15%", justifyContent: "center" }}
-                                // onChangeText={(sex) => setDataLast(sex)} 
-                                // value={addDataSex}
+                                style={{ backgroundColor: "white", borderRadius: 10, width: "15%", justifyContent: "center", paddingLeft: 5}}
+                                onSelect={(sex) => setDataSex(allSex[sex])}
+                                value={addDataSex}
                                 />
 
                             <TextInput style={{ width: "15%", backgroundColor: "white", padding: 5, borderRadius: 10, marginHorizontal: 5 }}
                                 keyboardType='numeric'
                                 maxLength={3}
                                 placeholder="อายุ"
-                                // onChangeText={(age) => setDataLast(age)} 
-                                // value={addDataAge} 
+                                onChangeText={(age) => setDataAge(age)} 
+                                value={addDataAge} 
                                 />
 
                             <TextInput style={{ width: "65%", backgroundColor: "white", padding: 5, borderRadius: 10 }}
                                 keyboardType="email-address"
                                 placeholder="E-mail"
-                                // onChangeText={(e_mail) => setDataLast(e_mail)} 
-                                // value={addDataEmail} 
+                                onChangeText={(e_mail) => setDataEmail(e_mail)} 
+                                value={addDataEmail} 
                                 />
                         </View>
 
@@ -152,69 +156,99 @@ export default function Register() {
                                 keyboardType="numeric"
                                 maxLength={8}
                                 placeholder="รหัสนักศึกษา"
-                                // onChangeText={(student_id) => setDataLast(student_id)} 
-                                // value={addDataStudentId}
+                                onChangeText={(student_id) => setDataStudentId(student_id)} 
+                                value={addDataStudentId}
                                  />
 
-                            <ModalDropdown options={['1', '2', '3', '4']}
+                            <ModalDropdown options={allYear}
                                 defaultValue={"ชั้นปีการศึกษา"}
                                 textStyle={{ paddingLeft: 5, paddingBottom: 5, fontSize: 14, paddingTop: 3 }}
-                                dropdownStyle={{ width: "40%", borderRadius: 20, backgroundColor: "white" }}
+                                dropdownStyle={{ width: "40%", borderRadius: 10, backgroundColor: "white", height: 140, overflow: "hidden" }}
                                 defaultTextStyle={{ color: "#Bbbbbd" }}
                                 style={{ backgroundColor: "white", borderRadius: 10, width: "48%", justifyContent: "center" }}
-                                // onChangeText={(year) => setDataLast(year)} 
-                                // value={addDataYear} 
+                                onSelect={(year) => setDataYear(allYear[year])} 
+                                value={addDataYear} 
                                 />
                         </View>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
-                            <ModalDropdown options={['IT', 'วิศวะ', 'ครุ', 'วิทย์']}
+                            <ModalDropdown options={allFaculty}
                                 defaultValue={"คณะ"}
                                 textStyle={{ paddingLeft: 5, paddingBottom: 5 }}
                                 dropdownStyle={{ width: "40%", borderRadius: 20, backgroundColor: "white" }}
                                 defaultTextStyle={{ color: "#Bbbbbd" }}
                                 style={{ backgroundColor: "white", borderRadius: 10, width: "48%", justifyContent: "center" }}
-                                // onChangeText={(faculty) => setDataLast(faculty)} 
-                                // value={addDataFaculty}
+                                onSelect={(faculty) => setDataFaculty(allFaculty[faculty])} 
+                                value={addDataFaculty}
                                  />
 
                             <TextInput 
                                 style={styles.inputContainer} 
                                 placeholder="สาขา"
-                                // onChangeText={(bit) => setDataLast(bit)} 
-                                // value={addDataBit} 
+                                onChangeText={(bit) => setDataBit(bit)} 
+                                value={addDataBit} 
                                 />
                         </View>
 
                         <Text style={{ fontSize: 18, padding: 5 }}>ที่อยู่ปัจจุบัน</Text>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
-                            <TextInput style={styles.inputContainer} placeholder="บ้านเลขที่" />
+                            <TextInput 
+                                style={{backgroundColor: "white", padding: 5, borderRadius: 10, width: "30%",}} 
+                                placeholder="บ้านเลขที่"
+                                onChangeText={(houseNo) => setDataHouseNo(houseNo)} 
+                                value={addDataHouseNo} />
 
-                            <TextInput style={styles.inputContainer} placeholder="หมู่บ้าน" />
+                            <TextInput 
+                                style={{backgroundColor: "white", padding: 5, borderRadius: 10, width: "20%",}} 
+                                placeholder="หมู่"
+                                onChangeText={(moo) => setDataMoo(moo)} 
+                                value={addDataMoo} />
+
+                            <TextInput 
+                                style={{backgroundColor: "white", padding: 5, borderRadius: 10, width: "45%",}} 
+                                placeholder="หมู่บ้าน"
+                                onChangeText={(village) => setDataVillage(village)} 
+                                value={addDataVillage} />
                         </View>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
-                            <TextInput style={styles.inputContainer} placeholder="ตรอก/ซอย" />
+                            <TextInput 
+                                style={styles.inputContainer} 
+                                placeholder="ตรอก/ซอย"
+                                onChangeText={(alley_lane) => setDataAlley_Lane(alley_lane)} 
+                                value={addDataAlley_Lane} />
 
-                            <TextInput style={styles.inputContainer} placeholder="ตำบล/แขวง" />
+                            <TextInput 
+                                style={styles.inputContainer} 
+                                placeholder="ตำบล/แขวง"
+                                onChangeText={(subDistrict) => setDataSub_district(subDistrict)} 
+                                value={addDataSub_district} />
                         </View>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
-                            <TextInput style={styles.inputContainer} placeholder="อำเภอ/เขต" />
+                            <TextInput 
+                                style={styles.inputContainer} 
+                                placeholder="อำเภอ/เขต"
+                                onChangeText={(district) => setDataDistrict(district)} 
+                                value={addDataDistrict} />
 
-                            <TextInput style={styles.inputContainer} placeholder="จังหวัด" />
+                            <TextInput 
+                                style={styles.inputContainer} 
+                                placeholder="จังหวัด"
+                                onChangeText={(province) => setDataProvince(province)} 
+                                value={addDataProvince} />
                         </View>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
                             <TextInput style={styles.inputContainer}
                                 placeholder="รหัสไปรษณีย์"
                                 keyboardType='numeric'
-                                maxLength={5} />
+                                maxLength={5}
+                                onChangeText={(postCode) => setDataPostCode(postCode)} 
+                                value={addDataPostCode} />
                         </View>
-                        <TouchableOpacity 
-                        // onPress={addField}
-                        >
+                        <TouchableOpacity onPress={addField} >
                             <View style={{backgroundColor: "#77CF32", padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10}}>
                                 <Text style={{color: "white", alignSelf: "center", fontSize: 16}}>
                                     ยืนยัน
