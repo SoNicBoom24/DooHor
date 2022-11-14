@@ -12,7 +12,7 @@ import ScreenRegister from "../screens/Registration";
 import ScreenLogin from "../screens/Login";
 
 import { DataTableTest } from "../screens/Datatable";
-
+import ScreenDetailroom from "../screens/Detailroom"
 import ScreenNotification from "../screens/Notification";
 import ScreenProflie from "../screens/Profile";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
@@ -125,7 +125,7 @@ export default function App() {
             <NavigationContainer>
                 <NavBar />
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="ScreenLogin" component={ScreenLogin} />
+                    <Stack.Screen name="ScreenLogin" component={ScreenLogin} />
                     <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
                     <Stack.Screen name="ScreenHor" component={ScreenHor} />
                     <Stack.Screen name="ScreenMain" component={TestNavigate} />
@@ -133,7 +133,9 @@ export default function App() {
                     <Stack.Screen name="DataTableTest" component={DataTableTest} />
                     {/* <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} /> */}
                     <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
-                {/* isSignedIn ? (
+                    <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
+
+                    {/* isSignedIn ? (
                     <>
                     <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
                     <Stack.Screen name="ScreenHor" component={ScreenHor} />
@@ -148,10 +150,10 @@ export default function App() {
                         <Stack.Screen name="ScreenLogin" component={ScreenLogin} />
                     </>
                 ) */}
-                    
 
 
-                    
+
+
                 </Stack.Navigator>
             </NavigationContainer>
         </>

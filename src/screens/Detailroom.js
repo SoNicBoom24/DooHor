@@ -20,7 +20,7 @@ buttonClickListener = () => {
     alert("ลงชื่อแล้ว");
 }
 // Carousal Component
-export default function Carousal({
+export default function Detailroom({
     height = 500,
     width = Dimensions.get("window").width,
     delay = 5000,
@@ -31,7 +31,7 @@ export default function Carousal({
     const scrollView = useRef();
     const all_data = [];
     const set = [];
-
+    let id = 0;
     firebase.firestore()
         .collection('Room')
         .where('idroom', '==', 1)
@@ -43,7 +43,9 @@ export default function Carousal({
             {
                 all_data[0].image_room.forEach(d => {
                     set.push({
-                        image: d
+                        image: d,
+                        id: id += 1
+
                     })
                 })
                 SetDATA(set)
@@ -94,6 +96,7 @@ export default function Carousal({
                 <View style={styles.carousalContainer} >
                     {DATA.map((item) => (
                         <ItemElement
+                            key={item.id}
                             height={height}
                             width={width}
                             {...item}

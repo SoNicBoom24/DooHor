@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity, Keyboard } from 'react-native';
+import { Alert, StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity, Keyboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import ModalDropdown from 'react-native-modal-dropdown';
 import { AntDesign } from '@expo/vector-icons';
-
+import * as ImagePicker from 'expo-image-picker';
 import { firebase } from "../Database/firebaseDB";
-
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 
 // const options = {
@@ -26,7 +24,7 @@ export default function Register() {
     const allSex = ['ชาย', 'หญิง'];
     const allYear = ['1', '2', '3', '4'];
     const allFaculty = ['IT', 'วิศวะ', 'ครุ', 'วิทย์'];
-    
+
     // const openGallery = async () => {
     //     const images = await launchImageLibrary(options);
     //     console.log(images)
@@ -51,30 +49,71 @@ export default function Register() {
     const [addDataDistrict, setDataDistrict] = useState("");
     const [addDataProvince, setDataProvince] = useState("");
     const [addDataPostCode, setDataPostCode] = useState("");
+    const [imageProflie, setimageProflie] = useState(null);
+    const [uploading, setuploading] = useState(false)
+
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1
+        })
+
+        const source = { uri: result.uri };
+        console.log(source);
+        setimageProflie(source);
+
+    };
+
+    const uploadImage = async () => {
+        setuploading(true);
+        const response = await fetch(imageProflie.uri)
+        const blob = await response.blob();
+        const filename = imageProflie.uri
+        var ref = firebase.storage().ref().child(filename).put(blob);
+
+        try {
+            await ref;
+        }
+        catch (e) {
+            console.log(e)
+        }
+        setuploading(false);
+        Alert.alert(
+            'success'
+        )
+        setimageProflie(null)
+
+    }
+
+
+
 
     const addField = () => {
         // if (addDataFirstName && addDataFirstName.length > 0) {
-            const data = {
-                firstName: addDataFirstName,
-                lasstName: addDataLastName,
-                sex: addDataSex,
-                age: addDataAge,
-                e_mail: addDataEmail,
-                student_id: addDataStudentId,
-                year: addDataYear,
-                faculty: addDataFaculty,
-                bit: addDataBit,
-                houseNo: addDataHouseNo,
-                moo: addDataMoo,
-                village: addDataVillage,
-                alley_lane: addDataAlley_Lane,
-                subDistrict: addDataSub_district,
-                district: addDataDistrict,
-                province: addDataProvince,
-                postCode: addDataPostCode
-            };
-            todoRef.add(data)
-            navigation.navigate("ScreenNotification")
+        const data = {
+            firstName: addDataFirstName,
+            lasstName: addDataLastName,
+            sex: addDataSex,
+            age: addDataAge,
+            e_mail: addDataEmail,
+            student_id: addDataStudentId,
+            year: addDataYear,
+            faculty: addDataFaculty,
+            bit: addDataBit,
+            houseNo: addDataHouseNo,
+            moo: addDataMoo,
+            village: addDataVillage,
+            alley_lane: addDataAlley_Lane,
+            subDistrict: addDataSub_district,
+            district: addDataDistrict,
+            province: addDataProvince,
+            postCode: addDataPostCode
+        };
+        todoRef.add(data)
+        navigation.navigate("ScreenNotification")
         // };
     }
 
@@ -100,7 +139,7 @@ export default function Register() {
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={pickImage}>
                             <View style={{ padding: 5, flexDirection: "row" }}>
                                 <Text style={{ fontSize: 18, padding: 5 }}>รูปถ่าย</Text>
                                 <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginLeft: 2, overflow: "hidden" }} />
@@ -109,19 +148,19 @@ export default function Register() {
                         </TouchableOpacity>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
-                            <TextInput 
-                                style={styles.inputContainer} 
+                            <TextInput
+                                style={styles.inputContainer}
                                 placeholder="ชื่อ"
                                 onChangeText={(firstName) => setDataFirst(firstName)}
                                 value={addDataFirstName}
-                                />
+                            />
 
-                            <TextInput 
-                                style={styles.inputContainer} 
+                            <TextInput
+                                style={styles.inputContainer}
                                 placeholder="นามสกุล"
-                                onChangeText={(lastName) => setDataLast(lastName)} 
-                                value={addDataLastName} 
-                                />
+                                onChangeText={(lastName) => setDataLast(lastName)}
+                                value={addDataLastName}
+                            />
                         </View>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
@@ -130,25 +169,25 @@ export default function Register() {
                                 textStyle={{ paddingLeft: 5, paddingBottom: 5, fontSize: 14, paddingTop: 3 }}
                                 dropdownStyle={{ width: "10%", borderRadius: 10, backgroundColor: "white", height: 70, overflow: "hidden" }}
                                 defaultTextStyle={{ color: "#Bbbbbd" }}
-                                style={{ backgroundColor: "white", borderRadius: 10, width: "15%", justifyContent: "center", paddingLeft: 5}}
+                                style={{ backgroundColor: "white", borderRadius: 10, width: "15%", justifyContent: "center", paddingLeft: 5 }}
                                 onSelect={(sex) => setDataSex(allSex[sex])}
                                 value={addDataSex}
-                                />
+                            />
 
                             <TextInput style={{ width: "15%", backgroundColor: "white", padding: 5, borderRadius: 10, marginHorizontal: 5 }}
                                 keyboardType='numeric'
                                 maxLength={3}
                                 placeholder="อายุ"
-                                onChangeText={(age) => setDataAge(age)} 
-                                value={addDataAge} 
-                                />
+                                onChangeText={(age) => setDataAge(age)}
+                                value={addDataAge}
+                            />
 
                             <TextInput style={{ width: "65%", backgroundColor: "white", padding: 5, borderRadius: 10 }}
                                 keyboardType="email-address"
                                 placeholder="E-mail"
-                                onChangeText={(e_mail) => setDataEmail(e_mail)} 
-                                value={addDataEmail} 
-                                />
+                                onChangeText={(e_mail) => setDataEmail(e_mail)}
+                                value={addDataEmail}
+                            />
                         </View>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
@@ -156,9 +195,9 @@ export default function Register() {
                                 keyboardType="numeric"
                                 maxLength={8}
                                 placeholder="รหัสนักศึกษา"
-                                onChangeText={(student_id) => setDataStudentId(student_id)} 
+                                onChangeText={(student_id) => setDataStudentId(student_id)}
                                 value={addDataStudentId}
-                                 />
+                            />
 
                             <ModalDropdown options={allYear}
                                 defaultValue={"ชั้นปีการศึกษา"}
@@ -166,9 +205,9 @@ export default function Register() {
                                 dropdownStyle={{ width: "40%", borderRadius: 10, backgroundColor: "white", height: 140, overflow: "hidden" }}
                                 defaultTextStyle={{ color: "#Bbbbbd" }}
                                 style={{ backgroundColor: "white", borderRadius: 10, width: "48%", justifyContent: "center" }}
-                                onSelect={(year) => setDataYear(allYear[year])} 
-                                value={addDataYear} 
-                                />
+                                onSelect={(year) => setDataYear(allYear[year])}
+                                value={addDataYear}
+                            />
                         </View>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
@@ -178,65 +217,65 @@ export default function Register() {
                                 dropdownStyle={{ width: "40%", borderRadius: 20, backgroundColor: "white" }}
                                 defaultTextStyle={{ color: "#Bbbbbd" }}
                                 style={{ backgroundColor: "white", borderRadius: 10, width: "48%", justifyContent: "center" }}
-                                onSelect={(faculty) => setDataFaculty(allFaculty[faculty])} 
+                                onSelect={(faculty) => setDataFaculty(allFaculty[faculty])}
                                 value={addDataFaculty}
-                                 />
+                            />
 
-                            <TextInput 
-                                style={styles.inputContainer} 
+                            <TextInput
+                                style={styles.inputContainer}
                                 placeholder="สาขา"
-                                onChangeText={(bit) => setDataBit(bit)} 
-                                value={addDataBit} 
-                                />
+                                onChangeText={(bit) => setDataBit(bit)}
+                                value={addDataBit}
+                            />
                         </View>
 
                         <Text style={{ fontSize: 18, padding: 5 }}>ที่อยู่ปัจจุบัน</Text>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
-                            <TextInput 
-                                style={{backgroundColor: "white", padding: 5, borderRadius: 10, width: "30%",}} 
+                            <TextInput
+                                style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "30%", }}
                                 placeholder="บ้านเลขที่"
-                                onChangeText={(houseNo) => setDataHouseNo(houseNo)} 
+                                onChangeText={(houseNo) => setDataHouseNo(houseNo)}
                                 value={addDataHouseNo} />
 
-                            <TextInput 
-                                style={{backgroundColor: "white", padding: 5, borderRadius: 10, width: "20%",}} 
+                            <TextInput
+                                style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "20%", }}
                                 placeholder="หมู่"
-                                onChangeText={(moo) => setDataMoo(moo)} 
+                                onChangeText={(moo) => setDataMoo(moo)}
                                 value={addDataMoo} />
 
-                            <TextInput 
-                                style={{backgroundColor: "white", padding: 5, borderRadius: 10, width: "45%",}} 
+                            <TextInput
+                                style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "45%", }}
                                 placeholder="หมู่บ้าน"
-                                onChangeText={(village) => setDataVillage(village)} 
+                                onChangeText={(village) => setDataVillage(village)}
                                 value={addDataVillage} />
                         </View>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
-                            <TextInput 
-                                style={styles.inputContainer} 
+                            <TextInput
+                                style={styles.inputContainer}
                                 placeholder="ตรอก/ซอย"
-                                onChangeText={(alley_lane) => setDataAlley_Lane(alley_lane)} 
+                                onChangeText={(alley_lane) => setDataAlley_Lane(alley_lane)}
                                 value={addDataAlley_Lane} />
 
-                            <TextInput 
-                                style={styles.inputContainer} 
+                            <TextInput
+                                style={styles.inputContainer}
                                 placeholder="ตำบล/แขวง"
-                                onChangeText={(subDistrict) => setDataSub_district(subDistrict)} 
+                                onChangeText={(subDistrict) => setDataSub_district(subDistrict)}
                                 value={addDataSub_district} />
                         </View>
 
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
-                            <TextInput 
-                                style={styles.inputContainer} 
+                            <TextInput
+                                style={styles.inputContainer}
                                 placeholder="อำเภอ/เขต"
-                                onChangeText={(district) => setDataDistrict(district)} 
+                                onChangeText={(district) => setDataDistrict(district)}
                                 value={addDataDistrict} />
 
-                            <TextInput 
-                                style={styles.inputContainer} 
+                            <TextInput
+                                style={styles.inputContainer}
                                 placeholder="จังหวัด"
-                                onChangeText={(province) => setDataProvince(province)} 
+                                onChangeText={(province) => setDataProvince(province)}
                                 value={addDataProvince} />
                         </View>
 
@@ -245,16 +284,25 @@ export default function Register() {
                                 placeholder="รหัสไปรษณีย์"
                                 keyboardType='numeric'
                                 maxLength={5}
-                                onChangeText={(postCode) => setDataPostCode(postCode)} 
+                                onChangeText={(postCode) => setDataPostCode(postCode)}
                                 value={addDataPostCode} />
                         </View>
                         <TouchableOpacity onPress={addField} >
-                            <View style={{backgroundColor: "#77CF32", padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10}}>
-                                <Text style={{color: "white", alignSelf: "center", fontSize: 16}}>
+                            <View style={{ backgroundColor: "#77CF32", padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10 }}>
+                                <Text style={{ color: "white", alignSelf: "center", fontSize: 16 }}>
                                     ยืนยัน
                                 </Text>
                             </View>
                         </TouchableOpacity>
+
+                        <TouchableOpacity onPress={uploadImage} >
+                            <View style={{ backgroundColor: "#77CF32", padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10 }}>
+                                <Text style={{ color: "white", alignSelf: "center", fontSize: 16 }}>
+                                    เทส
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+
                     </View>
                 </>
             </KeyboardAwareScrollView>
