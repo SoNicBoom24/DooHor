@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import firebase from '../Database/firebaseDB'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -22,29 +23,33 @@ export default function Login() {
                 setEmail({ value: '', error: '' })
                 setPassword({ value: '', error: '' })
             })
-            navigation.navigate("ScreenNotification")
+        navigation.navigate("ScreenNotification")
 
     }
     return (
-        <View style={styles.container} >
-            <Text style={styles.logintext}>Login</Text>
-            <TextInput style={styles.inputContainer} placeholder="Username" value={email.value}
-                onChangeText={(text) => setEmail({ value: text, error: '' })}
-            />
-            <TextInput style={styles.inputContainer} value={password.value}
-                placeholder="Password" onChangeText={(text) => setPassword({ value: text, error: '' })}
-            />
-            <View style={styles.buttonLogin}>
-                <TouchableOpacity onPress={onLoginPressed}>
-                <View style={{backgroundColor: "transparent", padding: 5, borderRadius: 5, flexDirection: "row"}}>
-                    <Text style={{color: "white", fontSize: 18}}>
-                        Login
-                    </Text>
-                    <AntDesign name="caretright" size={24} color="#FFE664" />
+        <SafeAreaView style={{ width: "100%", backgroundColor: "#FFB053", height: "100%"}} >
+            <KeyboardAwareScrollView extraHeight={100}>
+                <View style={{paddingTop: "50%"}}>
+                    <Text style={styles.logintext}>Login</Text>
+                    <TextInput style={styles.inputContainer} placeholder="Username" value={email.value} keyboardType="email-address"
+                        onChangeText={(text) => setEmail({ value: text, error: '' })}
+                    />
+                    <TextInput style={styles.inputContainer} value={password.value}
+                        placeholder="Password" onChangeText={(text) => setPassword({ value: text, error: '' })}
+                    />
+                    <View style={styles.buttonLogin}>
+                        <TouchableOpacity onPress={onLoginPressed}>
+                            <View style={{ backgroundColor: "transparent", padding: 5, borderRadius: 5, flexDirection: "row" }}>
+                                <Text style={{ color: "white", fontSize: 18 }}>
+                                    Login
+                                </Text>
+                                <AntDesign name="caretright" size={24} color="#FFE664" />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                </TouchableOpacity>
-            </View>
-        </View>
+            </KeyboardAwareScrollView>
+        </SafeAreaView>
     );
 }
 
@@ -54,6 +59,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFB053",
         justifyContent: "center",
         alignItems: "center",
+        width: "100%",
+        height: "100%"
     },
     inputContainer: {
         backgroundColor: "white",
@@ -61,13 +68,15 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: "70%",
         margin: 10,
-        fontSize: 20
+        fontSize: 20,
+        alignSelf: "center"
     },
     logintext: {
         fontSize: 50,
         color: "white",
         paddingBottom: 50,
-        fontWeight: "700"
+        fontWeight: "700",
+        alignSelf: "center",
     },
     buttonLogin: {
         backgroundColor: "#FF9A3C",
@@ -76,6 +85,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        alignContent: "center"
+        alignContent: "center",
+        alignSelf: "center"
     }
 });

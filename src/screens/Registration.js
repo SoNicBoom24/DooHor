@@ -194,7 +194,6 @@ export default function Register() {
                             <View style={{ padding: 5, flexDirection: "row" }}>
                                 <Text style={{ fontSize: 18, padding: 5 }}>รูปถ่าย</Text>
                                 <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginLeft: 2, overflow: "hidden" }} />
-                                {/* download มันต้องเป็นรูปไหนดีวะ */}
                             </View>
                         </TouchableOpacity>
 
@@ -345,14 +344,6 @@ export default function Register() {
                                 </Text>
                             </View>
                         </TouchableOpacity>
-
-                        {/* <TouchableOpacity onPress={uploadImage} >
-                            <View style={{ backgroundColor: "#77CF32", padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10 }}>
-                                <Text style={{ color: "white", alignSelf: "center", fontSize: 16 }}>
-                                    เทส
-                                </Text>
-                            </View>
-                        </TouchableOpacity> */}
 
                     </View>
                 </>
