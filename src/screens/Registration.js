@@ -69,6 +69,7 @@ export default function Register() {
         const blob = await response.blob();
         const filename = imageProflie.uri
         var ref = firebase.storage().ref().child(filename).put(blob);
+        ////มันคือไอ url ของไฟลเบส
         console.log(filename);
 
         try {
