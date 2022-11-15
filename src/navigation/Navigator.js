@@ -7,7 +7,7 @@ import { FontAwesome, MaterialIcons, Ionicons, Octicons } from "@expo/vector-ico
 // import { Ionicons } from "@expo/vector-icons";
 // import { Octicons } from '@expo/vector-icons';
 // import { MaterialIcons } from '@expo/vector-icons';
-
+import ScreenSendOffice_Documents from '../screens/SendOffice_Documents'
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
 // import ScreenDetailroom from "../screens/Detailroom";
@@ -19,7 +19,6 @@ import ScreenProflie from "../screens/Profile";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useRouteLoaderData } from "react-router-native";
-
 
 
 
@@ -146,7 +145,7 @@ function NavBar() {
                         color="black"
                         style={{ position: "absolute", left: -60, top: -13 }}
                         onPress={() => {
-                            linkTo.navigate("ScoreTable");
+                            linkTo.navigate("ScreenSendOffice_Documents");
                         }}
                     />
                     <FontAwesome
@@ -181,6 +180,7 @@ export default function App() {
                     {/* <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} /> */}
                     <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
+                    <Stack.Screen name="ScreenSendOffice_Documents" component={ScreenSendOffice_Documents} />
 
                     {/* isSignedIn ? (
                     <>
