@@ -32,28 +32,31 @@ export default function Detailroom({
     const all_data = [];
     const set = [];
     let id = 0;
-    firebase.firestore()
-        .collection('Room')
-        .where('idroom', '==', 1)
-        .get()
-        .then(querySnapshot => {
-            querySnapshot.forEach((res) => {
-                all_data.push(res.data());
-            })
-            {
-                all_data[0].image_room.forEach(d => {
-                    set.push({
-                        image: d,
-                        id: id += 1
+    //const user = firebase.auth().currentUser
+    //if (user) {
+    //     firebase.firestore()
+    //        .collection('Room')
+    //   .where('idroom', '==', 1)
+    //      .get()
+    //      .then(querySnapshot => {
+    //           querySnapshot.forEach((res) => {
+    //              all_data.push(res.data());
+    //           })
+    //           {
+    //               all_data[0].image_room.forEach(d => {
+    //                  set.push({
+    //                       image: d,
+    //                       id: id += 1
 
-                    })
-                })
-                SetDATA(set)
-            }
+    //                  })
+    //              })
+    //              SetDATA(set)
+    //         }
 
-        });
-
-
+    //       });
+    // }
+    //  else {
+    //  }
     // Script which will only executed when component initilizes
     useEffect(() => {
         const fn = setInterval(() => {

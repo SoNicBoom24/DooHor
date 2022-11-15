@@ -11,18 +11,26 @@ class Bill extends Component {
         this.state = { subject_list: [], };
     }
     getCollection = () => {
-        const all_data = [];
-        firebase.firestore()
-            .collection('office_documents')
-            .where('uid', '==', "LvTaBmip7DUjgaZwLJnWpRIR32o1").where('type', '==', 'Bill')
-            .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach((res) => {
-                    const { title, desc, dormitory_bill, image_documents } = res.data();
-                    all_data.push({ title: title, desc: desc, dormitory_bill: dormitory_bill, desc: desc, image_documents: image_documents });
+
+        const user = firebase.auth().currentUser
+        if (user) {
+            const uid = firebase.auth().currentUser.uid
+            const all_data = [];
+            firebase.firestore()
+                .collection('office_documents')
+                .where('uid', '==', uid).where('type', '==', 'Bill')
+                .get()
+                .then(querySnapshot => {
+                    querySnapshot.forEach((res) => {
+                        const { title, desc, dormitory_bill, image_documents } = res.data();
+                        all_data.push({ title: title, desc: desc, dormitory_bill: dormitory_bill, desc: desc, image_documents: image_documents });
+                    });
+                    this.setState({ subject_list: all_data, });
                 });
-                this.setState({ subject_list: all_data, });
-            });
+        }
+        else {
+
+        }
     };
     componentDidMount() {
         this.unsubscribe =

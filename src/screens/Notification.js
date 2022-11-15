@@ -3,22 +3,29 @@ import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView
 import { AntDesign } from '@expo/vector-icons';
 import { color } from 'react-native-reanimated';
 
-export default function Notification() {
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
+export default function Notification() {
+    const navigation = useNavigation();
+    const GotoRegister = () => {
+        navigation.navigate("ScreenRegister")
+    }
+    const GotoSelectHor = () => {
+        navigation.navigate("ScreenHor")
+    }
     return (
         <ScrollView style={styles.container}>
             <View>
                 <Text style={styles.noti}>ประกาศสำนักงานหอพักใน</Text>
                 <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
-                    <TouchableOpacity style={styles.cardNoti} onPress={() => { console.log('IT work'); }} >
-                        <Text style={styles.text}>ประกาศ จากหอพัก</Text>
+                    <TouchableOpacity style={styles.cardNoti} onPress={GotoRegister}>
+
+                        <Text style={styles.text}>ประกาศ แบบฟอร์มสำหรับให้นักศึกษาลงทะเบียน เข้าหอพักใน</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardNoti}>
-                        <Text style={styles.text}>ประกาศ จากนายก</Text>
+                    <TouchableOpacity style={styles.cardNoti} onPress={GotoSelectHor}>
+                        <Text style={styles.text}>ประกาศ สำรหับนักศึกษาที่ เป็นสมาชิกเลือกห้องพัก</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardNoti}>
-                        <Text style={styles.text}>ประกาศ จากโคคาเงะ</Text>
-                    </TouchableOpacity>
+
                 </View>
 
                 <Text style={styles.noti}>ประกาศสำนักงาน IT</Text>

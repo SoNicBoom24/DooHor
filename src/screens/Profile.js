@@ -69,15 +69,22 @@ const Profile = () => {
     const [userData, setUserData] = useState({});
 
     ///////////ดึงข้อมูลผู้ใช้
-    firebase.firestore()
-        .collection('Users')
-        .where('uid', '==', "LvTaBmip7DUjgaZwLJnWpRIR32o1")
-        .get()
-        .then(querySnapshot => {
-            querySnapshot.forEach((res) => {
-                setUserData(res.data())
+    const user = firebase.auth().currentUser
+    if (user) {
+        const uid = firebase.auth().currentUser.uid
+        firebase.firestore()
+            .collection('Users')
+            .where('uid', '==', uid)
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach((res) => {
+                    setUserData(res.data())
+                });
             });
-        });
+    }
+    else {
+        alert("ยังไม่ได้ล็อคอิน พาส test1234")
+    }
 
     //////// 
 

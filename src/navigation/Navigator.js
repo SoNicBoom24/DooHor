@@ -60,7 +60,7 @@ function TestNavigate() {
         // <View>
         //     <Text>Hello</Text>
         // </View>
-        <ScoreTable></ScoreTable>
+        <ScreenNotification></ScreenNotification>
     );
 }
 
@@ -125,7 +125,7 @@ function NavBar() {
                         color="black"
                         style={{ position: "absolute", left: -60, top: -13 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenRegister");
+                            linkTo.navigate("ScoreTable");
                         }}
                     />
                     <FontAwesome
