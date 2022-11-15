@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button, ScrollView, Image, TouchableOpacity } from "react-native";
 
@@ -12,7 +12,6 @@ import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
 // import ScreenDetailroom from "../screens/Detailroom";
 import ScreenLogin from "../screens/Login";
-
 import { ScoreTable } from "../screens/ScoreTable";
 import ScreenDetailroom from "../screens/Detailroom"
 import ScreenNotification from "../screens/Notification";
@@ -21,8 +20,12 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useRouteLoaderData } from "react-router-native";
 
-const Stack = createNativeStackNavigator();
 
+
+
+import firebase from '../Database/firebaseDB'
+
+const Stack = createNativeStackNavigator();
 function HomeScreen() {
     return (
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#FFDA79" }}>
@@ -65,7 +68,25 @@ function TestNavigate() {
 }
 
 function NavBar() {
+    const user = firebase.auth().currentUser
     const linkTo = useNavigation();
+    // if (check) {
+    // if (user) {
+    //     firebase.firestore()
+    //         .collection('Users')
+    //         .where('uid', '==', uid)
+    //         .get()
+    //         .then(querySnapshot => {
+    //             querySnapshot.forEach((res) => {
+    //                 setUserData(res.data())
+    //             });
+    //         });
+    // }
+    // else {
+    //     alert("ยังไม่ได้ล็อคอิน พาส test1234")
+    // }
+
+
     return (
         <View style={{ backgroundColor: "#FFDA79" }}>
             <View
@@ -141,12 +162,14 @@ function NavBar() {
             </View>
         </View>
     );
+    // }
 }
 
 export default function App() {
     return (
         <>
             <NavigationContainer>
+                {/* {check ? (<NavBar />) : (<></>)} */}
                 <NavBar />
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="ScreenLogin" component={ScreenLogin} />

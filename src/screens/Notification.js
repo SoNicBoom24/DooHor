@@ -1,50 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { color } from 'react-native-reanimated';
+import firebase from '../Database/firebaseDB'
 
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
-export default function Notification() {
-    const navigation = useNavigation();
-    const GotoRegister = () => {
-        navigation.navigate("ScreenRegister")
-    }
-    const GotoSelectHor = () => {
-        navigation.navigate("ScreenHor")
-    }
-    return (
-        <ScrollView style={styles.container}>
-            <View>
-                <Text style={styles.noti}>ประกาศสำนักงานหอพักใน</Text>
-                <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
-                    <TouchableOpacity style={styles.cardNoti} onPress={GotoRegister}>
+export default function RootFunction() {
+    const navigation = useNavigation() // extract navigation prop here 
 
-                        <Text style={styles.text}>ประกาศ แบบฟอร์มสำหรับให้นักศึกษาลงทะเบียน เข้าหอพักใน</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardNoti} onPress={GotoSelectHor}>
-                        <Text style={styles.text}>ประกาศ สำรหับนักศึกษาที่ เป็นสมาชิกเลือกห้องพัก</Text>
-                    </TouchableOpacity>
+    return <Notification navigation={navigation} /> //pass to your component.
 
-                </View>
-
-                <Text style={styles.noti}>ประกาศสำนักงาน IT</Text>
-                <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
-                    <TouchableOpacity style={styles.cardNoti} onPress={() => { console.log('IT work'); }} >
-                        <Text style={styles.text}>ประกาศ ตึกถล่ม</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardNoti}>
-                        <Text style={styles.text}>ประกาศ น้ำท่วม</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardNoti}>
-                        <Text style={styles.text}>ประกาศ หนาว</Text>
-                    </TouchableOpacity>
-                </View>
-
-            </View>
-        </ScrollView>
-    );
 }
+
+
+
+class Notification extends Component {
+    constructor() {
+        super();
+        this.subjCollection = firebase.firestore().collection("declaration");
+        this.state = { subject_list: [], };
+    }
+    getCollection = (querySnapshot) => {
+        const all_data = [];
+        querySnapshot.forEach((res) => {
+            const { image } = res.data();
+            all_data.push({ image });
+        });
+        this.setState({ subject_list: all_data, });
+    };
+
+    componentDidMount() {
+        this.unsubscribe =
+            this.subjCollection.onSnapshot(this.getCollection);
+    }
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
+    render() {
+        return (
+            < ScrollView style={styles.container} >
+                <View>
+                    <Text style={styles.noti}>ประกาศสำนักงานหอพักใน</Text>
+                    <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
+                        <TouchableOpacity style={styles.cardNoti} onPress={() => this.props.navigation.navigate('ScreenHor')}  >
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.cardNoti} onPress={() => this.props.navigation.navigate('ScreenRegister')}>
+                            <Text style={styles.text}>ประกาศ สำรหับนักศึกษาที่ เป็นสมาชิกเลือกห้องพัก</Text>
+                        </TouchableOpacity>
+
+                    </View>
+
+                    <Text style={styles.noti}>ประกาศสำนักงาน IT</Text>
+                    <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
+                        <TouchableOpacity style={styles.cardNoti} onPress={() => { console.log('IT work'); }} >
+                            <Text style={styles.text}>ประกาศ ตึกถล่ม</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.cardNoti}>
+                            <Text style={styles.text}>ประกาศ น้ำท่วม</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.cardNoti}>
+                            <Text style={styles.text}>ประกาศ หนาว</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                </View>
+            </ScrollView >
+        )
+    }
+}
+
+
 
 const styles = StyleSheet.create({
     container: {
