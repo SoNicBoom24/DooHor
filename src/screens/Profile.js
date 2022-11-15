@@ -145,10 +145,10 @@ const Profile = () => {
                 <View
                 >
                     <Image style={styles.img} source={{ uri: userData.imageprofile }} />
-                    <View style={{ position: "absolute", left: 280, top: 10, overflow: "hidden" }}>
+                    <View style={{ position: "absolute", left: '30%', top: '5%', overflow: "hidden" }}>
                         <Text style={{ fontSize: 25 }}>ชื่อนักศึกษา: {userData.first_name} {userData.last_name}</Text>
                     </View>
-                    <View style={{ position: "absolute", left: 280, top: 35, overflow: "hidden" }}>
+                    <View style={{ position: "absolute", left: '30%', top: '15%', overflow: "hidden" }}>
                         <Text style={{ fontSize: 25 }}>รหัสนักศึกษา: {userData.student_id}</Text>
                     </View>
                 </View>

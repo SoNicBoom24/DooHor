@@ -10,7 +10,7 @@ export const ScoreTable = () => {
     const all_data = [];
     firebase.firestore()
         .collection('Users')
-        .where('uid', '==', "LvTaBmip7DUjgaZwLJnWpRIR32o1")
+        .where('Role', '==', "user")
         .get()
         .then(querySnapshot => {
             querySnapshot.forEach((res) => {
@@ -51,7 +51,7 @@ export const ScoreTable = () => {
                     colSettings={Settings}
                     noOfPages="1"
                     onRowSelect={(row) => {
-                        Alert.alert(`ชื่อนักศึกษา` + " " + JSON.parse(JSON.stringify((row.score_details))
+                        Alert.alert(" " + JSON.parse(JSON.stringify((row.score_details))
 
                         ));
                     }}

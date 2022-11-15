@@ -33,7 +33,7 @@ class Bill extends Component {
     }
     render() {
         return (
-            <View  >
+            <View>
                 {this.state.subject_list.map((item, i) => (
                     <ListItem key={i}>
                         <Card style={{
@@ -45,7 +45,7 @@ class Bill extends Component {
                                 <Title>{item.title}</Title>
                                 <Paragraph>{item.desc}</Paragraph>
                             </Card.Content>
-                            <Card.Cover style={{ width: 350, height: 350, alignSelf: "center" }} source={{ uri: item.image_documents }} />
+                            <Card.Cover style={{ width: "30%", height: "45%", alignSelf: "center", marginTop: '5%' }} source={{ uri: item.image_documents }} />
                             <Card.Actions>
                                 <Title>Card title</Title>
                             </Card.Actions>

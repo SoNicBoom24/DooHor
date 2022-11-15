@@ -59,7 +59,6 @@ export default function Register() {
             aspect: [4, 3],
             quality: 1
         })
-        console.log(result)
         const source = { uri: result.uri };
         setimageProflie(source);
 
@@ -70,6 +69,7 @@ export default function Register() {
         const blob = await response.blob();
         const filename = imageProflie.uri
         var ref = firebase.storage().ref().child(filename).put(blob);
+        console.log(filename);
 
         try {
             await ref;
