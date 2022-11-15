@@ -58,6 +58,7 @@ class Bill extends Component {
                                 <Title>Card title</Title>
                             </Card.Actions>
                         </Card>
+
                     </ListItem>
                 ))
                 }
