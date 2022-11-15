@@ -3,8 +3,10 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button, ScrollView, Image, TouchableOpacity } from "react-native";
 
 import imgDooHor from "../../assets/logoDooHor.png";
-import { FontAwesome } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome, MaterialIcons, Ionicons, Octicons } from "@expo/vector-icons";
+// import { Ionicons } from "@expo/vector-icons";
+// import { Octicons } from '@expo/vector-icons';
+// import { MaterialIcons } from '@expo/vector-icons';
 
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
@@ -93,22 +95,44 @@ function NavBar() {
                 </View>
                 <View style={{ display: "flex", flexDirection: "row" }}>
 
+                    {/* สำหรับ admin */}
+                    {/* {isRole == "admin" &&
+                        <Ionicons
+                            name="chatbubble-outline"
+                            size={24}
+                            color="black"
+                            style={{ position: "absolute", left: -85, top: -13 }}
+                            onPress={() => {
+                                linkTo.navigate("ScreenRegister");
+                            }}
+                        />
+                        <Octicons 
+                            name="feed-star" 
+                            size={25} 
+                            color="black" 
+                            style={{ position: "absolute", left: -55, top: -13 }}
+                        />
+                        <MaterialIcons 
+                            name="edit" size={25} 
+                            color="black" 
+                            style={{ position: "absolute", left: -25, top: -13 }}
+                        />
+                    } */}
 
                     <Ionicons
                         name="chatbubble-outline"
                         size={24}
                         color="black"
-                        style={{ position: "absolute", left: -60, top: -15 }}
+                        style={{ position: "absolute", left: -60, top: -13 }}
                         onPress={() => {
                             linkTo.navigate("ScreenRegister");
                         }}
                     />
-
                     <FontAwesome
                         name="user"
                         size={25}
                         color={"black"}
-                        style={{ position: "absolute", left: -25, top: -15 }}
+                        style={{ position: "absolute", left: -25, top: -13 }}
                         onPress={() => {
                             linkTo.navigate("ScreenProflie");
                         }}

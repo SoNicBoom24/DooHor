@@ -8,28 +8,12 @@ import * as ImagePicker from 'expo-image-picker';
 import { firebase } from "../Database/firebaseDB";
 
 
-// const options = {
-//     title: 'Select Image',
-//     type: 'library',
-//     options: {
-//         selectionLimit: 1,
-//         mediaType: 'photo',
-//         includeBase64: false,
-//     },
-// }
-
 export default function Register() {
     const navigation = useNavigation();
 
     const allSex = ['ชาย', 'หญิง'];
     const allYear = ['1', '2', '3', '4'];
     const allFaculty = ['IT', 'วิศวะ', 'ครุ', 'วิทย์'];
-
-    // const openGallery = async () => {
-    //     const images = await launchImageLibrary(options);
-    //     console.log(images)
-    //     const formdata = new FormData()
-    // }
 
     const todoRef = firebase.firestore().collection("DataRegister");
     const [addDataFirstName, setDataFirst] = useState("");
@@ -49,10 +33,12 @@ export default function Register() {
     const [addDataDistrict, setDataDistrict] = useState("");
     const [addDataProvince, setDataProvince] = useState("");
     const [addDataPostCode, setDataPostCode] = useState("");
-    const [imageProflie, setimageProflie] = useState(null);
+    const [imageIdCard, setimageIdCard] = useState(null);
+    const [imageHouse, setimageHouse] = useState(null);
+    const [imageSelfie, setimageSelfie] = useState(null);
 
 
-    const pickImage = async () => {
+    const pickImage_IdCard = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
@@ -60,20 +46,53 @@ export default function Register() {
             quality: 1
         })
         const source = { uri: result.uri };
-        setimageProflie(source);
+        setimageIdCard(source);
+    };
 
+    const pickImage_House = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1
+        })
+        const source = { uri: result.uri };
+        setimageHouse(source);
+    };
+
+    const pickImage_Selfie = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1
+        })
+        const source = { uri: result.uri };
+        setimageSelfie(source);
     };
 
     const uploadImage = async () => {
-        const response = await fetch(imageProflie.uri)
-        const blob = await response.blob();
-        const filename = imageProflie.uri
-        var ref = firebase.storage().ref().child(filename).put(blob);
+        const response_IdCard = await fetch(imageIdCard.uri)
+        const response_House = await fetch(imageHouse.uri)
+        const response_Selfie = await fetch(imageSelfie.uri)
+        const blob1 = await response_IdCard.blob();
+        const blob2 = await response_House.blob();
+        const blob3 = await response_Selfie.blob();
+        const filename1 = imageIdCard.uri
+        const filename2 = imageHouse.uri
+        const filename3 = imageSelfie.uri
+        var ref1 = firebase.storage().ref().child(filename1).put(blob1);
+        var ref2 = firebase.storage().ref().child(filename2).put(blob2);
+        var ref3 = firebase.storage().ref().child(filename3).put(blob3);
         ////มันคือไอ url ของไฟลเบส
-        console.log(filename);
+        console.log(filename1);
+        console.log(filename2);
+        console.log(filename3);
 
         try {
-            await ref;
+            await ref1;
+            await ref2;
+            await ref3;
         }
         catch (e) {
             console.log(e)
@@ -81,7 +100,9 @@ export default function Register() {
         Alert.alert(
             'success'
         )
-        setimageProflie(null)
+        setimageIdCard(null)
+        setimageHouse(null)
+        setimageSelfie(null)
 
     }
 
@@ -107,7 +128,10 @@ export default function Register() {
             subDistrict: addDataSub_district,
             district: addDataDistrict,
             province: addDataProvince,
-            postCode: addDataPostCode
+            postCode: addDataPostCode,
+            // imgIdCard: ,
+            // imgHouse: ,
+            // imgSelfie: 
         };
         todoRef.add(data)
         navigation.navigate("ScreenNotification")
@@ -122,21 +146,21 @@ export default function Register() {
                 </>
                 <>
                     <View style={{ backgroundColor: "#FFB053", width: "90%", alignSelf: "center", padding: 10, borderRadius: 20 }}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={pickImage_IdCard}>
                             <View style={{ padding: 5, flexDirection: "row" }}>
                                 <Text style={{ fontSize: 18, padding: 5 }}>สำเนาบัตรประจำตัวประชาชน</Text>
                                 <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginLeft: 2, overflow: "hidden" }} />
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={pickImage_House}>
                             <View style={{ padding: 5, flexDirection: "row" }}>
                                 <Text style={{ fontSize: 18, padding: 5 }}>สำเนาทะเบียนบ้าน</Text>
                                 <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginLeft: 2, overflow: "hidden" }} />
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={pickImage}>
+                        <TouchableOpacity onPress={pickImage_Selfie}>
                             <View style={{ padding: 5, flexDirection: "row" }}>
                                 <Text style={{ fontSize: 18, padding: 5 }}>รูปถ่าย</Text>
                                 <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginLeft: 2, overflow: "hidden" }} />
