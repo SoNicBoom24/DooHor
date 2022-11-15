@@ -71,7 +71,44 @@ export default function Register() {
         setimageSelfie(source);
     };
 
-    const uploadImage = async () => {
+    // const uploadImage = async () => {
+    //     const response_IdCard = await fetch(imageIdCard.uri)
+    //     const response_House = await fetch(imageHouse.uri)
+    //     const response_Selfie = await fetch(imageSelfie.uri)
+    //     const blob1 = await response_IdCard.blob();
+    //     const blob2 = await response_House.blob();
+    //     const blob3 = await response_Selfie.blob();
+    //     const filename1 = imageIdCard.uri
+    //     const filename2 = imageHouse.uri
+    //     const filename3 = imageSelfie.uri
+    //     var ref1 = firebase.storage().ref().child(filename1).put(blob1);
+    //     var ref2 = firebase.storage().ref().child(filename2).put(blob2);
+    //     var ref3 = firebase.storage().ref().child(filename3).put(blob3);
+    //     ////มันคือไอ url ของไฟลเบส
+    //     console.log(filename1);
+    //     console.log(filename2);
+    //     console.log(filename3);
+
+    //     try {
+    //         await ref1;
+    //         await ref2;
+    //         await ref3;
+    //     }
+    //     catch (e) {
+    //         console.log(e)
+    //     }
+    //     Alert.alert(
+    //         'success'
+    //     )
+    //     setimageIdCard(null)
+    //     setimageHouse(null)
+    //     setimageSelfie(null)
+
+    // }
+
+
+    const addField = async () => {
+        // if (addDataFirstName && addDataFirstName.length > 0) {
         const response_IdCard = await fetch(imageIdCard.uri)
         const response_House = await fetch(imageHouse.uri)
         const response_Selfie = await fetch(imageSelfie.uri)
@@ -104,13 +141,6 @@ export default function Register() {
         setimageHouse(null)
         setimageSelfie(null)
 
-    }
-
-
-
-
-    const addField = () => {
-        // if (addDataFirstName && addDataFirstName.length > 0) {
         const data = {
             firstName: addDataFirstName,
             lasstName: addDataLastName,
@@ -129,9 +159,9 @@ export default function Register() {
             district: addDataDistrict,
             province: addDataProvince,
             postCode: addDataPostCode,
-            // imgIdCard: ,
-            // imgHouse: ,
-            // imgSelfie: 
+            imgIdCard: filename1,
+            imgHouse: filename2,
+            imgSelfie: filename3
         };
         todoRef.add(data)
         navigation.navigate("ScreenNotification")
@@ -316,13 +346,13 @@ export default function Register() {
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={uploadImage} >
+                        {/* <TouchableOpacity onPress={uploadImage} >
                             <View style={{ backgroundColor: "#77CF32", padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10 }}>
                                 <Text style={{ color: "white", alignSelf: "center", fontSize: 16 }}>
                                     เทส
                                 </Text>
                             </View>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
                     </View>
                 </>
