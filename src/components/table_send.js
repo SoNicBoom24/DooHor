@@ -7,18 +7,23 @@ export const DataTableTest = () => {
     const [text, onChangeText] = React.useState("");
     const [userdata, setuserdata] = React.useState([]);
     const all_data = [];
-    firebase.firestore()
-        .collection('Users')
-        .where('Role', '==', 'user')
-        .get()
-        .then(querySnapshot => {
-            querySnapshot.forEach((res) => {
-                const { first_name, last_name, student_id } = res.data();
-                all_data.push({ stundet_name: first_name + " " + last_name, Stundet_id: student_id, });
+    const user = firebase.auth().currentUser
+    if (user) {
+        const uid = firebase.auth().currentUser.uid
+        firebase.firestore()
+            .collection('Users')
+            .where('Role', '==', 'user')
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach((res) => {
+                    const { first_name, last_name, student_id } = res.data();
+                    all_data.push({ stundet_name: first_name + " " + last_name, Stundet_id: student_id, });
+                });
+                setuserdata(all_data);
             });
-            setuserdata(all_data);
-        });
-
+    }
+    else {
+    }
     let data = userdata;
     if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
         data = userdata.filter(x => String(x.Stundet_id).includes(text));
