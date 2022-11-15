@@ -5,7 +5,7 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import ModalDropdown from 'react-native-modal-dropdown';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { firebase } from "../Database/firebaseDB";
+import firebase from "../Database/firebaseDB";
 
 
 export default function Register() {
