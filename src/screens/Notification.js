@@ -43,10 +43,13 @@ class Notification extends Component {
                 <View>
                     <Text style={styles.noti}>ประกาศสำนักงานหอพักใน</Text>
                     <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
-                        <TouchableOpacity style={styles.cardNoti} onPress={() => this.props.navigation.navigate('ScreenHor')}  >
+                        <TouchableOpacity style={styles.cardNoti} onPress={() => this.props.navigation.navigate('ScreenAnnoucement')}  >
+                            <Image style={styles.imgNoti} 
+                                source={{uri: "https://i.pinimg.com/originals/94/32/cd/9432cdd515ab3d772334e471e230c211.jpg"}} />
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.cardNoti} onPress={() => this.props.navigation.navigate('ScreenRegister')}>
-                            <Text style={styles.text}>ประกาศ สำรหับนักศึกษาที่ เป็นสมาชิกเลือกห้องพัก</Text>
+                            <Image style={styles.imgNoti} 
+                                source={{uri: "https://i.pinimg.com/originals/7d/98/84/7d98840fdff1b2e7cd508cc7f3a17403.jpg"}} />
                         </TouchableOpacity>
 
                     </View>
@@ -54,13 +57,16 @@ class Notification extends Component {
                     <Text style={styles.noti}>ประกาศสำนักงาน IT</Text>
                     <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
                         <TouchableOpacity style={styles.cardNoti} onPress={() => { console.log('IT work'); }} >
-                            <Text style={styles.text}>ประกาศ ตึกถล่ม</Text>
+                            <Image style={styles.imgNoti} 
+                                source={{uri: "https://c4.wallpaperflare.com/wallpaper/586/603/742/minimalism-4k-for-mac-desktop-wallpaper-preview.jpg"}} />
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.cardNoti}>
-                            <Text style={styles.text}>ประกาศ น้ำท่วม</Text>
+                        <Image style={styles.imgNoti} 
+                                source={{uri: "https://i.pinimg.com/originals/ec/11/6d/ec116dc201666899c1830dbb92ddd67d.jpg"}} />
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.cardNoti}>
-                            <Text style={styles.text}>ประกาศ หนาว</Text>
+                        <Image style={styles.imgNoti} 
+                                source={{uri: "https://i.pinimg.com/originals/94/32/cd/9432cdd515ab3d772334e471e230c211.jpg"}} />
                         </TouchableOpacity>
                     </View>
 
@@ -90,7 +96,7 @@ const styles = StyleSheet.create({
         zIndex: 2,
     },
     cardNoti: {
-        backgroundColor: "#6EA57A",
+        backgroundColor: "#fff",
         justifyContent: "center",
         alignSelf: "center",
         width: "85%",
@@ -110,6 +116,13 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         color: "white",
         fontSize: 16
+    },
+    imgNoti:{
+        width: "100%",
+        height: "100%",
+        resizeMode: "cover",
+        borderRadius: 10,
+        // opacity: 0.7
     }
 
 });

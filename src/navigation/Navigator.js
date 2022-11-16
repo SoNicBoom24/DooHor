@@ -1,24 +1,21 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button, ScrollView, Image, TouchableOpacity } from "react-native";
 
 import imgDooHor from "../../assets/logoDooHor.png";
 import { FontAwesome, MaterialIcons, Ionicons, Octicons } from "@expo/vector-icons";
-// import { Ionicons } from "@expo/vector-icons";
-// import { Octicons } from '@expo/vector-icons';
-// import { MaterialIcons } from '@expo/vector-icons';
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import ScreenSendOffice_Documents from '../screens/SendOffice_Documents'
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
-// import ScreenDetailroom from "../screens/Detailroom";
 import ScreenLogin from "../screens/Login";
 import { ScoreTable } from "../screens/ScoreTable";
 import ScreenDetailroom from "../screens/Detailroom"
 import ScreenNotification from "../screens/Notification";
 import ScreenProflie from "../screens/Profile";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useRouteLoaderData } from "react-router-native";
+import ScreenAnnoucement from "../screens/Announcement";
 
 
 
@@ -67,8 +64,9 @@ function TestNavigate() {
 }
 
 function NavBar() {
-    const user = firebase.auth().currentUser
     const linkTo = useNavigation();
+    // const user = firebase.auth().currentUser
+    // console.log(user)
     // if (check) {
     // if (user) {
     //     firebase.firestore()
@@ -164,12 +162,20 @@ function NavBar() {
     // }
 }
 
-export default function App() {
+export default function Navigator() {
+    const [user, setUser] = useState(null)
+    useEffect(()=> { 
+        setInterval(()=> {
+
+            setUser(firebase.auth().currentUser)
+        }, 5000)
+        // console.log(user)
+    }, [])
     return (
         <>
             <NavigationContainer>
-                {/* {check ? (<NavBar />) : (<></>)} */}
-                <NavBar />
+                {user ? (<NavBar />) : (<></>)}
+                {/* <NavBar /> */}
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="ScreenLogin" component={ScreenLogin} />
                     <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
@@ -181,6 +187,7 @@ export default function App() {
                     <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
                     <Stack.Screen name="ScreenSendOffice_Documents" component={ScreenSendOffice_Documents} />
+                    <Stack.Screen name="ScreenAnnoucement" component={ScreenAnnoucement} />
 
                     {/* isSignedIn ? (
                     <>

@@ -149,24 +149,18 @@ const Profile = () => {
         });
         return (
             <Animated.View style={[styles.header, { transform: [{ translateY: y }] }]}>
-                <View
-                >
-                    <Image style={styles.img} source={{ uri: userData.imageprofile }} />
-                    <View style={{ position: "absolute", left: '30%', top: '5%', overflow: "hidden" }}>
-                        <Text style={{ fontSize: 25 }}>ชื่อนักศึกษา: {userData.first_name} {userData.last_name}</Text>
-                    </View>
-                    <View style={{ position: "absolute", left: '30%', top: '15%', overflow: "hidden" }}>
-                        <Text style={{ fontSize: 25 }}>รหัสนักศึกษา: {userData.student_id}</Text>
-                    </View>
-                </View>
+                        <Image style={styles.img} source={{ uri: "https://www.digitaltrends.com/wp-content/uploads/2022/08/Chainsaw-Man-trailer.jpg" }} />
+                        <View style={{overflow: "hidden", paddingLeft: 5}}>
+                            <Text style={{ fontSize: 12 }}>ชื่อนักศึกษา: {userData.first_name} {userData.last_name}</Text>
+                            <Text style={{ fontSize: 12 }}>รหัสนักศึกษา: {userData.student_id}</Text>
+                        </View>
             </Animated.View>
         );
     };
 
     const rednerTab1Item = ({ item, index }) => {
         return (
-            <View
-            >
+            <View>
             </View>
 
         );
@@ -176,10 +170,9 @@ const Profile = () => {
         return (
             <View
                 style={{
-                    width: Dimensions.get('window').width - 100,
-                    height: Dimensions.get('window').height,
-                    backgroundColor: '#fff',
-
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: 'red',
                 }}>
                 <Bill></Bill>
             </View>
@@ -297,7 +290,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         borderRadius: 25,
         backgroundColor: "white",
-        padding: 15
+        padding: 15,
+        flexDirection: "row"
 
     },
     label: { fontSize: 16, color: '#222' },
@@ -307,11 +301,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFCC80',
         borderRadius: 25,
         width: '90%',
-        left: "5%"
+        left: "5%",
     },
     img: {
-        width: 250,
-        height: 250,
+        width: "40%",
+        height: "30%",
         borderRadius: 20,
         flexWrap: 'wrap',
         resizeMode: "cover",

@@ -45,15 +45,17 @@ class Bill extends Component {
                 {this.state.subject_list.map((item, i) => (
                     <ListItem key={i}>
                         <Card style={{
-                            width: "100%", borderRadius: 15,
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: 15,
                             elevation: 15,
-                            padding: 10
+                            padding: 10,
                         }}>
                             <Card.Content>
                                 <Title>{item.title}</Title>
                                 <Paragraph>{item.desc}</Paragraph>
                             </Card.Content>
-                            <Card.Cover style={{ width: "30%", height: "45%", alignSelf: "center", marginTop: '5%' }} source={{ uri: item.image_documents }} />
+                            <Card.Cover style={{ width: "90%", height: 300, alignSelf: "center", marginTop: '5%', resizeMode: "contain" }} source={{ uri: item.image_documents }} />
                             <Card.Actions>
                                 <Title>Card title</Title>
                             </Card.Actions>
