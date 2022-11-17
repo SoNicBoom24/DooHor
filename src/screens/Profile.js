@@ -149,11 +149,11 @@ const Profile = () => {
         });
         return (
             <Animated.View style={[styles.header, { transform: [{ translateY: y }] }]}>
-                        <Image style={styles.img} source={{ uri: "https://www.digitaltrends.com/wp-content/uploads/2022/08/Chainsaw-Man-trailer.jpg" }} />
-                        <View style={{overflow: "hidden", paddingLeft: 5}}>
-                            <Text style={{ fontSize: 12 }}>ชื่อนักศึกษา: {userData.first_name} {userData.last_name}</Text>
-                            <Text style={{ fontSize: 12 }}>รหัสนักศึกษา: {userData.student_id}</Text>
-                        </View>
+                <Image style={styles.img} source={{ uri: "https://www.digitaltrends.com/wp-content/uploads/2022/08/Chainsaw-Man-trailer.jpg" }} />
+                <View style={{ overflow: "hidden", paddingLeft: 5 }}>
+                    <Text style={{ fontSize: 12 }}>ชื่อนักศึกษา: {userData.first_name} {userData.last_name}</Text>
+                    <Text style={{ fontSize: 12 }}>รหัสนักศึกษา: {userData.student_id}</Text>
+                </View>
             </Animated.View>
         );
     };

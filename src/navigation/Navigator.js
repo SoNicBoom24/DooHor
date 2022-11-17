@@ -164,8 +164,8 @@ function NavBar() {
 
 export default function Navigator() {
     const [user, setUser] = useState(null)
-    useEffect(()=> { 
-        setInterval(()=> {
+    useEffect(() => {
+        setInterval(() => {
 
             setUser(firebase.auth().currentUser)
         }, 5000)
