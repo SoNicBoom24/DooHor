@@ -10,7 +10,6 @@ export const ScoreTable = () => {
     const all_data = [];
     const user = firebase.auth().currentUser
     if (user) {
-        const uid = firebase.auth().currentUser.uid
         firebase.firestore()
             .collection('Users')
             .where('Role', '==', 'user')
@@ -25,15 +24,36 @@ export const ScoreTable = () => {
     }
     else {
     }
-    let data = userdata;
-    if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
-        data = userdata.filter(x => String(x.Stundet_id).includes(text));
-    }
-    else {
-        data = userdata.filter(x => String(x.stundet_name).includes(text));
+    // let data = userdata;
+    // if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
+    //     data = userdata.filter(x => String(x.Stundet_id).includes(text));
+    // }
+    // else {
+    //     data = userdata.filter(x => String(x.stundet_name).includes(text));
+
+    // }
+    const Detail = (row) => {
+        // Alert.alert(
+        //     "รายละเอียดการให้คะแนน:",
+        //      JSON.parse(JSON.stringify((row.score_details)),
+        //         [
+        //             {
+        //                 text: "Cancel",
+        //                 onPress: () => Alert.alert("Cancel Pressed"),
+        //                 style: "cancel",
+        //             },
+        //         ],
+        //         {
+        //             cancelable: true,
+        //             onDismiss: () =>
+        //                 Alert.alert(
+        //                     "This alert was dismissed by tapping outside of the alert dialog."
+        //                 ),
+        //         }
+        //     )
+        // )
 
     }
-
 
     const Settings =
         [
@@ -46,6 +66,7 @@ export const ScoreTable = () => {
     return (
         <View style={{ top: "5%" }}>
             <Text style={{ alignSelf: 'center', fontSize: 20 }}>ตารางนักศึกษา </Text>
+            <Text style={{ alignSelf: 'center', fontSize: 20 }}>สำหรับให้คะแนน ความประพฤตินักศึกษา </Text>
 
             <TextInput placeholder="ชื่อหรือรหัสนักศึกษา" style={styles.input}
                 onChangeText={onChangeText}
@@ -56,11 +77,9 @@ export const ScoreTable = () => {
                     colSettings={Settings}
                     noOfPages="1"
                     onRowSelect={(row) => {
-                        Alert.alert(" " + JSON.parse(JSON.stringify((row.score_details))
-
-                        ));
+                        Detail(row);
                     }}
-                    data={data}
+                    data={userdata}
                     colNames={nameOfCols}
                     headerLabelStyle={{ color: 'grey', fontSize: 20 }}
 
