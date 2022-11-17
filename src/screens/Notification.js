@@ -16,11 +16,11 @@ export default function Notification() {
     return (
         <ScrollView style={styles.container}>
             <View>
-                <Text style={styles.noti}>ประกาศสำนักงานหอพักใน</Text>
+                <Text style={styles.noti}>แบบฟอรม</Text>
                 <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
                     <TouchableOpacity style={styles.cardNoti} onPress={GotoRegister}>
 
-                        <Text style={styles.text}>ประกาศ แบบฟอร์มสำหรับให้นักศึกษาลงทะเบียน เข้าหอพักใน</Text>
+                        <Text style={styles.text}></Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.cardNoti} onPress={GotoSelectHor}>
                         <Text style={styles.text}>ประกาศ สำรหับนักศึกษาที่ เป็นสมาชิกเลือกห้องพัก</Text>
@@ -33,14 +33,14 @@ export default function Notification() {
                     <TouchableOpacity style={styles.cardNoti} onPress={() => { console.log('IT work'); }} >
                         <Text style={styles.text}>ประกาศ ตึกถล่ม</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardNoti}>
-                        <Text style={styles.text}>ประกาศ น้ำท่วม</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardNoti}>
-                        <Text style={styles.text}>ประกาศ หนาว</Text>
-                    </TouchableOpacity>
                 </View>
 
+                <Text style={styles.noti}>ประกาศสำนักงาน IT</Text>
+                <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
+                    <TouchableOpacity style={styles.cardNoti} onPress={() => { console.log('IT work'); }} >
+                        <Text style={styles.text}>ประกาศ ตึกถล่ม</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </ScrollView>
     );
