@@ -3,7 +3,6 @@ import DataTable, { COL_TYPES } from 'react-native-datatable-component';
 import React, { useState } from "react";
 import firebase from '../Database/firebaseDB'
 import ModalDropdown from 'react-native-modal-dropdown';
-import { cos, set } from 'react-native-reanimated';
 
 
 export const ScoreTable = () => {

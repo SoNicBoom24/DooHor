@@ -33,6 +33,7 @@ export default function Register() {
     const [addDataDistrict, setDataDistrict] = useState("");
     const [addDataProvince, setDataProvince] = useState("");
     const [addDataPostCode, setDataPostCode] = useState("");
+    const [addreason, setDataReason] = useState("");
     const [imageIdCard, setimageIdCard] = useState(null);
     const [imageHouse, setimageHouse] = useState(null);
     const [imageSelfie, setimageSelfie] = useState(null);
@@ -161,7 +162,8 @@ export default function Register() {
             postCode: addDataPostCode,
             imgIdCard: filename1,
             imgHouse: filename2,
-            imgSelfie: filename3
+            imgSelfie: filename3,
+            Reason: Reason
         };
         todoRef.add(data)
         navigation.navigate("ScreenNotification")
@@ -328,7 +330,6 @@ export default function Register() {
                                 onChangeText={(province) => setDataProvince(province)}
                                 value={addDataProvince} />
                         </View>
-
                         <View style={{ padding: 5, flexDirection: "row", justifyContent: "space-between" }}>
                             <TextInput style={styles.inputContainer}
                                 placeholder="รหัสไปรษณีย์"
@@ -336,7 +337,12 @@ export default function Register() {
                                 maxLength={5}
                                 onChangeText={(postCode) => setDataPostCode(postCode)}
                                 value={addDataPostCode} />
+                            <TextInput style={styles.inputContainer}
+                                placeholder="เหตุผลการสมัครเป็นสมาชิกหอพักใน"
+                                onChangeText={(Reason) => setDataReason(Reason)}
+                                value={addreason} />
                         </View>
+
                         <TouchableOpacity onPress={addField} >
                             <View style={{ backgroundColor: "#77CF32", padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10 }}>
                                 <Text style={{ color: "white", alignSelf: "center", fontSize: 16 }}>
