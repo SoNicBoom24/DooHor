@@ -71,8 +71,7 @@ export default function SendOffice_Documents() {
         var ref1 = firebase.storage().ref().child(filename).put(blob);
         try {
             await ref1;
-            await ref2;
-            await ref3;
+
         }
         catch (e) {
             console.log(e)
