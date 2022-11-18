@@ -62,7 +62,7 @@ export const ScoreTable = () => {
 
         )
     }
-    const add = async () => {
+    const add = () => {
         const db = firebase.firestore();
         const value1 = parseInt(score_begin);
         const value2 = parseInt(Score_input)

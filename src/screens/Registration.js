@@ -163,7 +163,9 @@ export default function Register() {
             imgIdCard: filename1,
             imgHouse: filename2,
             imgSelfie: filename3,
-            Reason: Reason
+            Reason: Reason,
+            score: "ยังไม่ได้ประเมิน"
+
         };
         todoRef.add(data)
         navigation.navigate("ScreenNotification")
