@@ -16,7 +16,6 @@ class GeneralTopic extends Component {
     }
     getCollection = () => {
         const { route } = this.props;
-
         const all_data = [];
         firebase.firestore()
             .collection('declaration')
@@ -30,9 +29,6 @@ class GeneralTopic extends Component {
                 this.setState({ subject_list: all_data, });
 
             });
-
-
-
     };
     componentDidMount() {
         this.unsubscribe =

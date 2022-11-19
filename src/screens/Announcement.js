@@ -3,16 +3,11 @@ import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView
 import firebase from '../Database/firebaseDB'
 import { useNavigation } from '@react-navigation/native';
 
-
-export default function (props) {
-    const navigation = useNavigation();
-    return <Announcement {...props} navigation={navigation} />;
-}
-
-class Announcement extends Component {
+export default class Announcement extends Component {
     constructor() {
+        this.navigation = useNavigation();
         super();
-        this.subjCollection = firebase.firestore().collection("declaration");
+        this.subjCollection = firebase.firestore().collection("office_documents");
         this.state = {
             subject_list: [],
         };
@@ -27,10 +22,11 @@ class Announcement extends Component {
             .get()
             .then(querySnapshot => {
                 querySnapshot.forEach((res) => {
-                    const { desc, image, title, type, state, id } = res.data();
-                    all_data.push({ desc: desc, image: image, title: title, type: type, state: state, id: id });
+                    const { desc, image, title, type, state } = res.data();
+                    all_data.push({ desc: desc, image: image, title: title, type: type, state: state, id: res.id });
                 });
-                this.setState({ subject_list: all_data, });
+                setHome(all_data);
+
             });
 
 
@@ -44,28 +40,28 @@ class Announcement extends Component {
         this.unsubscribe();
     }
     ScreenRegister() {
-        const { navigation } = this.props;
+        const navigation = useNavigation();
         navigation.navigate('ScreenRegister')
     };
-    ScreenGeneralTopic(i) {
-        const { navigation } = this.props;
-        navigation.navigate('ScreenGeneralTopic',
-            {
-                id: i
-            })
+    GeneralTopic(id) {
+        const navigation = useNavigation();
+        navigation.navigate('GeneralTopic', {
+            id,
+        })
     };
     ScreenHor() {
-        const { navigation } = this.props;
+        const navigation = useNavigation();
         navigation.navigate('ScreenHor')
     };
     render() {
         return (
+
             < ScrollView style={styles.container} >
                 {this.state.subject_list.map((item, i) => (
                     <View key={i}>
                         <View style={{ display: item.type == 'Register' ? 'flex' : 'none' }}>
                             <Image style={styles.img} source={{ uri: item.image }} />
-                            <TouchableOpacity onPress={() => this.ScreenRegister()}>
+                            <TouchableOpacity onPress={() => ScreenRegister()}>
                                 <SafeAreaView style={styles.description}>
                                     <Text style={{ padding: 10 }}>
                                         {item.title} : {item.desc}   ...กดเพื่อดูรายละเอียดเพิ่มเติม
@@ -75,7 +71,7 @@ class Announcement extends Component {
                         </View>
                         <View style={{ display: item.type == 'Room' ? 'flex' : 'none' }}>
                             <Image style={styles.img} source={{ uri: item.image }} />
-                            <TouchableOpacity onPress={() => this.ScreenHor()}>
+                            <TouchableOpacity onPress={() => ScreenHor()}>
                                 <SafeAreaView style={styles.description}>
                                     <Text style={{ padding: 10 }}>
                                         {item.title} : {item.desc}   ...กดเพื่อดูรายละเอียดเพิ่มเติม
@@ -86,7 +82,7 @@ class Announcement extends Component {
 
                         <View style={{ display: item.type == 'General' ? 'flex' : 'none' }}>
                             <Image style={styles.img} source={{ uri: item.image }} />
-                            <TouchableOpacity onPress={() => this.ScreenGeneralTopic(item.id)} >
+                            <TouchableOpacity onPress={() => GeneralTopic(item.id)}>
                                 <SafeAreaView style={styles.description}>
                                     <Text style={{ padding: 10 }}>
                                         {item.title} : {item.desc}   ...กดเพื่อดูรายละเอียดเพิ่มเติม
