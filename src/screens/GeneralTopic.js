@@ -2,38 +2,37 @@ import React, { useState, useEffect, Component } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import firebase from '../Database/firebaseDB'
 import { useRoute } from '@react-navigation/native';
-
-export default class Announcement extends Component {
+export default function (props) {
+    const route = useRoute();
+    return <GeneralTopic {...props} route={route} />;
+}
+class GeneralTopic extends Component {
     constructor() {
         super();
-        this.subjCollection = firebase.firestore().collection("office_documents");
+        this.subjCollection = firebase.firestore().collection("declaration");
         this.state = {
             subject_list: [],
         };
     }
     getCollection = () => {
-        const route = useRoute();
-        const user = firebase.auth().currentUser
-        if (user) {
-            const all_data = [];
-            firebase.firestore()
-                .collection('declaration')
-                .where('id', '==', route.params.id)
-                .get()
-                .then(querySnapshot => {
-                    querySnapshot.forEach((res) => {
-                        const { desc, image, title, type, state } = res.data();
-                        all_data.push({ desc: desc, image: image, title: title, type: type, state: state, id: res.id });
-                    });
-                    setHome(all_data);
+        const { route } = this.props;
 
+        const all_data = [];
+        firebase.firestore()
+            .collection('declaration')
+            .where('id', '==', route.params.id)
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach((res) => {
+                    const { desc, image, title, type, state } = res.data();
+                    all_data.push({ desc: desc, image: image, title: title, type: type, state: state, });
                 });
+                this.setState({ subject_list: all_data, });
+
+            });
 
 
-        }
-        else {
 
-        }
     };
     componentDidMount() {
         this.unsubscribe =
@@ -104,4 +103,3 @@ const styles = StyleSheet.create({
     }
 
 });
-
