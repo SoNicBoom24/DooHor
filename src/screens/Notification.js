@@ -7,40 +7,31 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
 export default function Notification() {
     const navigation = useNavigation();
-    const GotoRegister = () => {
-        navigation.navigate("ScreenRegister")
-    }
-    const GotoSelectHor = () => {
-        navigation.navigate("ScreenHor")
+
+    const ScreenSendOffice_Documents = () => {
+        navigation.navigate("ScreenSendOffice_Documents")
     }
     return (
         <ScrollView style={styles.container}>
             <View>
-                <Text style={styles.noti}>แบบฟอรม</Text>
+                <Text style={styles.noti}>แบบฟอร์มสำหรับ ประกาศหน้าแจ้งข่าว</Text>
                 <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
-                    <TouchableOpacity style={styles.cardNoti} onPress={GotoRegister}>
-
-                        <Text style={styles.text}></Text>
+                    <TouchableOpacity style={styles.cardNoti}>
+                        <Text style={styles.text}>ประกาศรับสมัครนักศึกษา เข้าหอพัก </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardNoti} onPress={GotoSelectHor}>
+                    <TouchableOpacity style={styles.cardNoti}>
                         <Text style={styles.text}>ประกาศ สำรหับนักศึกษาที่ เป็นสมาชิกเลือกห้องพัก</Text>
                     </TouchableOpacity>
 
                 </View>
 
-                <Text style={styles.noti}>ประกาศสำนักงาน IT</Text>
+                <Text style={styles.noti}>ฟอร์มสำหรับ ส่งเอกสารให้กับนักศึกษา</Text>
                 <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
-                    <TouchableOpacity style={styles.cardNoti} onPress={() => { console.log('IT work'); }} >
-                        <Text style={styles.text}>ประกาศ ตึกถล่ม</Text>
+                    <TouchableOpacity style={styles.cardNoti} onPress={ScreenSendOffice_Documents} >
+                        <Text style={styles.text}>ฟอร์มสำหรับ ออกแบบการส่งเอกสาร ทั่วไป ใบเสร็จ และคำร้อง</Text>
                     </TouchableOpacity>
                 </View>
 
-                <Text style={styles.noti}>ประกาศสำนักงาน IT</Text>
-                <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
-                    <TouchableOpacity style={styles.cardNoti} onPress={() => { console.log('IT work'); }} >
-                        <Text style={styles.text}>ประกาศ ตึกถล่ม</Text>
-                    </TouchableOpacity>
-                </View>
             </View>
         </ScrollView>
     );

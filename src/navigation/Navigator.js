@@ -16,8 +16,7 @@ import ScreenDetailroom from "../screens/Detailroom"
 import ScreenNotification from "../screens/Notification";
 import ScreenProflie from "../screens/Profile";
 import ScreenAnnoucement from "../screens/Announcement";
-
-
+import ScreenRegisTable from "../screens/RegisTable"
 
 import firebase from '../Database/firebaseDB'
 
@@ -188,7 +187,9 @@ export default function Navigator() {
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
                     <Stack.Screen name="ScreenSendOffice_Documents" component={ScreenSendOffice_Documents} />
                     <Stack.Screen name="ScreenAnnoucement" component={ScreenAnnoucement} />
-
+                    <Stack.Screen name="ScoreTable" component={ScoreTable} />
+                    <Stack.Screen name="ScreenSendOffice_Documents" component={ScreenSendOffice_Documents} />
+                    <Stack.Screen name="ScreenRegisTable" component={ScreenRegisTable} />
                     {/* isSignedIn ? (
                     <>
                     <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
@@ -215,3 +216,6 @@ export default function Navigator() {
 }
 
 const styles = StyleSheet.create({});
+
+
+

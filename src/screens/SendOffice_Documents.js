@@ -18,7 +18,7 @@ export default function SendOffice_Documents() {
     const [electricity_bill_input, setElectricity_bill] = React.useState("");
     const [water_bill_input, setWater_bill] = React.useState("");
     const [image_documents, setImage_documents] = React.useState(null);
-    const [picture_from_user, setPicture_from_user] = React.useState(null);
+    const [picture_from_user, setPicture_from_user] = React.useState("");
     const [uid_input, setUid] = React.useState("");
     const todoRef = firebase.firestore().collection("office_documents");
 
@@ -30,8 +30,6 @@ export default function SendOffice_Documents() {
     const all_data = []
     const user = firebase.auth().currentUser
     if (user) {
-        const uid = firebase.auth().currentUser.uid
-
         firebase.firestore()
             .collection('Users')
             .where('Role', '==', 'user')
@@ -46,17 +44,15 @@ export default function SendOffice_Documents() {
             });
     }
     else {
-
     }
+    // let data_table = userdata
+    // if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
+    //     data_table = userdata.filter(x => String(x.Stundet_id).includes(text));
+    // }
+    // else {
+    //     data_table = userdata.filter(x => String(x.stundet_name).includes(text));
 
-    let data_table = userdata;
-    if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
-        data_table = userdata.filter(x => String(x.Stundet_id).includes(text));
-    }
-    else {
-        data_table = userdata.filter(x => String(x.stundet_name).includes(text));
-
-    }
+    // }
     const Settings =
         [
             { name: 'stundet_name', type: COL_TYPES.STRING, },
@@ -77,8 +73,7 @@ export default function SendOffice_Documents() {
         var ref1 = firebase.storage().ref().child(filename).put(blob);
         try {
             await ref1;
-            await ref2;
-            await ref3;
+
         }
         catch (e) {
             console.log(e)
@@ -95,7 +90,8 @@ export default function SendOffice_Documents() {
             electricity_bill: electricity_bill_input,
             water_billi: water_bill_input,
             uid: uid_input,
-            image_documents: filename
+            image_documents: filename,
+            picture_from_user: picture_from_user
         }
         todoRef.add(data)
         setCheck(true)
@@ -118,10 +114,15 @@ export default function SendOffice_Documents() {
         <ScrollView style={{backgroundColor: "#FFDA79", width: "100%", height: "100%" }}>
 
             <View style={{ margin: 20, display: check ? 'flex' : 'none' }} >
+<<<<<<< HEAD
                 <View style={{flexDirection: "row",  alignSelf: 'center', }}>
                 <FontAwesome5 name="user-graduate" size={24} color="black"/>
                 <Text style={{fontSize: 20, paddingLeft: 5 }}>ตารางนักศึกษา </Text>
                 </View>
+=======
+                <Text style={{ alignSelf: 'center', fontSize: 20 }}>ตารางนักศึกษา</Text>
+                <Text style={{ alignSelf: 'center', fontSize: 20 }}>สำหรับ ส่งข้อมูลทั่วไป ใบเสร็จ หรือคำร้องไปให้นักศึกษา</Text>
+>>>>>>> c10e4fd0d680c1244eee55f39d885be885f4cc45
 
                 <TextInput placeholder="ชื่อหรือรหัสนักศึกษา" style={styles.input}
                     onChangeText={onChangeText}
@@ -131,7 +132,7 @@ export default function SendOffice_Documents() {
 
                     colSettings={Settings}
                     noOfPages="1"
-                    data={data_table}
+                    data={userdata}
                     onclick
                     colNames={nameOfCols}
                     headerLabelStyle={{ color: 'grey', fontSize: 20 }}

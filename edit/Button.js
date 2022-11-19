@@ -6,7 +6,7 @@ const Button_Row = React.memo((props) => { //props: initialVal
     return (
         <TouchableOpacity style={styles.touchableOpacity}>
             <View style={styles.container}>
-                <Button style={styles.byn} title="Check" onPress={handleOnRowSelect?.bind(null, !initialVal, info.id, info.name)} ></Button>
+                <Button style={styles.byn} title="Select" onPress={handleOnRowSelect?.bind(null, !initialVal, info.id, info.name)} ></Button>
             </View>
         </TouchableOpacity>
     );

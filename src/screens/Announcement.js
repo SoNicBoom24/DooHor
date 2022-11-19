@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import firebase from '../Database/firebaseDB'
-import { ListItem } from 'react-native-elements'
 
 export default function Announcement() {
     const [home, setHome] = useState([])
@@ -19,24 +18,30 @@ export default function Announcement() {
     //         setHome(all_data);
 
     //     });
+    var data = [];
 
-    return (
+    for (let i = 0; i < home.length; i++) {
+        data.push(
+            <View key={i}>
+                <View>
 
+                    <Image style={styles.img}
+                        source={{ uri: home[i].image }} />
+                    <View style={styles.description}>
+                        <Text style={{ padding: 10 }}>
+                            {home[i].desc}
+                        </Text>
+                    </View>
 
-        < ScrollView style={styles.container} >
-            <View>
-
-                <Image style={styles.img}
-                    source={{ uri: "https://i.pinimg.com/originals/94/32/cd/9432cdd515ab3d772334e471e230c211.jpg" }} />
-                <View style={styles.description}>
-                    <Text style={{ padding: 10 }}>
-                        รายละเอียด
-                    </Text>
                 </View>
 
             </View>
+        )
+    }
+    return (
 
-
+        < ScrollView style={styles.container} >
+            {data}
         </ScrollView>
 
 
@@ -68,3 +73,4 @@ const styles = StyleSheet.create({
     }
 
 });
+

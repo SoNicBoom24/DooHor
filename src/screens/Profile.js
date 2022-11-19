@@ -6,11 +6,14 @@ import {
     Text,
     Dimensions,
     Animated,
-    Image
+    Image,
+    ScrollView,
+
 } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 import firebase from '../Database/firebaseDB'
-import Bill from '../components/bill'
+import Fromdata from '../components/form_information'
+import General from '../components/General';
 ///////////////////////////////////
 const TabBarHeight = 5;
 const HeaderHeight = 600;
@@ -69,22 +72,22 @@ const Profile = () => {
     const [userData, setUserData] = useState({});
 
     ///////////ดึงข้อมูลผู้ใช้
-    const user = firebase.auth().currentUser
-    if (user) {
-        const uid = firebase.auth().currentUser.uid
-        firebase.firestore()
-            .collection('Users')
-            .where('uid', '==', uid)
-            .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach((res) => {
-                    setUserData(res.data())
-                });
+    // const user = firebase.auth().currentUser
+    // if (user) {
+    //     const uid = firebase.auth().currentUser.uid
+    firebase.firestore()
+        .collection('Users')
+        .where('uid', '==', "LvTaBmip7DUjgaZwLJnWpRIR32o1")
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach((res) => {
+                setUserData(res.data())
             });
-    }
-    else {
-        alert("ยังไม่ได้ล็อคอิน พาส test1234")
-    }
+        });
+    // }
+    // else {
+    //     alert("ยังไม่ได้ล็อคอิน พาส test1234")
+    // }
 
     //////// 
 
@@ -160,22 +163,34 @@ const Profile = () => {
 
     const rednerTab1Item = ({ item, index }) => {
         return (
-            <View>
-            </View>
+            <ScrollView
+                style={{
+                    flex: 1,
+                    backgroundColor: 'white',
+                }}>
+                <General></General>
+            </ScrollView>
 
         );
     };
 
     const rednerTab2Item = ({ item, index }) => {
         return (
-            <View
+            <ScrollView
                 style={{
+<<<<<<< HEAD
                     width: "100%",
                     height: "100%",
                     marginBottom: 20,
+=======
+                    flex: 1,
+                    backgroundColor: 'white',
+>>>>>>> c10e4fd0d680c1244eee55f39d885be885f4cc45
                 }}>
-                <Bill></Bill>
-            </View>
+                <Fromdata></Fromdata>
+
+            </ScrollView>
+
         );
     };
 
