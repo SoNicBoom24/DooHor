@@ -17,6 +17,7 @@ import ScreenNotification from "../screens/Notification";
 import ScreenProflie from "../screens/Profile";
 import ScreenAnnoucement from "../screens/Announcement";
 import ScreenRegisTable from "../screens/RegisTable"
+import ScreenGeneralTopic from "../screens/GeneralTopic";
 
 import firebase from '../Database/firebaseDB'
 
@@ -187,6 +188,7 @@ export default function Navigator() {
                     <Stack.Screen name="ScreenSendOffice_Documents" component={ScreenSendOffice_Documents} />
                     <Stack.Screen name="ScreenAnnoucement" component={ScreenAnnoucement} />
                     <Stack.Screen name="ScreenRegisTable" component={ScreenRegisTable} />
+                    <Stack.Screen name="ScreenGeneralTopic" component={ScreenGeneralTopic} />
                     {/* isSignedIn ? (
                     <>
                     <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
