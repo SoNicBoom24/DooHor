@@ -29,7 +29,7 @@ const TabScene = ({
     const windowHeight = Dimensions.get('window').height;
 
     return (
-        <SafeAreaView >
+        <SafeAreaView>
             <Animated.FlatList
                 numColumns={numCols}
                 ref={onGetRef}
@@ -172,7 +172,7 @@ const Profile = () => {
                 style={{
                     width: "100%",
                     height: "100%",
-                    backgroundColor: 'red',
+                    marginBottom: 20,
                 }}>
                 <Bill></Bill>
             </View>
@@ -275,7 +275,6 @@ const Profile = () => {
 
     return (
         <View style={{ backgroundColor: "#FFDA79", flex: 1 }} >
-            {/* style={{ flex: 1 }} */}
             {renderTabView()}
             {renderHeader()}
         </View>
@@ -294,7 +293,10 @@ const styles = StyleSheet.create({
         flexDirection: "row"
 
     },
-    label: { fontSize: 16, color: '#222' },
+    label: {
+        fontSize: 16,
+        color: '#222',
+    },
     tab: {
         elevation: 0,
         shadowOpacity: 0,
