@@ -48,17 +48,15 @@ class GeneralTopic extends Component {
 
                         <View>
                             <Image style={styles.img} source={{ uri: item.image }} />
-                            <TouchableOpacity>
-                                <SafeAreaView style={styles.description}>
-                                    <Text style={{ padding: 10 }}>
-                                        {item.title}
-                                    </Text>
-                                    <Text style={{ padding: 10 }}>
-                                        {item.desc}
-                                    </Text>
+                            <SafeAreaView style={styles.description}>
+                                <Text style={{ padding: 10 }}>
+                                    {item.title}
+                                </Text>
+                                <Text style={{ padding: 10 }}>
+                                    {item.desc}
+                                </Text>
 
-                                </SafeAreaView>
-                            </TouchableOpacity>
+                            </SafeAreaView>
                         </View>
                     </View>
 
