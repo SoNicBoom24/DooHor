@@ -187,7 +187,6 @@ export default function Navigator() {
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
                     <Stack.Screen name="ScreenSendOffice_Documents" component={ScreenSendOffice_Documents} />
                     <Stack.Screen name="ScreenAnnoucement" component={ScreenAnnoucement} />
-                    <Stack.Screen name="ScoreTable" component={ScoreTable} />
                     <Stack.Screen name="ScreenSendOffice_Documents" component={ScreenSendOffice_Documents} />
                     <Stack.Screen name="ScreenRegisTable" component={ScreenRegisTable} />
                     {/* isSignedIn ? (
