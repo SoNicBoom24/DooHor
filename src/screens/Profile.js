@@ -178,14 +178,11 @@ const Profile = () => {
         return (
             <ScrollView
                 style={{
-<<<<<<< HEAD
-                    width: "100%",
-                    height: "100%",
-                    marginBottom: 20,
-=======
+                    // width: "100%",
+                    // height: "100%",
+                    // marginBottom: 20,
                     flex: 1,
                     backgroundColor: 'white',
->>>>>>> c10e4fd0d680c1244eee55f39d885be885f4cc45
                 }}>
                 <Fromdata></Fromdata>
 

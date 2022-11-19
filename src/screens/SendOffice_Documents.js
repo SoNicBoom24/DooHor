@@ -111,18 +111,15 @@ export default function SendOffice_Documents() {
 
 
     return (
-        <ScrollView style={{backgroundColor: "#FFDA79", width: "100%", height: "100%" }}>
+        <ScrollView style={{ backgroundColor: "#FFDA79", width: "100%", height: "100%" }}>
 
             <View style={{ margin: 20, display: check ? 'flex' : 'none' }} >
-<<<<<<< HEAD
-                <View style={{flexDirection: "row",  alignSelf: 'center', }}>
-                <FontAwesome5 name="user-graduate" size={24} color="black"/>
-                <Text style={{fontSize: 20, paddingLeft: 5 }}>ตารางนักศึกษา </Text>
-                </View>
-=======
+                {/* <View style={{ flexDirection: "row", alignSelf: 'center', }}>
+                    <FontAwesome5 name="user-graduate" size={24} color="black" />
+                    <Text style={{ fontSize: 20, paddingLeft: 5 }}>ตารางนักศึกษา </Text>
+                </View> */}
                 <Text style={{ alignSelf: 'center', fontSize: 20 }}>ตารางนักศึกษา</Text>
                 <Text style={{ alignSelf: 'center', fontSize: 20 }}>สำหรับ ส่งข้อมูลทั่วไป ใบเสร็จ หรือคำร้องไปให้นักศึกษา</Text>
->>>>>>> c10e4fd0d680c1244eee55f39d885be885f4cc45
 
                 <TextInput placeholder="ชื่อหรือรหัสนักศึกษา" style={styles.input}
                     onChangeText={onChangeText}

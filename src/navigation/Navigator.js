@@ -11,7 +11,7 @@ import ScreenSendOffice_Documents from '../screens/SendOffice_Documents'
 import ScreenHor from "../screens/SelectHor";
 import ScreenRegister from "../screens/Registration";
 import ScreenLogin from "../screens/Login";
-import { ScoreTable } from "../screens/ScoreTable";
+import ScoreTable from "../screens/ScoreTable";
 import ScreenDetailroom from "../screens/Detailroom"
 import ScreenNotification from "../screens/Notification";
 import ScreenProflie from "../screens/Profile";
@@ -182,12 +182,11 @@ export default function Navigator() {
                     <Stack.Screen name="ScreenMain" component={TestNavigate} />
                     <Stack.Screen name="ScreenRegister" component={ScreenRegister} />
                     <Stack.Screen name="ScoreTable" component={ScoreTable} />
-                    {/* <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} /> */}
                     <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
                     <Stack.Screen name="ScreenSendOffice_Documents" component={ScreenSendOffice_Documents} />
                     <Stack.Screen name="ScreenAnnoucement" component={ScreenAnnoucement} />
-                    <Stack.Screen name="ScoreTable" component={ScoreTable} />
+                    {/* <Stack.Screen name="ScoreTable" component={ScoreTable} /> */}
                     <Stack.Screen name="ScreenSendOffice_Documents" component={ScreenSendOffice_Documents} />
                     <Stack.Screen name="ScreenRegisTable" component={ScreenRegisTable} />
                     {/* isSignedIn ? (
