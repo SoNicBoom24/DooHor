@@ -3,10 +3,12 @@ import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView
 import firebase from '../Database/firebaseDB'
 import { useNavigation } from '@react-navigation/native';
 
+
 export default class Announcement extends Component {
     constructor() {
+        this.navigation = useNavigation();
         super();
-        this.subjCollection = firebase.firestore().collection("office_documents");
+        this.subjCollection = firebase.firestore().collection("declaration");
         this.state = {
             subject_list: [],
         };
@@ -15,19 +17,18 @@ export default class Announcement extends Component {
 
 
         const all_data = [];
-        firebase.firestore()
-            .collection('declaration')
-            .where('state', '==', "open")
-            .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach((res) => {
-                    const { desc, image, title, type, state } = res.data();
-                    all_data.push({ desc: desc, image: image, title: title, type: type, state: state, id: res.id });
-                });
-                setHome(all_data);
-
-            });
-
+        // firebase.firestore()
+        //     .collection('declaration')
+        //     .where('state', '==', "open")
+        //     .get()
+        //     .then(querySnapshot => {
+        //         querySnapshot.forEach((res) => {
+        //             const { desc, image, title, type, state } = res.data();
+        //             all_data.push({ desc: desc, image: image, title: title, type: type, state: state, id: res.id });
+        //         });
+        //         this.setState({ subject_list: all_data, });
+            // });
+            
 
 
     };
@@ -39,28 +40,30 @@ export default class Announcement extends Component {
         this.unsubscribe();
     }
     ScreenRegister() {
-        const navigation = useNavigation();
-        navigation.navigate('ScreenRegister')
+        // const navigation = useNavigation();
+        // navigation.navigate('ScreenRegister')
     };
     GeneralTopic(id) {
-        const navigation = useNavigation();
-        navigation.navigate('GeneralTopic', {
-            id,
-        })
+        this.navigation.navigate('ScreenRegister')
+        console.log(id)
     };
     ScreenHor() {
-        const navigation = useNavigation();
-        navigation.navigate('ScreenHor')
+        // const navigation = useNavigation();
+        // navigation.navigate('ScreenHor')
     };
     render() {
         return (
+
+            // <View>
+            //     <Text>BANK</Text>
+            // </View>
 
             < ScrollView style={styles.container} >
                 {this.state.subject_list.map((item, i) => (
                     <View key={i}>
                         <View style={{ display: item.type == 'Register' ? 'flex' : 'none' }}>
                             <Image style={styles.img} source={{ uri: item.image }} />
-                            <TouchableOpacity onPress={() => ScreenRegister()}>
+                            <TouchableOpacity onPress={() => this.ScreenRegister()}>
                                 <SafeAreaView style={styles.description}>
                                     <Text style={{ padding: 10 }}>
                                         {item.title} : {item.desc}   ...กดเพื่อดูรายละเอียดเพิ่มเติม
@@ -70,7 +73,7 @@ export default class Announcement extends Component {
                         </View>
                         <View style={{ display: item.type == 'Room' ? 'flex' : 'none' }}>
                             <Image style={styles.img} source={{ uri: item.image }} />
-                            <TouchableOpacity onPress={() => ScreenHor()}>
+                            <TouchableOpacity onPress={() => this.ScreenHor()}>
                                 <SafeAreaView style={styles.description}>
                                     <Text style={{ padding: 10 }}>
                                         {item.title} : {item.desc}   ...กดเพื่อดูรายละเอียดเพิ่มเติม
@@ -81,7 +84,8 @@ export default class Announcement extends Component {
 
                         <View style={{ display: item.type == 'General' ? 'flex' : 'none' }}>
                             <Image style={styles.img} source={{ uri: item.image }} />
-                            <TouchableOpacity onPress={() => GeneralTopic(item.id)}>
+                            <TouchableOpacity onPress={() => this.GeneralTopic(item.id)} >
+                            
                                 <SafeAreaView style={styles.description}>
                                     <Text style={{ padding: 10 }}>
                                         {item.title} : {item.desc}   ...กดเพื่อดูรายละเอียดเพิ่มเติม

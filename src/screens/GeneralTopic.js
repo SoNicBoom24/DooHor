@@ -6,13 +6,14 @@ import { useRoute } from '@react-navigation/native';
 export default class Announcement extends Component {
     constructor() {
         super();
-        this.subjCollection = firebase.firestore().collection("office_documents");
+        this.subjCollection = firebase.firestore().collection("declaration");
         this.state = {
             subject_list: [],
         };
     }
     getCollection = () => {
         const route = useRoute();
+        console.log(route.params.id)
         const user = firebase.auth().currentUser
         if (user) {
             const all_data = [];
@@ -25,7 +26,7 @@ export default class Announcement extends Component {
                         const { desc, image, title, type, state } = res.data();
                         all_data.push({ desc: desc, image: image, title: title, type: type, state: state, id: res.id });
                     });
-                    setHome(all_data);
+                    this.setState({ subject_list: all_data, });
 
                 });
 
