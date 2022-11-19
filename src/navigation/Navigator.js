@@ -182,12 +182,10 @@ export default function Navigator() {
                     <Stack.Screen name="ScreenMain" component={TestNavigate} />
                     <Stack.Screen name="ScreenRegister" component={ScreenRegister} />
                     <Stack.Screen name="ScoreTable" component={ScoreTable} />
-                    {/* <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} /> */}
                     <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
                     <Stack.Screen name="ScreenSendOffice_Documents" component={ScreenSendOffice_Documents} />
                     <Stack.Screen name="ScreenAnnoucement" component={ScreenAnnoucement} />
-                    <Stack.Screen name="ScreenSendOffice_Documents" component={ScreenSendOffice_Documents} />
                     <Stack.Screen name="ScreenRegisTable" component={ScreenRegisTable} />
                     {/* isSignedIn ? (
                     <>
@@ -195,7 +193,7 @@ export default function Navigator() {
                     <Stack.Screen name="ScreenHor" component={ScreenHor} />
                     <Stack.Screen name="ScreenMain" component={TestNavigate} />
                     <Stack.Screen name="ScreenRegister" component={ScreenRegister} />
-                    <Stack.Screen name="DataTableTest" component={DataTableTest} />
+    
                     <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
                     <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
                     </>

@@ -1,8 +1,10 @@
-import { Text, TextInput, View, StyleSheet, Button, Alert, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Button, Alert, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import DataTable, { COL_TYPES } from 'react-native-datatable-component';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import React, { useState, useEffect } from "react";
 import firebase from '../Database/firebaseDB'
@@ -109,9 +111,13 @@ export default function SendOffice_Documents() {
 
 
     return (
-        <View style={{ top: "5%" }}>
+        <ScrollView style={{ backgroundColor: "#FFDA79", width: "100%", height: "100%" }}>
 
             <View style={{ margin: 20, display: check ? 'flex' : 'none' }} >
+                {/* <View style={{ flexDirection: "row", alignSelf: 'center', }}>
+                    <FontAwesome5 name="user-graduate" size={24} color="black" />
+                    <Text style={{ fontSize: 20, paddingLeft: 5 }}>ตารางนักศึกษา </Text>
+                </View> */}
                 <Text style={{ alignSelf: 'center', fontSize: 20 }}>ตารางนักศึกษา</Text>
                 <Text style={{ alignSelf: 'center', fontSize: 20 }}>สำหรับ ส่งข้อมูลทั่วไป ใบเสร็จ หรือคำร้องไปให้นักศึกษา</Text>
 
@@ -204,16 +210,19 @@ export default function SendOffice_Documents() {
                 </View>
             </SafeAreaView>
 
-        </View >
+        </ScrollView >
 
     )
 }
 const styles = StyleSheet.create({
     input: {
         height: 40,
+        width: "70%",
         margin: 15,
-        borderWidth: 1,
+        borderWidth: 2,
+        borderColor: "#FFB053",
         padding: 10,
-        width: "20%",
+        backgroundColor: "white",
+        borderRadius: 10
     },
 });
