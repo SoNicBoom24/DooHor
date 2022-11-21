@@ -10,8 +10,7 @@ export default class General extends Component {
         this.subjCollection = firebase.firestore().collection("office_documents");
         this.state = {
             subject_list: [],
-            upload: null,
-            check: -1
+
         };
     }
     getCollection = () => {
@@ -44,50 +43,6 @@ export default class General extends Component {
     componentWillUnmount() {
         this.unsubscribe();
     }
-    async pickImage(i) {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1
-        })
-        const source = { uri: result.uri };
-        this.setState({
-            check: i,
-            upload: source
-
-        });
-    };
-    async add(i) {
-        console.log(this.state.subject_list[i].id)
-        const db = firebase.firestore();
-
-        const response = await fetch(this.state.upload.uri)
-        const blob = await response.blob();
-        const filename = this.state.upload.uri
-        var ref1 = firebase.storage().ref().child(filename).put(blob);
-        try {
-            await ref1;
-
-        }
-        catch (e) {
-            console.log(e)
-        }
-
-        db.collection("office_documents").doc(this.state.subject_list[i].id).update({
-            picture_from_user: filename
-
-        })
-        this.setState({
-            check: -1,
-            upload: null
-        });
-    }
-    back() {
-        this.setState({
-            check: -1
-        });
-    };
     render() {
         return (
             <View>

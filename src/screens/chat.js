@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { ScrollView, Image } from "react-native";
-import firebase from "../database/firebaseDB";
+import firebase from "../Database/firebaseDB";
 import { ListItem } from "react-native-elements";
 import { Button, Input } from "react-native-elements";
 
-class dormChat extends Component {
+class Sceeenchat extends Component {
   constructor() {
     super();
     this.messageCollection = firebase.firestore().collection("message"); // ฝากทำแยกหอที
@@ -44,7 +44,7 @@ class dormChat extends Component {
       //   console.log("res: ", res);
       //   console.log("res.data() : ", res.data());
 
-      const { student_id, text} = res.data();
+      const { student_id, text } = res.data();
       all_data.push({
         key: res.id,
         student_id,
@@ -70,7 +70,7 @@ class dormChat extends Component {
       <ScrollView >
 
 
-        
+
         {this.state.message_list.map((item, i) => {
           return (
             <ListItem key={i} bottomDivider>
@@ -93,4 +93,4 @@ class dormChat extends Component {
   }
 }
 
-export default dormChat;
+export default Sceeenchat;

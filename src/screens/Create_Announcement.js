@@ -42,7 +42,7 @@ export default function Create_Announcement() {
             'success'
         )
         if (selecttype == 'Register') {
-            db.collection("declaration").doc("9hxCXTzaMTsqmF7Zgcfa").update({
+            db.collection("declaration").doc("Bfju2YmnuNB8gDcc7wmn").update({
                 title: title_input,
                 desc: desc_input,
                 state: 'open',

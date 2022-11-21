@@ -13,51 +13,52 @@ import {
 import { Card, Title, Paragraph } from 'react-native-paper';
 import firebase from '../Database/firebaseDB'
 
+import { useRoute } from '@react-navigation/native';
 
-// Default Image Item
 
-buttonClickListener = () => {
-    alert("ลงชื่อแล้ว");
-}
-// Carousal Component
+
+
 export default function Detailroom({
-    height = 500,
+    height = "100%",
     width = Dimensions.get("window").width,
     delay = 5000,
-    ItemElement = Item,
 }) {
     const [DATA, SetDATA] = useState([]);
+    const [detaildata, SetDetaildata] = useState([]);
     const [selectedIndex, setselectedIndex] = useState(0);
     const scrollView = useRef();
     const all_data = [];
     const set = [];
-    let id = 0;
-    //const user = firebase.auth().currentUser
-    //if (user) {
-    //     firebase.firestore()
-    //        .collection('Room')
-    //   .where('idroom', '==', 1)
-    //      .get()
-    //      .then(querySnapshot => {
-    //           querySnapshot.forEach((res) => {
-    //              all_data.push(res.data());
-    //           })
-    //           {
-    //               all_data[0].image_room.forEach(d => {
-    //                  set.push({
-    //                       image: d,
-    //                       id: id += 1
+    const user = firebase.auth().currentUser
+    const route = useRoute();
 
-    //                  })
-    //              })
-    //              SetDATA(set)
-    //         }
+    if (true) {
+        firebase.firestore()
+            .collection('Room')
+            .where('RoomName', '==', route.params.Roomname)
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach((res) => {
+                    const { RoomName, building, desc, floor, id, image_room, price, student, state } = res.data();
+                    all_data.push({ RoomName: RoomName, building: building, floor: floor, image_room: image_room, state: state, desc: desc, id: id, desc: desc, price: price, student: student });
+                });
+                {
+                    all_data[0].image_room.forEach(d => {
+                        set.push({
+                            image: d,
 
-    //       });
-    // }
-    //  else {
-    //  }
-    // Script which will only executed when component initilizes
+                        })
+                    })
+
+                    SetDATA(set)
+                    SetDetaildata(all_data)
+
+                }
+            });
+    }
+    else {
+    }
+
     useEffect(() => {
         const fn = setInterval(() => {
             setselectedIndex((oldCount) =>
@@ -86,6 +87,7 @@ export default function Detailroom({
         setselectedIndex(Math.floor(contentOffset.x / viewSize.width));
     };
 
+
     return (
         <View style={{ backgroundColor: "#FFDA79" }}>
             <ScrollView
@@ -97,27 +99,32 @@ export default function Detailroom({
 
             >
                 <View style={styles.carousalContainer} >
-                    {DATA.map((item) => (
-                        <ItemElement
-                            key={item.id}
-                            height={height}
-                            width={width}
-                            {...item}
-                            onPress={() => onPress(item)}
-                        />
+                    {DATA.map((item, index) => (
+                        <TouchableOpacity
+                            key={index}
+                            style={{ height: height, width: width }}
+                        >
+                            <Image source={{ uri: item.image }} style={[styles.image, { height: height }]} />
+
+                        </TouchableOpacity>
                     ))}
                 </View>
             </ScrollView >
             <View style={{ alignItems: "center", marginTop: 30, marginBottom: 30, }}>
-                <Text style={{ fontSize: 25 }}> รายละเอียดหอพัก </Text>
-                <Text style={{ fontSize: 20 }}> หอพักแอร์ จำนวน 4 คน </Text>
-                <Text style={{ fontSize: 20 }}>  ค่าเช่า 5000</Text>
+                {detaildata.map((item, i) => (
+                    <View key={i}>
+
+                        <Text style={{ fontSize: 25 }}>
+                            {item.desc}
+                        </Text>
+                    </View>
+                ))}
             </View>
 
             <View style={{ alignItems: "center", height: "63%" }}>
                 <Button
 
-                    onPress={buttonClickListener}
+
                     title="ลงชื่อเข้าหอพัก"
                     color="#594545"
                 />
@@ -139,17 +146,6 @@ export default function Detailroom({
 
 
 }
-const Item = ({ image, height, width, onPress, }) => (
-    <TouchableOpacity
-        activeOpacity={1}
-        onPress={onPress}
-        style={{ height: height, width: width }}
-    >
-        <Image source={{ uri: image }} style={[styles.image, { height: height }]} />
-
-    </TouchableOpacity>
-);
-
 const styles = StyleSheet.create({
     carousalContainer: {
         flexDirection: "row",
