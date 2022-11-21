@@ -137,7 +137,7 @@ function NavBar() {
                         color="black"
                         style={{ position: "absolute", left: -60, top: -13 }}
                         onPress={() => {
-                            linkTo.navigate("ScoreTable");
+                            linkTo.navigate("ScreenProflie");
                         }}
                     />
                     <FontAwesome
@@ -157,11 +157,18 @@ function NavBar() {
 }
 
 export default function Navigator() {
+    // const [user, setUser] = useState(null)
+    // useEffect(() => {
+    //     setInterval(() => {
 
+    //         setUser(firebase.auth().currentUser)
+    //     }, 5000)
+    //     // console.log(user)
+    // }, [])
     return (
         <>
             <NavigationContainer>
-
+            {/* {user ? (<NavBar />) : (<></>)} */}
                 <NavBar />
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="ScreenLogin" component={ScreenLogin} />

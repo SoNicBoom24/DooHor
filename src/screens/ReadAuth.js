@@ -39,10 +39,11 @@ export default class ReadAuth extends Component {
                             width: "90%",
                             alignSelf: 'center',
                             marginTop: "8%",
-                            marginLeft: "5%"
                         }}>
                             <Card.Content>
                                 <Title>{item.student_id}</Title>
+                            </Card.Content>
+                            <Card.Content style={{backgroundColor: "pink"}}>
                                 <Paragraph>{item.text}</Paragraph>
                             </Card.Content>
 

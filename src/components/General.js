@@ -16,7 +16,7 @@ export default class General extends Component {
     getCollection = () => {
 
         const user = firebase.auth().currentUser
-        if (user) {
+        if (true) {
             const all_data = [];
             firebase.firestore()
                 .collection('office_documents')

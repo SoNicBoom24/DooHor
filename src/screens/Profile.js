@@ -166,7 +166,7 @@ const Profile = () => {
             <ScrollView
                 style={{
                     flex: 1,
-                    backgroundColor: 'white',
+                    backgroundColor: 'pink',
                 }}>
                 <General></General>
             </ScrollView>

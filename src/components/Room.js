@@ -4,6 +4,7 @@ import firebase from '../Database/firebaseDB'
 import { Card, Title, Paragraph } from 'react-native-paper';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function (props) {
     const navigation = useNavigation();
@@ -18,7 +19,7 @@ class Room extends Component {
             subject_list: [],
             selecttype: "ชั้นที่ 1",
             alltype: ['ชั้นที่ 1', 'ชั้นที่ 2', 'ชั้นที่ 3', 'ชั้นที่ 4'],
-            check: ''
+            check: '',
         }
     }
     getCollection = (querySnapshot) => {
@@ -68,12 +69,22 @@ class Room extends Component {
         return (
             <View>
                 <View style={{ marginTop: "5%" }} >
+                    <View style={{flexDirection: "row", alignSelf: "center", backgroundColor: "#242424", width: "90%", padding: 10, borderRadius: 20}}>
+                        <View style={{flexDirection: "row", marginHorizontal: "15%"}}>
+                            <FontAwesome name="circle" size={24} color="#DF727D" />
+                            <Text style={{paddingLeft: 5, fontWeight: "bold", color: "white", fontSize: 15}}>เต็ม</Text>
+                        </View>
+                        <View style={{flexDirection: "row", marginHorizontal: "15%"}}>
+                            <FontAwesome name="circle" size={24} color="#6663F6" />
+                            <Text style={{paddingLeft: 5, fontWeight: "bold", color: "white", fontSize: 15}}>ไม่เต็ม</Text>
+                        </View>
+                    </View>
                     <ModalDropdown options={this.state.alltype}
                         defaultValue={"เลือกชั้น"}
-                        textStyle={{ paddingLeft: 5, paddingBottom: 5, fontSize: 14, paddingTop: 3 }}
-                        dropdownStyle={{ width: "10%", borderRadius: 10, backgroundColor: "white", height: 70, overflow: "hidden" }}
+                        textStyle={{ paddingLeft: 5, paddingBottom: 5, fontSize: 14, paddingTop: 5 }}
+                        dropdownStyle={{ width: "35%", borderRadius: 10, backgroundColor: "white", height: 100, overflow: "hidden", marginTop: -20 }}
                         defaultTextStyle={{ color: "#Bbbbbd" }}
-                        style={{ backgroundColor: "white", borderRadius: 10, width: "40%", justifyContent: "center", marginLeft: "54%", marginTop: '10%' }}
+                        style={{ backgroundColor: "white", borderRadius: 10, width: "40%", marginTop: '10%', alignSelf: "center", borderWidth: 1}}
                         onSelect={(type) =>
                             this.setState({
                                 selecttype: this.state.alltype[type]
@@ -84,15 +95,14 @@ class Room extends Component {
                 </View>
                 {this.state.subject_list.map((item, i) => (
                     <View key={i}>
-                        <TouchableOpacity onPress={() => this.GotoRoom(item.RoomName)} style={{ marginTop: "10%", display: item.floor == this.state.selecttype && item.pos == 'L' ? 'flex' : 'none' }} >
+                        <TouchableOpacity onPress={() => this.GotoRoom(item.RoomName)} style={{ marginTop: 10, display: item.floor == this.state.selecttype && item.pos == 'L' ? 'flex' : 'none' }} >
                             <View style={{
                                 flexDirection: "row",
-                                flexWrap: "wrap", backgroundColor: item.student == 4 ? 'red' : 'blue', padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10
-                            }}>
+                                 backgroundColor: item.student == 4 ? '#DF727D' : '#6663F6', padding: 5, borderRadius: 10, width: "35%", alignSelf: "center", marginVertical: 10}}>
                                 <Text style={{ color: "white", alignSelf: "center", fontSize: 16, marginLeft: '18%' }}>
                                     {item.RoomName}
                                 </Text>
-                                <Text style={{ color: "white", alignSelf: "center", fontSize: 12, marginLeft: '2%' }}>
+                                <Text style={{ color: "white", alignSelf: "center", fontSize: 12, marginLeft: 10 }}>
                                     {item.student} / 4
                                 </Text>
                             </View>

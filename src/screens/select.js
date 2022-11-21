@@ -62,8 +62,8 @@ const TabScene = ({
 const Profile = () => {
   const [tabIndex, setIndex] = useState(0);
   const [routes] = useState([
-    { key: 'tab1', title: 'เอกสารทั่วไป' },
-    { key: 'tab2', title: 'เอกสารสำนักงาน' },
+    { key: 'tab1', title: 'หอพักฝั่งซ้าย' },
+    { key: 'tab2', title: 'หอพักฝั่งขวา' },
   ]);
   const [tab1Data] = useState(Array(null).fill(0));
   const [tab2Data] = useState(Array(null).fill(0));
@@ -140,8 +140,12 @@ const Profile = () => {
       <ScrollView
         style={{
           flex: 1,
+          // height: Dimensions.get('window').height,
+          width: "120%",
           backgroundColor: 'white',
-          height: Dimensions.get('window').height,
+          borderRadius: 20,
+          alignSelf: "center",
+          marginBottom: 20
 
         }}>
         <Room></Room>

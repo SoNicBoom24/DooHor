@@ -62,7 +62,7 @@ export default function Create_Announcement() {
                 <ModalDropdown options={alltype}
                     defaultValue={"ประเภท ของประกาศ"}
                     textStyle={{ paddingLeft: 5, paddingBottom: 5, fontSize: 14, }}
-                    dropdownStyle={{ width: "50%", borderRadius: 10, backgroundColor: "white", height: 70, overflow: "hidden" }}
+                    dropdownStyle={{ width: "45%", borderRadius: 10, backgroundColor: "white", height: 110, overflow: "hidden", marginTop: -25 }}
                     defaultTextStyle={{ color: "#Bbbbbd" }}
                     style={{ backgroundColor: "white", borderRadius: 10, width: "50%", justifyContent: "center" }}
                     onSelect={(type) => setSelecttype(alltype[type])}
@@ -70,10 +70,10 @@ export default function Create_Announcement() {
                 />
             </View>
             <TouchableOpacity onPress={pickImage} style={{
-                backgroundColor: "gray", borderRadius: 15,
+                backgroundColor: "#b8b8b8", borderRadius: 15,
                 elevation: 15,
                 padding: 10,
-                width: "90%",
+                width: "80%",
                 height: "40%",
                 alignSelf: 'center'
 
@@ -103,7 +103,6 @@ export default function Create_Announcement() {
                         </Text>
                     </View>
                 </TouchableOpacity>
-
             </View>
 
 
