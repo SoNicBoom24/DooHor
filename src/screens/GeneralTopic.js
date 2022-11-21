@@ -4,22 +4,23 @@ import firebase from '../Database/firebaseDB'
 import { useRoute } from '@react-navigation/native';
 
 export default class Announcement extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.subjCollection = firebase.firestore().collection("declaration");
         this.state = {
             subject_list: [],
         };
     }
     getCollection = () => {
-        const route = useRoute();
-        console.log(route.params.id)
+        // const route = useRoute();
+        // console.log(route.params.id)
         const user = firebase.auth().currentUser
         if (user) {
+            console.log(this.props.id)
             const all_data = [];
             firebase.firestore()
                 .collection('declaration')
-                .where('id', '==', route.params.id)
+                .where('id', '==', this.props.id)
                 .get()
                 .then(querySnapshot => {
                     querySnapshot.forEach((res) => {
@@ -39,6 +40,7 @@ export default class Announcement extends Component {
     componentDidMount() {
         this.unsubscribe =
             this.subjCollection.onSnapshot(this.getCollection);
+        // alert(this.props.id)
     }
     componentWillUnmount() {
         this.unsubscribe();
@@ -49,6 +51,7 @@ export default class Announcement extends Component {
         return (
 
             < ScrollView style={styles.container} >
+                <Text>{this.props.id}</Text>
                 {this.state.subject_list.map((item, i) => (
                     <View key={i}>
 
