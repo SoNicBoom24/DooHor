@@ -2,6 +2,8 @@ import React, { useState, useEffect, Component } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import firebase from '../Database/firebaseDB'
 import { useRoute } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
+
 export default function (props) {
     const route = useRoute();
     return <GeneralTopic {...props} route={route} />;
@@ -57,8 +59,8 @@ class GeneralTopic extends Component {
                                 <Text style={{ padding: 10 }}>
                                     {item.all_desc}
                                 </Text>
-
                             </SafeAreaView>
+                            <FontAwesome name="trash" size={24} color="black" style={{bottom: 0, alignSelf: "center"}} />
                         </View>
                     </View>
 

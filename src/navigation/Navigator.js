@@ -90,7 +90,7 @@ function NavBar() {
                             style={{ position: "absolute", left: -25, top: -13 }}
                         />
                     } */}
-                    {/* <Ionicons
+                    <Ionicons
                         name="chatbubble-outline"
                         size={24}
                         color="black"
@@ -113,17 +113,17 @@ function NavBar() {
                         color="black" 
                         style={{ position: "absolute", left: -25, top: -13 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenAnnoucement");
+                            linkTo.navigate("ReadAuth");
                         }}
-                    /> */}
+                    />
 
-                    <Ionicons
+                    {/* <Ionicons
                         name="chatbubble-outline"
                         size={24}
                         color="black"
                         style={{ position: "absolute", left: -80, top: -13 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenSendOffice_Documents");
+                            linkTo.navigate("Sceeenchat");
                         }}
                     />
                     <FontAwesome
@@ -143,7 +143,7 @@ function NavBar() {
                         onPress={() => {
                             linkTo.navigate("ScreenRegisTable");
                         }}
-                    />
+                    /> */}
                 </View>
             </View>
         </View>

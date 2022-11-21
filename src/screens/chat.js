@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, ScrollView, Image, View } from "react-native";
-import firebase from "../database/firebaseDB";
+import firebase from "../Database/firebaseDB";
 import { ListItem } from "react-native-elements";
 import { Button, Input } from "react-native-elements";
 import { Card, Title, Paragraph } from 'react-native-paper';
@@ -9,7 +9,7 @@ class Sceeenchat extends Component {
   constructor() {
     super();
     this.messageCollection = firebase.firestore().collection("message"); // ฝากทำแยกหอที
-    this.userCollection = firebase.firestore().collection("users"); // ฝากทำ authen ที
+    // this.userCollection = firebase.firestore().collection("Users"); // ฝากทำ authen ที
     this.state = {
       message_list: [],
       message: "",
