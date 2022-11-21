@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { ScrollView, Image } from "react-native";
-import firebase from "../Database/firebaseDB";
+import { StyleSheet, ScrollView, Image, View } from "react-native";
+import firebase from "../database/firebaseDB";
 import { ListItem } from "react-native-elements";
 import { Button, Input } from "react-native-elements";
+import { Card, Title, Paragraph } from 'react-native-paper';
 
 class Sceeenchat extends Component {
   constructor() {
@@ -31,18 +32,12 @@ class Sceeenchat extends Component {
         this.setState({
           message: "",
         });
-        Alert.alert(
-          "Adding Alert",
-          "New subject was added!! Pls check your DB!!"
-        );
       });
   }
 
   getCollection = (querySnapshot) => {
     const all_data = [];
     querySnapshot.forEach((res) => {
-      //   console.log("res: ", res);
-      //   console.log("res.data() : ", res.data());
 
       const { student_id, text } = res.data();
       all_data.push({
@@ -51,7 +46,6 @@ class Sceeenchat extends Component {
         text,
       });
     });
-    // console.log("all_data : ", all_data);
     this.setState({
       message_list: all_data,
     });
@@ -67,30 +61,80 @@ class Sceeenchat extends Component {
 
   render() {
     return (
-      <ScrollView >
+      <View style={styles.container}>
+      < ScrollView>
+                {this.state.message_list.map((item, i) => (
+                    <View key={i}>
+                        <Card style={{
+                          backgroundColor: '#CDFFFC',
+                            borderRadius: 15,
+                            elevation: 15,
+                            padding: 10,
+                            width: "90%",
+                            alignSelf: 'center',
+                            marginTop: "8%",
+                            marginLeft: "5%",
+                            
+                        }}>
+                            <Card.Content>
+                                <Title>{item.student_id} : You</Title>
+                                <Paragraph>{item.text}</Paragraph>
+                            </Card.Content>
+
+                        </Card>
+                    </View>
 
 
-
-        {this.state.message_list.map((item, i) => {
-          return (
-            <ListItem key={i} bottomDivider>
-              <ListItem.Content>
-                <ListItem.Title>{item.student_id}</ListItem.Title>
-                <ListItem.Subtitle>{item.text}</ListItem.Subtitle>
-              </ListItem.Content>
-              <ListItem.Chevron />
-            </ListItem>
-          );
-        })}
+                ))}
+      </ScrollView>
+        <View style={{
+    position: 'absolute',
+    flexDirection:'row', 
+    width: window.width, 
+    margin: 10, 
+    padding:4, 
+    bottom: 0,
+    alignItems:'center', 
+    justifyContent:'center', 
+    borderWidth:4, 
+    borderColor:'#fff', 
+    borderRadius:10, 
+    backgroundColor:'#fff'
+}}>
+  <View style={{
+    flex: 4,
+  }}>
         <Input
+          style={{
+            height: 40, 
+            width: "100%",
+            color: 'white',
+            backgroundColor: '#A4EBF3', 
+            borderWidth: 1,
+            borderColor: 'white',
+            borderRadius: 10,
+            flex:1,
+            flexDirection:'row'
+  }}
           placeholder={"ข้อความ"}
+          placeholderTextColor="white" 
           value={this.state.message}
           onChangeText={(val) => this.inputValueUpdate(val, "message")}
         />
-        <Button title="ส่งข้อความ" onPress={() => this.storeSubject()} />
-      </ScrollView>
+    </View>
+        <View style={{ flex: 1}}>
+          <Button title="ส่งข้อความ" onPress={() => this.storeSubject()} />
+        </View>
+        </View>
+      
+      </View>
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+      backgroundColor: "#A4EBF3",
+  },
 
+});
 export default Sceeenchat;
