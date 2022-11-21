@@ -39,5 +39,4 @@ ViewPropTypes has been removed from React Native. Migrate to ViewPropTypes expor
 
 เอกสารอ้างอิง 
 2. https://github.com/JungHsuan/react-native-collapsible-tabview
-3. https://www.npmjs.com/package/react-native-table-component
 4. https://www.npmjs.com/package/react-native-datatable-component
