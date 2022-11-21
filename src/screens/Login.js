@@ -23,13 +23,17 @@ export default function Login() {
                 setEmail({ value: '', error: '' })
                 setPassword({ value: '', error: '' })
             })
-        navigation.navigate("ScreenNotification")
+        navigation.navigate("ScreenAnnoucement")
+
+    }
+    const onPressed = () => {
+        navigation.navigate("ScreenAnnoucement")
 
     }
     return (
-        <SafeAreaView style={{ width: "100%", backgroundColor: "#FFB053", height: "100%"}} >
+        <SafeAreaView style={{ width: "100%", backgroundColor: "#FFB053", height: "100%" }} >
             <KeyboardAwareScrollView extraHeight={100}>
-                <View style={{paddingTop: "50%"}}>
+                <View style={{ paddingTop: "50%" }}>
                     <Text style={styles.logintext}>Login</Text>
                     <TextInput style={styles.inputContainer} placeholder="Username" value={email.value} keyboardType="email-address"
                         onChangeText={(text) => setEmail({ value: text, error: '' })}
@@ -44,6 +48,15 @@ export default function Login() {
                                     Login
                                 </Text>
                                 <AntDesign name="caretright" size={24} color="#FFE664" />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.buttonGuest}>
+                        <TouchableOpacity onPress={onPressed}>
+                            <View style={{ backgroundColor: "transparent", padding: 5, borderRadius: 5, flexDirection: "row" }}>
+                                <Text style={{ color: "white", fontSize: 12.5 }}>
+                                    Guest
+                                </Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -82,6 +95,15 @@ const styles = StyleSheet.create({
         backgroundColor: "#FF9A3C",
         width: "30%",
         marginTop: 10,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        alignContent: "center",
+        alignSelf: "center"
+    },
+    buttonGuest: {
+        width: "30%",
+        marginTop: 5,
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",

@@ -18,9 +18,11 @@ import ScreenProflie from "../screens/Profile";
 import ScreenAnnoucement from "../screens/Announcement";
 import ScreenRegisTable from "../screens/RegisTable"
 import ScreenGeneralTopic from "../screens/GeneralTopic";
-
+import Sceeenchat from "../screens/chat"
+import Sceeenselect from "../screens/select"
 import firebase from '../Database/firebaseDB'
-
+import ReadAuth from '../screens/ReadAuth'
+import Table_check from "../screens/Table_check"
 const Stack = createNativeStackNavigator();
 function HomeScreen() {
     return (
@@ -143,7 +145,7 @@ function NavBar() {
                         color="black"
                         style={{ position: "absolute", left: -60, top: -13 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenSendOffice_Documents");
+                            linkTo.navigate("Table_check");
                         }}
                     />
                     <FontAwesome
@@ -152,7 +154,7 @@ function NavBar() {
                         color={"black"}
                         style={{ position: "absolute", left: -25, top: -13 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenProflie");
+                            linkTo.navigate("ScreenHor");
                         }}
                     />
                 </View>
@@ -163,6 +165,7 @@ function NavBar() {
 }
 
 export default function Navigator() {
+
     const [user, setUser] = useState(null)
     useEffect(() => {
         setInterval(() => {
@@ -189,6 +192,12 @@ export default function Navigator() {
                     <Stack.Screen name="ScreenAnnoucement" component={ScreenAnnoucement} />
                     <Stack.Screen name="ScreenRegisTable" component={ScreenRegisTable} />
                     <Stack.Screen name="ScreenGeneralTopic" component={ScreenGeneralTopic} />
+                    <Stack.Screen name="Sceeenchat" component={Sceeenchat} />
+                    <Stack.Screen name="Sceeenselect" component={Sceeenselect} />
+                    <Stack.Screen name="ReadAuth" component={ReadAuth} />
+                    <Stack.Screen name="Table_check" component={Table_check} />
+
+
                     {/* isSignedIn ? (
                     <>
                     <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
