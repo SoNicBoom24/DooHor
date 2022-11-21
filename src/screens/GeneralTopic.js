@@ -2,40 +2,33 @@ import React, { useState, useEffect, Component } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import firebase from '../Database/firebaseDB'
 import { useRoute } from '@react-navigation/native';
-
-export default class Announcement extends Component {
-    constructor(props) {
-        super(props);
+export default function (props) {
+    const route = useRoute();
+    return <GeneralTopic {...props} route={route} />;
+}
+class GeneralTopic extends Component {
+    constructor() {
+        super();
         this.subjCollection = firebase.firestore().collection("declaration");
         this.state = {
             subject_list: [],
         };
     }
     getCollection = () => {
-        // const route = useRoute();
-        // console.log(route.params.id)
-        const user = firebase.auth().currentUser
-        if (user) {
-            console.log(this.props.id)
-            const all_data = [];
-            firebase.firestore()
-                .collection('declaration')
-                .where('id', '==', this.props.id)
-                .get()
-                .then(querySnapshot => {
-                    querySnapshot.forEach((res) => {
-                        const { desc, image, title, type, state } = res.data();
-                        all_data.push({ desc: desc, image: image, title: title, type: type, state: state, id: res.id });
-                    });
-                    this.setState({ subject_list: all_data, });
-
+        const { route } = this.props;
+        const all_data = [];
+        firebase.firestore()
+            .collection('declaration')
+            .where('id', '==', route.params.id)
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach((res) => {
+                    const { desc, image, title, type, state } = res.data();
+                    all_data.push({ desc: desc, image: image, title: title, type: type, state: state, });
                 });
+                this.setState({ subject_list: all_data, });
 
-
-        }
-        else {
-
-        }
+            });
     };
     componentDidMount() {
         this.unsubscribe =
@@ -57,17 +50,15 @@ export default class Announcement extends Component {
 
                         <View>
                             <Image style={styles.img} source={{ uri: item.image }} />
-                            <TouchableOpacity>
-                                <SafeAreaView style={styles.description}>
-                                    <Text style={{ padding: 10 }}>
-                                        {item.title}
-                                    </Text>
-                                    <Text style={{ padding: 10 }}>
-                                        {item.desc}
-                                    </Text>
+                            <SafeAreaView style={styles.description}>
+                                <Text style={{ padding: 10 }}>
+                                    {item.title}
+                                </Text>
+                                <Text style={{ padding: 10 }}>
+                                    {item.desc}
+                                </Text>
 
-                                </SafeAreaView>
-                            </TouchableOpacity>
+                            </SafeAreaView>
                         </View>
                     </View>
 
@@ -108,4 +99,3 @@ const styles = StyleSheet.create({
     }
 
 });
-

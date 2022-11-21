@@ -4,7 +4,12 @@ import firebase from '../Database/firebaseDB'
 // import { useNavigation } from '@react-navigation/native';
 
 
-export default class Announcement extends Component {
+export default function (props) {
+    const navigation = useNavigation();
+    return <Announcement {...props} navigation={navigation} />;
+}
+
+class Announcement extends Component {
     constructor() {
         super();
         this.subjCollection = firebase.firestore().collection("declaration");
@@ -22,12 +27,12 @@ export default class Announcement extends Component {
             .get()
             .then(querySnapshot => {
                 querySnapshot.forEach((res) => {
-                    const { desc, image, title, type, state } = res.data();
-                    all_data.push({ desc: desc, image: image, title: title, type: type, state: state, id: res.id });
+                    const { desc, image, title, type, state, id } = res.data();
+                    all_data.push({ desc: desc, image: image, title: title, type: type, state: state, id: id });
                 });
                 this.setState({ subject_list: all_data, });
             });
-            
+
 
 
     };
@@ -39,25 +44,22 @@ export default class Announcement extends Component {
         this.unsubscribe();
     }
     ScreenRegister() {
-        // const navigation = useNavigation();
-        // navigation.navigate('ScreenRegister')
+        const { navigation } = this.props;
+        navigation.navigate('ScreenRegister')
     };
-    GeneralTopic(id) {
-        // const navigation = useNavigation();
-        this.props.navigation.navigate('ScreenGeneralTopic', {id})
-        // console.log(id)
+    ScreenGeneralTopic(i) {
+        const { navigation } = this.props;
+        navigation.navigate('ScreenGeneralTopic',
+            {
+                id: i
+            })
     };
     ScreenHor() {
-        // const navigation = useNavigation();
-        // navigation.navigate('ScreenHor')
+        const { navigation } = this.props;
+        navigation.navigate('ScreenHor')
     };
     render() {
         return (
-
-            // <View>
-            //     <Text>BANK</Text>
-            // </View>
-
             < ScrollView style={styles.container} >
                 <Text>{this.props.id}</Text>
                 {this.state.subject_list.map((item, i) => (
@@ -85,7 +87,7 @@ export default class Announcement extends Component {
 
                         <View style={{ display: item.type == 'General' ? 'flex' : 'none' }}>
                             <Image style={styles.img} source={{ uri: item.image }} />
-                            <TouchableOpacity onPress={() => this.GeneralTopic(item.id)} >
+                            <TouchableOpacity onPress={() => this.ScreenGeneralTopic(item.id)} >
                                 <SafeAreaView style={styles.description}>
                                     <Text style={{ padding: 10 }}>
                                         {item.title} : {item.desc}   ...กดเพื่อดูรายละเอียดเพิ่มเติม
@@ -133,4 +135,3 @@ const styles = StyleSheet.create({
     }
 
 });
-

@@ -32,11 +32,6 @@ export default function SelectHor() {
                     onPress={(value) => console.log(`Call onPress with value: ${value}`)}
                 />
                 <CardHor />
-                <CardHor />
-                <CardHor />
-                <CardHor />
-                <CardHor />
-                <CardHor />
             </View>
         </ScrollView>
     );
