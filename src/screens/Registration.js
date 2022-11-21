@@ -176,7 +176,7 @@ export default function Register() {
         <SafeAreaView style={{ width: "100%", backgroundColor: "#FFDA79", height: "100%" }}>
             <KeyboardAwareScrollView extraHeight={100}>
                 <>
-                    <Image style={styles.img} source={{ uri: "https://picsum.photos/200" }} />
+                    <Image style={styles.img} source={{ uri: "https://firebasestorage.googleapis.com/v0/b/doohor-af5ca.appspot.com/o/kmitl-covid-19-01.jpg?alt=media&token=2a14807f-5b50-4a32-97fe-e0abc365ba73" }} />
                 </>
                 <>
                     <View style={{ backgroundColor: "#FFB053", width: "90%", alignSelf: "center", padding: 10, borderRadius: 20 }}>

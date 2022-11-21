@@ -54,7 +54,9 @@ export default function Login() {
                     <View style={styles.buttonGuest}>
                         <TouchableOpacity onPress={onPressed}>
                             <View style={{ backgroundColor: "transparent", padding: 5, borderRadius: 5, flexDirection: "row" }}>
-                                <Text style={{ color: "white", fontSize: 12.5 }}>
+                                <Text style={{
+                                    color: "white", fontSize: 12.5, textDecorationLine: 'underline'
+                                }}>
                                     Guest
                                 </Text>
                             </View>

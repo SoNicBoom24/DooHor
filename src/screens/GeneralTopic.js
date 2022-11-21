@@ -23,8 +23,8 @@ class GeneralTopic extends Component {
             .get()
             .then(querySnapshot => {
                 querySnapshot.forEach((res) => {
-                    const { desc, image, title, type, state } = res.data();
-                    all_data.push({ desc: desc, image: image, title: title, type: type, state: state, });
+                    const { desc, image, title, type, state, all_desc } = res.data();
+                    all_data.push({ desc: desc, image: image, title: title, type: type, state: state, all_desc: all_desc });
                 });
                 this.setState({ subject_list: all_data, });
 
@@ -53,7 +53,7 @@ class GeneralTopic extends Component {
                                     {item.title}
                                 </Text>
                                 <Text style={{ padding: 10 }}>
-                                    {item.desc}
+                                    {item.all_desc}
                                 </Text>
 
                             </SafeAreaView>

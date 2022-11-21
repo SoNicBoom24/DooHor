@@ -19,7 +19,7 @@ import Room from '../components/Room'
 import Room2 from '../components/Room2'
 ///////////////////////////////////
 const TabBarHeight = 5;
-const HeaderHeight = 300;
+const HeaderHeight = 25;
 
 const TabScene = ({
   numCols,
@@ -133,25 +133,6 @@ const Profile = () => {
       outputRange: [0, -HeaderHeight],
       extrapolateRight: 'clamp',
     });
-    return (
-      <Animated.View style={[styles.header, { transform: [{ translateY: y }] }]}>
-        <View style={{ overflow: "hidden", paddingLeft: 5 }}>
-          <Text style={{ marginTop: "10%", marginBottom: "5%", alignSelf: 'center', }}>สถานะห้อง </Text>
-
-          <View style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}>
-            <View style={{ marginLeft: "8%" }}>
-              <Button color="red" title="ห้องถูกจองจนเต็ม" ></Button>
-            </View>
-            <View style={{ marginLeft: "10%" }}>
-              <Button color="blue" title="ห้องยังไม่เต็ม"></Button>
-            </View>
-          </View>
-        </View>
-      </Animated.View>
-    );
   };
 
   const rednerTab1Item = ({ }) => {

@@ -1,4 +1,4 @@
-import { Text, TextInput, View, StyleSheet, Button, Alert, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Button, Alert, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import DataTable, { COL_TYPES } from 'react-native-datatable-component';
 import React, { useState } from "react";
 import firebase from '../Database/firebaseDB'
@@ -97,7 +97,7 @@ export const ScoreTable = () => {
         ]
     const nameOfCols = ['stundet_name', 'Stundet_id', "score", "Detail_Score"];
     return (
-        <View style={{ top: "5%" }}>
+        <ScrollView style={{ top: "5%" }}>
             <Text style={{ alignSelf: 'center', fontSize: 20 }}>ตารางนักศึกษา </Text>
             <Text style={{ alignSelf: 'center', fontSize: 20 }}>เลือกนักศึกษาเพื่อให้คะแนน ความประพฤติของนักศึกษา </Text>
 
@@ -168,7 +168,7 @@ export const ScoreTable = () => {
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>
-        </View >
+        </ScrollView >
 
     )
 }

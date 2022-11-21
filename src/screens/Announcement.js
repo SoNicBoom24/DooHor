@@ -62,7 +62,7 @@ class Announcement extends Component {
         return (
             < ScrollView style={styles.container} >
                 {this.state.subject_list.map((item, i) => (
-                    <View key={i}>
+                    <View key={i} style={{ marginTop: '5%' }}>
                         <View style={{ display: item.type == 'Register' ? 'flex' : 'none' }}>
                             <Image style={styles.img} source={{ uri: item.image }} />
                             <TouchableOpacity onPress={() => this.ScreenRegister()}>

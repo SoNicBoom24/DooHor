@@ -23,6 +23,7 @@ import Sceeenselect from "../screens/select"
 import firebase from '../Database/firebaseDB'
 import ReadAuth from '../screens/ReadAuth'
 import Table_check from "../screens/Table_check"
+import Create_Announcement from '../screens/Create_Announcement'
 const Stack = createNativeStackNavigator();
 function HomeScreen() {
     return (
@@ -67,24 +68,15 @@ function TestNavigate() {
 
 function NavBar() {
     const linkTo = useNavigation();
-    // const user = firebase.auth().currentUser
-    // console.log(user)
-    // if (check) {
-    // if (user) {
-    //     firebase.firestore()
-    //         .collection('Users')
-    //         .where('uid', '==', uid)
-    //         .get()
-    //         .then(querySnapshot => {
-    //             querySnapshot.forEach((res) => {
-    //                 setUserData(res.data())
-    //             });
-    //         });
-    // }
-    // else {
-    //     alert("ยังไม่ได้ล็อคอิน พาส test1234")
-    // }
-
+    const user = firebase.auth().currentUser
+    if (user) {
+        const uid = firebase.auth().currentUser.uid
+        firebase.firestore().collection("Users").where('uid', '==', uid).where('Role', '==', 'admin').querySnapshot.forEach((res) => {
+            const { Role } = res.data();
+            const isRole = Role;
+        }
+        )
+    }
 
     return (
         <View style={{ backgroundColor: "#FFDA79" }}>
@@ -115,7 +107,7 @@ function NavBar() {
                 </View>
                 <View style={{ display: "flex", flexDirection: "row" }}>
 
-                    {/* สำหรับ admin */}
+
                     {/* {isRole == "admin" &&
                         <Ionicons
                             name="chatbubble-outline"
@@ -123,7 +115,7 @@ function NavBar() {
                             color="black"
                             style={{ position: "absolute", left: -85, top: -13 }}
                             onPress={() => {
-                                linkTo.navigate("ScreenRegister");
+                                linkTo.navigate("");
                             }}
                         />
                         <Octicons 
@@ -145,7 +137,7 @@ function NavBar() {
                         color="black"
                         style={{ position: "absolute", left: -60, top: -13 }}
                         onPress={() => {
-                            linkTo.navigate("Table_check");
+                            linkTo.navigate("ScoreTable");
                         }}
                     />
                     <FontAwesome
@@ -154,7 +146,7 @@ function NavBar() {
                         color={"black"}
                         style={{ position: "absolute", left: -25, top: -13 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenHor");
+                            linkTo.navigate("Create_Announcement");
                         }}
                     />
                 </View>
@@ -166,19 +158,11 @@ function NavBar() {
 
 export default function Navigator() {
 
-    const [user, setUser] = useState(null)
-    useEffect(() => {
-        setInterval(() => {
-
-            setUser(firebase.auth().currentUser)
-        }, 5000)
-        // console.log(user)
-    }, [])
     return (
         <>
             <NavigationContainer>
-                {user ? (<NavBar />) : (<></>)}
-                {/* <NavBar /> */}
+
+                <NavBar />
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="ScreenLogin" component={ScreenLogin} />
                     <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
@@ -196,6 +180,7 @@ export default function Navigator() {
                     <Stack.Screen name="Sceeenselect" component={Sceeenselect} />
                     <Stack.Screen name="ReadAuth" component={ReadAuth} />
                     <Stack.Screen name="Table_check" component={Table_check} />
+                    <Stack.Screen name="Create_Announcement" component={Create_Announcement} />
 
 
                     {/* isSignedIn ? (
