@@ -16,7 +16,7 @@ import Fromdata from '../components/form_information'
 import General from '../components/General';
 ///////////////////////////////////
 const TabBarHeight = 5;
-const HeaderHeight = 600;
+const HeaderHeight = 250;
 const tabitem = (Dimensions.get('window').width - 30) / 2;
 
 const TabScene = ({
@@ -156,6 +156,8 @@ const Profile = () => {
                 <View style={{ overflow: "hidden", paddingLeft: 5 }}>
                     <Text style={{ fontSize: 12 }}>ชื่อนักศึกษา: {userData.first_name} {userData.last_name}</Text>
                     <Text style={{ fontSize: 12 }}>รหัสนักศึกษา: {userData.student_id}</Text>
+                    <Text style={{ fontSize: 12 }}>ห้อง: {userData.room_name}</Text>
+                    <Text style={{ fontSize: 12 }}>คะแนน: {userData.score}</Text>
                 </View>
             </Animated.View>
         );
@@ -319,7 +321,7 @@ const styles = StyleSheet.create({
     },
     img: {
         width: "40%",
-        height: "30%",
+        height: "100%",
         borderRadius: 20,
         flexWrap: 'wrap',
         resizeMode: "cover",

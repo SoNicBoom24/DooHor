@@ -20,7 +20,7 @@ export default class General extends Component {
             const all_data = [];
             firebase.firestore()
                 .collection('office_documents')
-                .where('uid', '==', "LvTaBmip7DUjgaZwLJnWpRIR32o1").where("type", "==", "General")
+                .where('uid', '==', "IAIWBRrWUKfS7PNuFzxsNYseg5n2").where("type", "==", "General")
                 .get()
                 .then(querySnapshot => {
                     querySnapshot.forEach((res) => {

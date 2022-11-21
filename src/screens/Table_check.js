@@ -20,8 +20,8 @@ export default function Table_check() {
             .get()
             .then(querySnapshot => {
                 querySnapshot.forEach((res) => {
-                    const { title, type, uid, picture_from_user } = res.data();
-                    all_data.push({ title: title, type: type, uid: uid, picture_from_user: picture_from_user });
+                    const { title, type, student_name, picture_from_user } = res.data();
+                    all_data.push({ หัวข้อ: title, ประเภท: type, ชื่อนักศึกษา: student_name, picture_from_user: picture_from_user });
                 });
                 setDocument(all_data);
 
@@ -37,12 +37,12 @@ export default function Table_check() {
     // }
     const Settings =
         [
-            { name: 'title', type: COL_TYPES.STRING, },
-            { name: 'type', type: COL_TYPES.STRING, },
-            { name: 'uid', type: COL_TYPES.STRING, },
-            { name: 'Check', type: COL_TYPES.Button, },
+            { name: 'หัวข้อ', type: COL_TYPES.STRING, },
+            { name: 'ประเภท', type: COL_TYPES.STRING, },
+            { name: 'ชื่อนักศึกษา', type: COL_TYPES.STRING, },
+            { name: 'ดูรูปภาพ', type: COL_TYPES.Button, },
         ]
-    const nameOfCols = ['title', 'type', "uid", "Check"];
+    const nameOfCols = ['หัวข้อ', 'ประเภท', "ชื่อนักศึกษา", "ดูรูปภาพ"];
 
     const back = () => {
         setCheck(true)
@@ -70,7 +70,7 @@ export default function Table_check() {
                     data={document}
                     onclick
                     colNames={nameOfCols}
-                    headerLabelStyle={{ color: 'grey', fontSize: 20 }}
+                    headerLabelStyle={{ color: 'grey', fontSize: 10 }}
                     onRowSelect={(row) => {
                         setKeep(row.picture_from_user)
 

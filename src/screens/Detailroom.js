@@ -1,180 +1,158 @@
-import React, { useRef, useState, useEffect } from "react";
-import {
-    View,
-    TouchableOpacity,
-    StyleSheet,
-    Image,
-    ScrollView,
-    Dimensions,
-    Text,
-    SafeAreaView,
-    Button
-} from "react-native";
-import { Card, Title, Paragraph } from 'react-native-paper';
+import React, { useState, useEffect, Component } from 'react';
+import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import firebase from '../Database/firebaseDB'
-
 import { useRoute } from '@react-navigation/native';
+import { Card, Title, Paragraph } from 'react-native-paper';
+import { AntDesign, Feather } from '@expo/vector-icons';
 
-
-
-
-export default function Detailroom({
-    height = "100%",
-    width = Dimensions.get("window").width,
-    delay = 5000,
-}) {
-    const [DATA, SetDATA] = useState([]);
-    const [detaildata, SetDetaildata] = useState([]);
-    const [selectedIndex, setselectedIndex] = useState(0);
-    const scrollView = useRef();
-    const all_data = [];
-    const set = [];
-    const user = firebase.auth().currentUser
+export default function (props) {
     const route = useRoute();
+    return <Detailroom {...props} route={route} />;
+}
+class Detailroom extends Component {
+    constructor() {
+        super();
+        this.subjCollection = firebase.firestore().collection("declaration");
+        this.state = {
+            subject_list: [],
+            image_list: [],
+            student_list: [],
+            Text_stundent_list: [],
+            state_list: []
 
-    if (true) {
+        };
+    }
+    getCollection = () => {
+        const { route } = this.props;
+        const all_data = [];
+
         firebase.firestore()
             .collection('Room')
             .where('RoomName', '==', route.params.Roomname)
             .get()
             .then(querySnapshot => {
                 querySnapshot.forEach((res) => {
-                    const { RoomName, building, desc, floor, id, image_room, price, student, state } = res.data();
-                    all_data.push({ RoomName: RoomName, building: building, floor: floor, image_room: image_room, state: state, desc: desc, id: id, desc: desc, price: price, student: student });
+                    const { RoomName, building, desc, floor, id, image_room, price, student, state, Text_stundent } = res.data();
+                    all_data.push({ RoomName: RoomName, building: building, floor: floor, image_room: image_room, state: state, desc: desc, id: id, desc: desc, price: price, student: student, Text_stundent: Text_stundent });
                 });
-                {
-                    all_data[0].image_room.forEach(d => {
-                        set.push({
-                            image: d,
+                this.setState({ subject_list: all_data, });
+                this.setState({ image_list: all_data[0].image_room, });
+                this.setState({ student_list: all_data[0].student, });
+                this.setState({ Text_stundent_list: all_data[0].Text_stundent, });
+                this.setState({ state_list: all_data[0].state, });
 
-                        })
-                    })
-
-                    SetDATA(set)
-                    SetDetaildata(all_data)
-
-                }
             });
-    }
-    else {
-    }
-
-    useEffect(() => {
-        const fn = setInterval(() => {
-            setselectedIndex((oldCount) =>
-                oldCount === DATA.length - 1 ? 0 : oldCount + 1
-            );
-        }, delay);
-        return () => {
-            clearInterval(fn);
-        };
-    }, []);
-
-    // Script will executed every time selectedIndex updates
-    useEffect(() => {
-        scrollView.current.scrollTo({
-            animated: true,
-            x: width * selectedIndex,
-            y: 0,
-        });
-    }, [selectedIndex]);
-
-    const setIndex = (event) => {
-        const contentOffset = event.nativeEvent.contentOffset;
-        const viewSize = event.nativeEvent.layoutMeasurement;
-
-        // Divide the horizontal offset by the width of the view to see which page is visible
-        setselectedIndex(Math.floor(contentOffset.x / viewSize.width));
     };
+    componentDidMount() {
+        this.unsubscribe =
+            this.subjCollection.onSnapshot(this.getCollection);
+        // alert(this.props.id)
 
+    }
+    componentWillUnmount() {
+        this.unsubscribe();
 
-    return (
-        <View style={{ backgroundColor: "#FFDA79" }}>
-            <ScrollView
-                ref={scrollView}
-                horizontal
-                pagingEnabled
-                onMomentumScrollEnd={setIndex}
-                onContentSizeChange={() => scrollView.current.scrollToEnd()}
+    }
+    addinRoom() {
 
-            >
-                <View style={styles.carousalContainer} >
-                    {DATA.map((item, index) => (
-                        <TouchableOpacity
-                            key={index}
-                            style={{ height: height, width: width }}
-                        >
-                            <Image source={{ uri: item.image }} style={[styles.image, { height: height }]} />
-
-                        </TouchableOpacity>
-                    ))}
-                </View>
-            </ScrollView >
-            <View style={{ alignItems: "center", marginTop: 30, marginBottom: 30, }}>
-                {detaildata.map((item, i) => (
-                    <View key={i}>
-
-                        <Text style={{ fontSize: 25 }}>
-                            {item.desc}
-                        </Text>
+    }
+    render() {
+        return (
+            < ScrollView style={styles.container} >
+                {this.state.image_list.map((item, i) => (
+                    <View key={i} style={{
+                        backgroundColor: "white",
+                        height: 200,
+                        width: '90%',
+                        overflow: "hidden",
+                        borderRadius: 20,
+                        alignSelf: "center",
+                        marginBottom: 20,
+                    }}>
+                        <Image source={{ uri: item }} style={{height: 200}}>
+                        </Image>
                     </View>
+
                 ))}
-            </View>
 
-            <View style={{ alignItems: "center", height: "63%" }}>
-                <Button
+                {this.state.subject_list.map((item, i) => (
+                    <View key={i} style={{ marginTop: 10 }}>
+                        <View>
+                            <SafeAreaView style={styles.description}>
+                                <Text style={{ padding: 10, textAlign: 'center' }}>
+                                    รายละเอียดห้องพัก
+                                </Text>
+                                <Text style={{ padding: 10 }}>
+                                    {item.desc}
+                                </Text>
+
+                            </SafeAreaView>
+                        </View>
+                    </View>
+
+                ))}
+
+                <View style={{ alignItems: "center", marginBottom: 20, }}>
+
+                    <Card style={{
+                        borderRadius: 15, width: "95%", marginBottom: 10,
+                    }} >
+
+                        <Card.Content
+                        ><Title style={{ fontSize: 15, textAlign: 'center' }}>รายชื่อนักศึกษา </Title>
+                            {this.state.student_list.map((item, i) => (
+                                <Paragraph key={i} style={{ fontSize: 15 }}>{i + 1}. {item}</Paragraph>
+
+                            ))}
+                            <Title style={{ fontSize: 15, textAlign: 'center' }}>คำแนะนำตัว </Title>
+                            {this.state.Text_stundent_list.map((item, i) => (
+                                <Paragraph key={i} style={{ fontSize: 15 }}>{i + 1}. {item}</Paragraph>
+                            ))}
+                            <Title style={{ fontSize: 15, textAlign: 'center' }}>สถานะ </Title>
+                            {this.state.state_list.map((item, i) => (
+                                <View key={i} style={{flexDirection: "row"}}>
+                                    <Paragraph  style={{ fontSize: 15 }}>{i + 1}. {item}</Paragraph>
+                                    <Text style={{color: "green", marginLeft: 10, marginTop: 2, display: item == "confirm" ? "none" : "flex"}}  >ยืนยัน</Text>
+                                    <Text style={{color: "red", marginLeft: 10, marginTop: 2}}  >ยกเลิก</Text>
+                                </View>
+                            ))}
+                        </Card.Content>
+
+                    </Card>
+                    <Button
+                        title="ลงชื่อเข้าหอพัก"
+                        color="#594545"
+                        onPress={() => this.addinRoom()}
+                    />
+
+                </View>
+
+            </ScrollView>
 
 
-                    title="ลงชื่อเข้าหอพัก"
-                    color="#594545"
-                />
-                <Card style={{
-                    borderRadius: 15, width: "95%", marginBottom: 10, marginTop: 50
-                }} >
-                    <Card.Content>
-                        <Title>นายกิตติภพ ปังตระกูล</Title>
-                        <Paragraph style={{ fontSize: 20 }}>คณะ IT เวลาเรียนช่วง 12.00 - 18.00</Paragraph>
-                        <Paragraph style={{ fontSize: 20 }}>สถานะ</Paragraph>
-                    </Card.Content>
-                </Card>
-
-            </View>
-
-        </View>
-    );
-
-
+        );
+    }
 
 }
+
 const styles = StyleSheet.create({
-    carousalContainer: {
-        flexDirection: "row",
-        width: "100%",
+    container: {
+        flex: 1,
+        backgroundColor: "#FFDA79",
+        width: "100%"
     },
 
-    item: {
-        backgroundColor: "rgba(91, 91, 91, 0.3)",
-        marginVertical: 8,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    titleContainer: {
-        position: "absolute",
-        bottom: 10,
-        width: "100%",
-        paddingLeft: 10,
-        backgroundColor: "rgba(0, 0, 0, 0.4)",
-    },
-    title: {
-        fontSize: 28,
-        color: '#fff',
-        fontWeight: "bold",
-    },
-    subtitle: {
-        color: '#fff',
-    },
-    image: {
-        width: Dimensions.get("window").width,
-        height: 500,
-    },
+    description: {
+        backgroundColor: "white",
+        borderRadius: 20,
+        width: "90%",
+        height: "100%",
+        alignSelf: "center",
+        flex: 1,
+        marginBottom: 30,
+        borderRadius: 15,
+        elevation: 15,
+        padding: 10,
+    }
+
 });

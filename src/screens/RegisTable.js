@@ -4,6 +4,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { Card, Title, Paragraph, TextInput } from 'react-native-paper';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 import React, { useState, useEffect } from "react";
 import firebase from '../Database/firebaseDB'
@@ -20,14 +21,14 @@ export default function RegisTable() {
 
     const all_data = []
     const user = firebase.auth().currentUser
-    if (user) {
+    if (true) {
         firebase.firestore()
             .collection('DataRegister')
             .get()
             .then(querySnapshot => {
                 querySnapshot.forEach((res) => {
                     const { firstName, lasstName, student_id, e_mail, age, alley_lane, bit, faculty, houseNo, imgHouse, imgIdCard, imgSelfie, moo, postCode, province, sex, district, subDistrict, village, year, Reason, score } = res.data();
-                    all_data.push({ stundet_name: firstName + " " + lasstName, Stundet_id: student_id, e_mail: e_mail, age: age, sex: sex, Reason: Reason, imgHouse: imgHouse, imgIdCard: imgIdCard, imgSelfie: imgSelfie, address: houseNo + " " + moo + " " + village + " " + alley_lane + " " + subDistrict + " " + district + " " + province + " " + postCode, education: "คณะ : " + faculty + " สาขา : " + bit + " ปี : " + year, uid: res.id, score: score });
+                    all_data.push({ ชื่อนักศึกษา: firstName + " " + lasstName, รหัสนักศึกษา: student_id, e_mail: e_mail, age: age, sex: sex, Reason: Reason, imgHouse: imgHouse, imgIdCard: imgIdCard, imgSelfie: imgSelfie, address: houseNo + " " + moo + " " + village + " " + alley_lane + " " + subDistrict + " " + district + " " + province + " " + postCode, education: "คณะ : " + faculty + " สาขา : " + bit + " ปี : " + year, uid: res.id, คะแนน: score });
                 });
                 setuserdata(all_data);
 
@@ -37,20 +38,20 @@ export default function RegisTable() {
     }
     // let data_table = userdata
     // if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
-    //     data_table = userdata.filter(x => String(x.Stundet_id).includes(text));
+    //     data_table = userdata.filter(x => String(x.รหัสนักศึกษา).includes(text));
     // }
     // else {
-    //     data_table = userdata.filter(x => String(x.stundet_name).includes(text));
+    //     data_table = userdata.filter(x => String(x.ชื่อนักศึกษา).includes(text));
 
     // }
     const Settings =
         [
-            { name: 'stundet_name', type: COL_TYPES.STRING, },
-            { name: 'Stundet_id', type: COL_TYPES.STRING, },
-            { name: 'score', type: COL_TYPES.STRING, },
-            { name: 'choose', type: COL_TYPES.Button, },
+            { name: 'ชื่อนักศึกษา', type: COL_TYPES.STRING, },
+            { name: 'รหัสนักศึกษา', type: COL_TYPES.STRING, },
+            { name: 'คะแนน', type: COL_TYPES.STRING, },
+            { name: 'เลือกให้คะแนน', type: COL_TYPES.Button, },
         ]
-    const nameOfCols = ['stundet_name', 'Stundet_id', "score", "choose"];
+    const nameOfCols = ['ชื่อนักศึกษา', 'รหัสนักศึกษา', "คะแนน", "เลือกให้คะแนน"];
 
     const add = () => {
         const db = firebase.firestore();
@@ -75,42 +76,46 @@ export default function RegisTable() {
     }
 
     return (
-        <View style={{ top: "5%" }}>
+        <View style={{ paddingTop: "5%", backgroundColor: "#FFDA79", height: "100%" }}>
+            {/* <ScrollView style={{width: "100%", height: "100%" }}> */}
+                <View style={{ display: check ? 'flex' : 'none', width: "100%" }} >
+                    <View style={{ flexDirection: "row", alignSelf: 'center', }}>
+                        <FontAwesome5 name="user-graduate" size={24} color="black" />
+                        <Text style={{ fontSize: 20, paddingLeft: 5 }}>ตารางนักศึกษา </Text>
+                    </View>
+                    <Text style={{ fontSize: 15, marginTop: 10, alignSelf: "center" }}>สำหรับ ให้คะแนนการสมัครเข้าเป็นสมาชิกหอพักของนักศึกษา</Text>
 
-            <View style={{ display: check ? 'flex' : 'none', width: "100%" }} >
-                <Text style={{ alignSelf: 'center', fontSize: 20 }}>ตารางนักศึกษา</Text>
-                <Text style={{ alignSelf: 'center', fontSize: 20 }}>สำหรับ ให้คะแนนการสมัครเข้าเป็นสมาชิกหอพักของนักศึกษา</Text>
+                    <TextInput placeholder="ชื่อหรือรหัสนักศึกษา" style={styles.input}
+                        onChangeText={onChangeText}
+                        value={text}
+                    />
+                    <DataTable
 
-                <TextInput placeholder="ชื่อหรือรหัสนักศึกษา" style={styles.input}
-                    onChangeText={onChangeText}
-                    value={text}
-                />
-                <DataTable
+                        colSettings={Settings}
+                        noOfPages="1"
+                        data={userdata}
+                        onclick
+                        colNames={nameOfCols}
+                        headerLabelStyle={{ color: 'grey', fontSize: 10 }}
+                        onRowSelect={(row) => {
+                            setCheck(false)
+                            setUsersChoose(row)
+                        }}
+                    />
 
-                    colSettings={Settings}
-                    noOfPages="1"
-                    data={userdata}
-                    onclick
-                    colNames={nameOfCols}
-                    headerLabelStyle={{ color: 'grey', fontSize: 20 }}
-                    onRowSelect={(row) => {
-                        setCheck(false)
-                        setUsersChoose(row)
-                    }}
-                />
-
-            </View>
+                </View>
+            {/* </ScrollView> */}
             <ScrollView style={{ borderRadius: 10, alignSelf: 'center', display: check ? 'none' : 'flex' }}>
 
                 <Card style={{
-                    padding: 20, borderRadius: 15,
+                    padding: 20,
+                    borderRadius: 15,
                     elevation: 15,
                     padding: 10,
                     width: "90%",
                     alignSelf: 'center',
-                    marginTop: "8%",
                     marginBottom: "8%",
-                    backgroundColor: "#FFDA79"
+                    backgroundColor: "#FFB053"
                 }}>
                     <Card.Content>
                         <Title style={{ alignSelf: 'center' }}>ข้อมูลรายละเอียดนักศึกษา</Title>
@@ -136,7 +141,7 @@ export default function RegisTable() {
                     alignSelf: 'center',
                     marginTop: "5%",
                     marginBottom: "8%",
-                    backgroundColor: "#FFDA79"
+                    backgroundColor: "#FFB053"
 
                 }}>
                     <Card.Content>
@@ -145,28 +150,28 @@ export default function RegisTable() {
                             label="เหตุผลการสมัคร (เต็ม 25)"
                             value={valueA}
                             onChangeText={Number => setValueA(Number)}
-                            style={{ width: "100%", marginTop: "5%", alignSelf: "center" }}
+                            style={{ width: "100%", marginTop: "5%", alignSelf: "center", height: 40 }}
 
                         />
                         <TextInput
                             label="ระยะทางบ้าน (เต็ม 25)"
                             value={valueB}
                             onChangeText={Number => setValueB(Number)}
-                            style={{ width: "100%", marginTop: "5%", alignSelf: "center" }}
+                            style={{ width: "100%", marginTop: "5%", alignSelf: "center", height: 40 }}
 
                         />
                         <TextInput
                             label="ทุนการศึกษา (เต็ม 25)"
                             value={valueC}
                             onChangeText={Number => setValueC(Number)}
-                            style={{ width: "100%", marginTop: "5%", alignSelf: "center" }}
+                            style={{ width: "100%", marginTop: "5%", alignSelf: "center", height: 40 }}
 
                         />
                         <TextInput
                             label="ความเห็นจากคณะ (เต็ม 25)"
                             value={valueD}
                             onChangeText={Number => setValueD(Number)}
-                            style={{ width: "100%", marginTop: "5%", alignSelf: "center" }}
+                            style={{ width: "100%", marginTop: "5%", alignSelf: "center", height: 40 }}
 
                         />
 
@@ -201,10 +206,14 @@ export default function RegisTable() {
 }
 const styles = StyleSheet.create({
     input: {
-        height: 40,
+        height: 20,
+        width: "60%",
         margin: 15,
-        borderWidth: 1,
-        padding: 10,
-        width: "20%",
+        borderWidth: 2,
+        borderColor: "#FFB053",
+        padding: 5,
+        backgroundColor: "white",
+        borderRadius: 10,
+        overflow: "hidden"
     },
 });

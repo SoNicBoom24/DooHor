@@ -26,8 +26,8 @@ class CardHor extends Component {
                 .get()
                 .then(querySnapshot => {
                     querySnapshot.forEach((res) => {
-                        const { building, price, type, sex, desc } = res.data();
-                        all_data.push({ building: building, price: price, type: type, desc: desc, sex: sex });
+                        const { building, price, type, sex, desc, image } = res.data();
+                        all_data.push({ building: building, price: price, type: type, desc: desc, sex: sex, image: image });
                     });
                     this.setState({ subject_list: all_data, });
                 });
@@ -61,7 +61,7 @@ class CardHor extends Component {
                     <View key={i}>
                         <TouchableOpacity style={styles.container} onPress={() => this.choose(item.building)}>
                             <View style={{flexDirection: "row", width: "100%"}}>
-                                <Image style={styles.img} source={{ uri: "https://picsum.photos/200" }} />
+                                <Image style={styles.img} source={{ uri: item.image }} />
                                 <View style={{flexDirection: "column", left: 20, top: 10}}>
                                     <View style={{flexDirection: "row"}}>
                                         <Text style={{ fontSize: 20, fontWeight: "bold", paddingBottom: 5}}>หอ : {item.building}</Text>
@@ -72,15 +72,6 @@ class CardHor extends Component {
                                     <Text style={{ fontSize: 15, color: "gray", left: "45%" }}>รายละเอียดหอพัก</Text>
                                 </View>
                             </View>
-                            {/* <Image style={styles.img} source={{ uri: "https://picsum.photos/200" }} />
-                            <View style={{ position: "absolute", left: 150, top: 10, overflow: "hidden" }}>
-                            </View>
-                            <View style={{ position: "absolute", right: 40, top: 15, overflow: "hidden" }}>
-                                <Text style={{ fontSize: 15 }}>ช่วงราคา {item.price} เพศ : {item.sex} ประเภท : {item.type}</Text>
-                            </View>
-                            <View style={{ position: "absolute", right: 40, bottom: 20, overflow: "hidden" }}>
-                                <Text style={{ fontSize: 15, color: "gray" }}>{item.desc}</Text>
-                            </View> */}
                         </TouchableOpacity>
                     </View>
                 ))

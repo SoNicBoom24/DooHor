@@ -17,9 +17,9 @@ export const ScoreTable = () => {
     const all_data = [];
 
     const alltype = ['เพิ่มคะแนน', 'ลดคะแนน'];
-
+    const [keep, setKeep] = useState("");
     const user = firebase.auth().currentUser
-    if (user) {
+    if (true) {
         firebase.firestore()
             .collection('Users')
             .where('Role', '==', 'user')
@@ -27,7 +27,7 @@ export const ScoreTable = () => {
             .then(querySnapshot => {
                 querySnapshot.forEach((res) => {
                     const { first_name, last_name, score, student_id, score_details, } = res.data();
-                    all_data.push({ stundet_name: first_name + " " + last_name, Stundet_id: student_id, score: score, score_details: score_details, uid: res.id });
+                    all_data.push({ รายชื่อนักศึกษา: first_name + " " + last_name, รหัสนักศึกษา: student_id, คะแนน: score, score_details: score_details, uid: res.id });
                 });
                 setuserdata(all_data);
             });
@@ -86,20 +86,19 @@ export const ScoreTable = () => {
     }
     const back = () => {
         setUid_edit('')
-        setName('')
+        setKeep('')
     }
     const Settings =
         [
-            { name: 'stundet_name', type: COL_TYPES.STRING, },
-            { name: 'Stundet_id', type: COL_TYPES.STRING, },
-            { name: 'score', type: COL_TYPES.INT, },
-            { name: 'Detail_Score', type: COL_TYPES.Button, },
+            { name: 'รายชื่อนักศึกษา', type: COL_TYPES.STRING, },
+            { name: 'รหัสนักศึกษา', type: COL_TYPES.STRING, },
+            { name: 'คะแนน', type: COL_TYPES.STRING, },
+            { name: 'รายละเอียดการให้คะแนน', type: COL_TYPES.Button, },
         ]
-    const nameOfCols = ['stundet_name', 'Stundet_id', "score", "Detail_Score"];
+    const nameOfCols = ['รายชื่อนักศึกษา', 'รหัสนักศึกษา', "คะแนน", "รายละเอียดการให้คะแนน"];
     return (
-        <ScrollView style={{ top: "5%" }}>
-            <Text style={{ alignSelf: 'center', fontSize: 20 }}>ตารางนักศึกษา </Text>
-            <Text style={{ alignSelf: 'center', fontSize: 20 }}>เลือกนักศึกษาเพื่อให้คะแนน ความประพฤติของนักศึกษา </Text>
+        <ScrollView style={{ flex: 1, backgroundColor: '#FFDA79' }}>
+
 
             <TextInput placeholder="ชื่อหรือรหัสนักศึกษา" style={styles.input}
                 onChangeText={onChangeText}
@@ -111,19 +110,21 @@ export const ScoreTable = () => {
                     noOfPages="1"
                     onRowSelect={(row) => {
                         Detail(row);
+                        setKeep(row.รายชื่อนักศึกษา)
                     }}
+                    backgroundColor=""
                     data={userdata}
                     colNames={nameOfCols}
-                    headerLabelStyle={{ color: 'grey', fontSize: 20 }}
+                    headerLabelStyle={{ color: 'grey', fontSize: 10 }}
 
                 />
             </View>
-            <SafeAreaView style={{ width: "90%", backgroundColor: "#FFDA79", borderRadius: 10, alignSelf: 'center' }}>
+            <SafeAreaView style={{ width: "90%", backgroundColor: "#FFB053", borderRadius: 10, alignSelf: 'center', marginBottom: 20, overflow: "hidden" }}>
                 <View style={{ padding: 20 }}>
                     <Text style={{ padding: 20, fontSize: 18, alignSelf: 'center' }}> กรอกข้อมูลสำหรับ การให้คะแนนนักศึกษา</Text>
-                    <View>
+                    <View style={{width: "90%"}}>
                         <Text style={{ padding: 20, fontSize: 18, display: uid_edit == '' ? 'flex' : 'none', alignSelf: 'center' }}> โปรดเลือกนักศึกษา ที่ให้คะแนน</Text>
-                        <Text style={{ padding: 20, fontSize: 18, display: uid_edit != '' ? 'flex' : 'none', alignSelf: 'center' }}> นักศึกษาที่เลือก : {name}</Text>
+                        <Text style={{ padding: 20, fontSize: 18, display: uid_edit != '' ? 'flex' : 'none', alignSelf: 'center' }}> นักศึกษาที่เลือก : {keep}</Text>
 
                         <TouchableOpacity style={{ display: uid_edit != '' ? 'flex' : 'none' }} onPress={back} >
                             <View style={{ backgroundColor: "red", padding: 5, borderRadius: 10, width: "10%", alignSelf: "center", marginVertical: 10 }}>
@@ -136,24 +137,25 @@ export const ScoreTable = () => {
 
                     </View>
                     <TextInput
-                        style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "30%", alignSelf: 'center', marginTop: "2.5%" }}
+                        style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "60%", alignSelf: 'center', marginTop: "2.5%", textAlign: 'center',borderWidth: 1 }}
                         placeholder="รายละเอียดการให้คะแนน"
                         onChangeText={(score_details) => setaddDetail_score(score_details)}
                         value={adddetail_score} />
 
 
                     <TextInput
-                        style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "20%", alignSelf: 'center', marginTop: "2.5%" }}
-                        placeholder="คะแนนที่ให้"
+                        style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "60%", alignSelf: 'center', marginTop: "2.5%", textAlign: 'center',borderWidth: 1 }}
+                        placeholder="จำนวนคะแนน"
+                        keyboardType="numeric"
                         onChangeText={(score) => setScore_input(score)}
                         value={Score_input} />
 
                     <ModalDropdown options={alltype}
                         defaultValue={"ประเภท ของการให้คะแนน"}
-                        textStyle={{ paddingLeft: 5, paddingBottom: 5, fontSize: 14, paddingTop: 3 }}
-                        dropdownStyle={{ width: "15%", borderRadius: 10, backgroundColor: "white", height: 70, overflow: "hidden" }}
-                        defaultTextStyle={{ color: "#Bbbbbd" }}
-                        style={{ backgroundColor: "white", borderRadius: 10, width: "18%", alignSelf: "center", marginTop: "2.5%" }}
+                        textStyle={{fontSize: 14}}
+                        dropdownStyle={{ width: "50%", borderRadius: 10, backgroundColor: "white", height: 70, overflow: "hidden", marginTop: -23 }}
+                        defaultTextStyle={{ color: "#Bbbbbd", paddingHorizontal: 10}}
+                        style={{ backgroundColor: "white", borderRadius: 10, width: "60%", alignSelf: "center", marginTop: "2.5%", textAlign: 'center',borderWidth: 1, padding: 5}}
                         onSelect={(type) => setSelecttype(alltype[type])}
                         value={selecttype}
 
@@ -161,7 +163,7 @@ export const ScoreTable = () => {
 
                     <TouchableOpacity onPress={add} >
                         <View style={{ backgroundColor: "#77CF32", padding: 5, borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10, marginTop: "2.5%" }}>
-                            <Text style={{ color: "white", alignSelf: "center", fontSize: 16 }}>
+                            <Text style={{ color: "white", alignSelf: "center", fontSize: 16, }}>
                                 ยืนยันการ เพิ่มข้อมูลคะแนนนักศึกษา
                             </Text>
                         </View>
@@ -178,8 +180,10 @@ const styles = StyleSheet.create({
         margin: 15,
         borderWidth: 1,
         padding: 10,
-        width: "20%",
+        width: "40%",
+        backgroundColor: "white",
+        borderRadius: 10,
+        borderColor: "#FFB053"
     },
 });
 export default ScoreTable;
-

@@ -25,46 +25,6 @@ import ReadAuth from '../screens/ReadAuth'
 import Table_check from "../screens/Table_check"
 import Create_Announcement from '../screens/Create_Announcement'
 const Stack = createNativeStackNavigator();
-function HomeScreen() {
-    return (
-        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#FFDA79" }}>
-            <Text>Home Screen</Text>
-        </View>
-    );
-}
-
-function ChatScreen() {
-    return (
-        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#FFDA79" }}>
-            <Text>Chat Screen</Text>
-            {/* <Button
-        title="Go back to first screen in stack"
-        onPress={() => navigation.popToTop()}
-      /> */}
-        </View>
-    );
-}
-
-function ProfileScreen() {
-    return (
-        <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#FFDA79", }}>
-            <Text>Profile Screen</Text>
-            {/* <Button
-        title="Go back to first screen in stack"
-        onPress={() => navigation.navigate("Home")}
-      /> */}
-        </View>
-    );
-}
-
-function TestNavigate() {
-    return (
-        // <View>
-        //     <Text>Hello</Text>
-        // </View>
-        <ScreenNotification></ScreenNotification>
-    );
-}
 
 function NavBar() {
     const linkTo = useNavigation();
@@ -98,7 +58,7 @@ function NavBar() {
             >
                 <View style={{ display: "flex", flexDirection: "row" }}>
                     <TouchableOpacity style={{ position: "absolute", top: -16 }}
-                        onPress={() => { linkTo.navigate("ScreenMain"); }}>
+                        onPress={() => { linkTo.navigate("ScreenAnnoucement"); }}>
                         <Image
                             source={imgDooHor}
                             style={{ resizeMode: "contain", width: 100, height: 35 }}
@@ -130,23 +90,58 @@ function NavBar() {
                             style={{ position: "absolute", left: -25, top: -13 }}
                         />
                     } */}
+                    {/* <Ionicons
+                        name="chatbubble-outline"
+                        size={24}
+                        color="black"
+                        style={{ position: "absolute", left: -80, top: -13 }}
+                        onPress={() => {
+                            linkTo.navigate("ReadAuth");
+                        }}
+                    />
+                    <MaterialIcons 
+                        name="edit" size={25} 
+                        color="black" 
+                        style={{ position: "absolute", left: -55, top: -13 }}
+                        onPress={() => {
+                            linkTo.navigate("ScreenNotification");
+                        }}
+                    />
+                    <Ionicons 
+                        name="md-exit-outline" 
+                        size={24} 
+                        color="black" 
+                        style={{ position: "absolute", left: -25, top: -13 }}
+                        onPress={() => {
+                            linkTo.navigate("ScreenAnnoucement");
+                        }}
+                    /> */}
 
                     <Ionicons
                         name="chatbubble-outline"
                         size={24}
                         color="black"
-                        style={{ position: "absolute", left: -60, top: -13 }}
+                        style={{ position: "absolute", left: -80, top: -13 }}
                         onPress={() => {
-                            linkTo.navigate("ScreenProflie");
+                            linkTo.navigate("ScreenSendOffice_Documents");
                         }}
                     />
                     <FontAwesome
                         name="user"
                         size={25}
                         color={"black"}
+                        style={{ position: "absolute", left: -50, top: -13 }}
+                        onPress={() => {
+                            linkTo.navigate("ScreenProflie");
+                        }}
+                    />
+                    <Ionicons 
+                        name="md-exit-outline" 
+                        size={24} 
+                        color="black" 
                         style={{ position: "absolute", left: -25, top: -13 }}
                         onPress={() => {
-                            linkTo.navigate("Create_Announcement");
+                            linkTo.navigate("ScreenRegisTable");
                         }}
                     />
                 </View>
@@ -174,7 +169,6 @@ export default function Navigator() {
                     <Stack.Screen name="ScreenLogin" component={ScreenLogin} />
                     <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
                     <Stack.Screen name="ScreenHor" component={ScreenHor} />
-                    <Stack.Screen name="ScreenMain" component={TestNavigate} />
                     <Stack.Screen name="ScreenRegister" component={ScreenRegister} />
                     <Stack.Screen name="ScoreTable" component={ScoreTable} />
                     <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
@@ -188,27 +182,6 @@ export default function Navigator() {
                     <Stack.Screen name="ReadAuth" component={ReadAuth} />
                     <Stack.Screen name="Table_check" component={Table_check} />
                     <Stack.Screen name="Create_Announcement" component={Create_Announcement} />
-
-
-                    {/* isSignedIn ? (
-                    <>
-                    <Stack.Screen name="ScreenNotification" component={ScreenNotification} />
-                    <Stack.Screen name="ScreenHor" component={ScreenHor} />
-                    <Stack.Screen name="ScreenMain" component={TestNavigate} />
-                    <Stack.Screen name="ScreenRegister" component={ScreenRegister} />
-    
-                    <Stack.Screen name="ScreenDetailroom" component={ScreenDetailroom} />
-                    <Stack.Screen name="ScreenProflie" component={ScreenProflie} />
-                    </>
-                ) : (
-                    <>
-                        <Stack.Screen name="ScreenLogin" component={ScreenLogin} />
-                    </>
-                ) */}
-
-
-
-
                 </Stack.Navigator>
             </NavigationContainer>
         </>
