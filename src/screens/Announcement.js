@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Component } from 'react';
 import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import firebase from '../Database/firebaseDB'
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 
 
 export default function (props) {
@@ -61,6 +61,7 @@ class Announcement extends Component {
     render() {
         return (
             < ScrollView style={styles.container} >
+                <Text>{this.props.id}</Text>
                 {this.state.subject_list.map((item, i) => (
                     <View key={i} style={{ marginTop: '5%' }}>
                         <View style={{ display: item.type == 'Register' ? 'flex' : 'none' }}>

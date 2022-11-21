@@ -33,6 +33,7 @@ class GeneralTopic extends Component {
     componentDidMount() {
         this.unsubscribe =
             this.subjCollection.onSnapshot(this.getCollection);
+        // alert(this.props.id)
     }
     componentWillUnmount() {
         this.unsubscribe();
@@ -43,6 +44,7 @@ class GeneralTopic extends Component {
         return (
 
             < ScrollView style={styles.container} >
+                <Text>{this.props.id}</Text>
                 {this.state.subject_list.map((item, i) => (
                     <View key={i}>
 
