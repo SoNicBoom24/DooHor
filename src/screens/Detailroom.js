@@ -97,7 +97,8 @@ class Detailroom extends Component {
     confirm() {
         const db = firebase.firestore();
         db.collection("Room").doc(this.state.Roomid).update({
-            state: firebase.firestore.FieldValue.arrayRemove("wait")
+            state: firebase.firestore.FieldValue.arrayUnion("fail"),
+            state: firebase.firestore.FieldValue.arrayRemove("confirm")
         })
         alert("ยืนยันการจองห้องพักสำเร็จ");
     }
