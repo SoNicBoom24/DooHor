@@ -60,7 +60,7 @@ class GeneralTopic extends Component {
                                     {item.all_desc}
                                 </Text>
                             </SafeAreaView>
-                            <FontAwesome name="trash" size={24} color="black" style={{bottom: 0, alignSelf: "center"}} />
+                            <FontAwesome name="trash" size={24} color="black" style={{ bottom: 0, alignSelf: "center" }} />
                         </View>
                     </View>
 

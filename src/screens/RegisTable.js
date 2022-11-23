@@ -59,6 +59,7 @@ export default function RegisTable() {
         db.collection("DataRegister").doc(userschoose.uid).update({
             score: score
         })
+        alert('เพิ่มคะแนนสำเร็จ')
         setValueA(0)
         setValueB(0)
         setValueC(0)
@@ -78,32 +79,32 @@ export default function RegisTable() {
     return (
         <View style={{ paddingTop: "5%", backgroundColor: "#FFDA79", height: "100%" }}>
             {/* <ScrollView style={{width: "100%", height: "100%" }}> */}
-                <View style={{ display: check ? 'flex' : 'none', width: "100%" }} >
-                    <View style={{ flexDirection: "row", alignSelf: 'center', }}>
-                        <FontAwesome5 name="user-graduate" size={24} color="black" />
-                        <Text style={{ fontSize: 20, paddingLeft: 5 }}>ตารางนักศึกษา </Text>
-                    </View>
-                    <Text style={{ fontSize: 15, marginTop: 10, alignSelf: "center" }}>สำหรับ ให้คะแนนการสมัครเข้าเป็นสมาชิกหอพักของนักศึกษา</Text>
-
-                    <TextInput placeholder="ชื่อหรือรหัสนักศึกษา" style={styles.input}
-                        onChangeText={onChangeText}
-                        value={text}
-                    />
-                    <DataTable
-
-                        colSettings={Settings}
-                        noOfPages="1"
-                        data={userdata}
-                        onclick
-                        colNames={nameOfCols}
-                        headerLabelStyle={{ color: 'grey', fontSize: 10 }}
-                        onRowSelect={(row) => {
-                            setCheck(false)
-                            setUsersChoose(row)
-                        }}
-                    />
-
+            <View style={{ display: check ? 'flex' : 'none', width: "100%" }} >
+                <View style={{ flexDirection: "row", alignSelf: 'center', }}>
+                    <FontAwesome5 name="user-graduate" size={24} color="black" />
+                    <Text style={{ fontSize: 20, paddingLeft: 5 }}>ตารางนักศึกษา </Text>
                 </View>
+                <Text style={{ fontSize: 15, marginTop: 10, alignSelf: "center" }}>สำหรับ ให้คะแนนการสมัครเข้าเป็นสมาชิกหอพักของนักศึกษา</Text>
+
+                <TextInput placeholder="ชื่อหรือรหัสนักศึกษา" style={styles.input}
+                    onChangeText={onChangeText}
+                    value={text}
+                />
+                <DataTable
+
+                    colSettings={Settings}
+                    noOfPages="1"
+                    data={userdata}
+                    onclick
+                    colNames={nameOfCols}
+                    headerLabelStyle={{ color: 'grey', fontSize: 10 }}
+                    onRowSelect={(row) => {
+                        setCheck(false)
+                        setUsersChoose(row)
+                    }}
+                />
+
+            </View>
             {/* </ScrollView> */}
             <ScrollView style={{ borderRadius: 10, alignSelf: 'center', display: check ? 'none' : 'flex' }}>
 
@@ -119,8 +120,8 @@ export default function RegisTable() {
                 }}>
                     <Card.Content>
                         <Title style={{ alignSelf: 'center' }}>ข้อมูลรายละเอียดนักศึกษา</Title>
-                        <Paragraph style={{ marginTop: "5%" }}>ชื่อนักศึกษา : {userschoose.stundet_name} </Paragraph>
-                        <Paragraph>รหัสนักศึกษา : {userschoose.Stundet_id} </Paragraph>
+                        <Paragraph style={{ marginTop: "5%" }}>ชื่อนักศึกษา : {userschoose.ชื่อนักศึกษา} </Paragraph>
+                        <Paragraph>รหัสนักศึกษา : {userschoose.รหัสนักศึกษา} </Paragraph>
                         <Paragraph>อายุ : {userschoose.age} เพศ : {userschoose.sex} </Paragraph>
                         <Paragraph>ปัจจุบันกำลังศึกษา : {userschoose.education}</Paragraph>
                         <Paragraph>อีเมลล์ : {userschoose.e_mail}</Paragraph>

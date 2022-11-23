@@ -31,24 +31,26 @@ export default class ReadAuth extends Component {
         return (
             < ScrollView style={styles.container} >
                 {this.state.subject_list.map((item, i) => (
-                    <View key={i}>
-                        <Card style={{
-                            borderRadius: 15,
-                            elevation: 15,
-                            padding: 10,
-                            width: "90%",
-                            alignSelf: 'center',
-                            marginTop: "8%",
-                        }}>
-                            <Card.Content>
-                                <Title>{item.student_id}</Title>
-                            </Card.Content>
-                            <Card.Content style={{backgroundColor: "pink"}}>
-                                <Paragraph>{item.text}</Paragraph>
-                            </Card.Content>
 
-                        </Card>
-                    </View>
+                    <Card key={i} style={{
+                        borderRadius: 15,
+                        elevation: 15,
+                        padding: 10,
+                        width: "90%",
+                        alignSelf: 'center',
+                        marginTop: "8%",
+
+                    }}>
+                        <Card.Content>
+                            <Title>รหัสนักศึกษา : {item.student_id}</Title>
+                        </Card.Content>
+                        <Card.Content style={{
+                            backgroundColor: "pink", padding: 20, borderRadius: 15,
+                        }}>
+                            <Paragraph>{item.text}</Paragraph>
+                        </Card.Content>
+
+                    </Card>
 
 
                 ))}

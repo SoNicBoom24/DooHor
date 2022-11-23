@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, ScrollView }
 import SwitchSelector from "react-native-switch-selector";
 
 import CardHor from "../components/CardHor";
+import CardHor2 from "../components/CardHor2";
 
 const options = [
     { label: "เครื่องปรับอากาศ", value: "1" },
@@ -11,6 +12,10 @@ const options = [
 ];
 
 export default function SelectHor() {
+    const [check, setCheck] = useState("1")
+    const Checktype = async (value) => {
+        setCheck(value)
+    }
     return (
         <ScrollView style={{ flex: 1, backgroundColor: "#FFDA79" }}>
             <View style={{ alignItems: "center", paddingBottom: 30 }}>
@@ -29,9 +34,9 @@ export default function SelectHor() {
                         padding: 5,
                         marginBottom: 5
                     }}
-                    onPress={(value) => console.log(`Call onPress with value: ${value}`)}
+                    onPress={(value) => Checktype(value)}
                 />
-                <CardHor />
+                {check == '1' ? (<CardHor />) : (<CardHor2 />)}
             </View>
         </ScrollView>
     );

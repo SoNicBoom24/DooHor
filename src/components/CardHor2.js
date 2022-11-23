@@ -5,10 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function (props) {
     const navigation = useNavigation();
-    return <CardHor {...props} navigation={navigation} />;
+    return <CardHor2 {...props} navigation={navigation} />;
 }
 
-class CardHor extends Component {
+class CardHor2 extends Component {
     constructor() {
         super();
         this.subjCollection = firebase.firestore().collection("Room")
@@ -27,7 +27,7 @@ class CardHor extends Component {
                 .then(querySnapshot => {
                     querySnapshot.forEach((res) => {
                         const { building, price, type, sex, desc, image } = res.data();
-                        all_data.push({ building: building, price: price, type: type, desc: desc, sex: sex, image: image });
+                        all_data.push({ building: building, price: price, type: type, desc: desc, sex: sex, image: image, });
                     });
                     this.setState({ subject_list: all_data, });
                 });
@@ -56,9 +56,9 @@ class CardHor extends Component {
     }
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }} >
+            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
                 {this.state.subject_list.map((item, i) => (
-                    <View key={i} style={{ display: item.type == "พัดลม" ? 'flex' : 'none' }}>
+                    <View key={i} style={{ display: item.type != "พัดลม" ? 'flex' : 'none' }}>
                         <TouchableOpacity style={styles.container} onPress={() => this.choose(item.building)}>
                             <View style={{ flexDirection: "row", width: "100%" }}>
                                 <Image style={styles.img} source={{ uri: item.image }} />

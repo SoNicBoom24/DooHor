@@ -11,12 +11,24 @@ export default function Notification() {
     const ScreenSendOffice_Documents = () => {
         navigation.navigate("ScreenSendOffice_Documents")
     }
+    const Create_Announcement = () => {
+        navigation.navigate("Create_Announcement")
+    }
+    const Table_check = () => {
+        navigation.navigate("Table_check")
+    }
+    const ScreenRegisTable = () => {
+        navigation.navigate("ScreenRegisTable")
+    }
+    const ScoreTable = () => {
+        navigation.navigate("ScoreTable")
+    }
     return (
         <ScrollView style={styles.container}>
             <View>
                 <Text style={styles.noti}>แบบฟอร์มสำหรับ ประกาศหน้าแจ้งข่าว</Text>
                 <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
-                    <TouchableOpacity style={styles.cardNoti}>
+                    <TouchableOpacity style={styles.cardNoti} onPress={Create_Announcement}>
                         <Text style={styles.text}>แบบฟอร์มเขียนประกาศ</Text>
                     </TouchableOpacity>
                 </View>
@@ -30,13 +42,13 @@ export default function Notification() {
 
                 <Text style={styles.noti}>ตารางตรวจสอบและจัดกาข้อมูล </Text>
                 <View style={{ backgroundColor: "white", width: "90%", alignSelf: "center", borderRadius: 20, paddingBottom: 30, marginBottom: 15 }}>
-                    <TouchableOpacity style={styles.cardNoti} onPress={ScreenSendOffice_Documents} >
+                    <TouchableOpacity style={styles.cardNoti} onPress={ScreenRegisTable} >
                         <Text style={styles.text}>ตารางประเมินสมัครสมาชิกนักศึกษา</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardNoti} onPress={ScreenSendOffice_Documents} >
+                    <TouchableOpacity style={styles.cardNoti} onPress={ScoreTable} >
                         <Text style={styles.text}>ตารางคะแนนประพฤตินักศึกษา</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.cardNoti} onPress={ScreenSendOffice_Documents} >
+                    <TouchableOpacity style={styles.cardNoti} onPress={Table_check} >
                         <Text style={styles.text}>ตารางตรวจสอบรูปหลักฐานข้อมูลของนักศึกษา</Text>
                     </TouchableOpacity>
                 </View>

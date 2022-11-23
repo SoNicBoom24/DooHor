@@ -78,8 +78,8 @@ export default function SendOffice_Documents() {
         catch (e) {
             console.log(e)
         }
-        Alert.alert(
-            'success'
+        alert(
+            'ส่งข้อมูลสำเร็จ'
         )
         setImage_documents(null)
         const data = {
@@ -114,12 +114,12 @@ export default function SendOffice_Documents() {
         <ScrollView style={{ backgroundColor: "#FFDA79", width: "100%", height: "100%" }}>
 
             <View style={{ margin: 20, display: check ? 'flex' : 'none' }} >
-                <View style={{backgroundColor: "#FFB053", width: "100%", borderRadius: 10, padding: 10}}>
-                <View style={{ flexDirection: "row", alignSelf: 'center'}}>
-                    <FontAwesome5 name="user-graduate" size={24} color="black" />
-                    <Text style={{ fontSize: 20, paddingLeft: 5 }}>ตารางนักศึกษา </Text>
-                </View>
-                <Text style={{ fontSize: 14, marginTop: 10 }}>สำหรับ ส่งข้อมูลทั่วไป ใบเสร็จ หรือคำร้องไปให้นักศึกษา</Text>
+                <View style={{ backgroundColor: "#FFB053", width: "100%", borderRadius: 10, padding: 10 }}>
+                    <View style={{ flexDirection: "row", alignSelf: 'center' }}>
+                        <FontAwesome5 name="user-graduate" size={24} color="black" />
+                        <Text style={{ fontSize: 20, paddingLeft: 5 }}>ตารางนักศึกษา </Text>
+                    </View>
+                    <Text style={{ fontSize: 14, marginTop: 10 }}>สำหรับ ส่งข้อมูลทั่วไป ใบเสร็จ หรือคำร้องไปให้นักศึกษา</Text>
                 </View>
 
                 <TextInput placeholder="ชื่อหรือรหัสนักศึกษา" style={styles.input}
@@ -143,8 +143,8 @@ export default function SendOffice_Documents() {
 
             </View>
             <SafeAreaView style={{ width: "90%", backgroundColor: "pink", borderRadius: 10, alignSelf: 'center', display: check ? 'none' : 'flex', overflow: "hidden" }}>
-                <View style={{ padding: 20, backgroundColor: "#FFB053",}}>
-                    <Text style={{fontSize: 20}}>{keep}</Text>
+                <View style={{ padding: 20, backgroundColor: "#FFB053", }}>
+                    <Text style={{ fontSize: 20 }}>{keep}</Text>
                     <ModalDropdown options={alltype}
                         defaultValue={"ประเภท ของการส่ง"}
                         textStyle={{ paddingLeft: 5, paddingBottom: 5, fontSize: 14, paddingTop: 3 }}
@@ -156,37 +156,37 @@ export default function SendOffice_Documents() {
                     />
                 </View>
                 <View style={{ padding: 20, backgroundColor: "#fff", }}>
-                    <Text style={{fontSize: 15 }}> กรอกข้อมูลสำหรับการส่ง</Text>
+                    <Text style={{ fontSize: 15 }}> กรอกข้อมูลสำหรับการส่ง</Text>
                     <TextInput
-                        style={{ backgroundColor: "#FFDA79", borderRadius: 10, width: "50%", marginVertical: 5 ,textAlign: "center"}}
+                        style={{ backgroundColor: "#FFDA79", borderRadius: 10, width: "50%", marginVertical: 5, textAlign: "center" }}
                         placeholder="หัวข้อ"
                         placeholderTextColor="#6e6e6e"
                         onChangeText={(title) => setTitle(title)}
                         value={title_input} />
 
                     <TextInput
-                        style={{ backgroundColor: "#FFDA79", borderRadius: 10, width: "50%", marginVertical: 5 ,textAlign: "center"}}
+                        style={{ backgroundColor: "#FFDA79", borderRadius: 10, width: "50%", marginVertical: 5, textAlign: "center" }}
                         placeholder="รายละเอียด"
                         placeholderTextColor="#6e6e6e"
                         onChangeText={(desc) => setDesc(desc)}
                         value={desc_input} />
 
                     <TextInput
-                        style={{ backgroundColor: "#FFDA79", borderRadius: 10, width: "50%", display: selecttype == 'Bill' ? 'flex' : 'none', marginVertical: 5 ,textAlign: "center" }}
+                        style={{ backgroundColor: "#FFDA79", borderRadius: 10, width: "50%", display: selecttype == 'Bill' ? 'flex' : 'none', marginVertical: 5, textAlign: "center" }}
                         placeholder="ค่าหอพัก"
                         placeholderTextColor="#6e6e6e"
                         onChangeText={(dormitory_bill) => setDormitory_bill(dormitory_bill)}
                         value={dormitory_bill_input} />
 
                     <TextInput
-                        style={{ backgroundColor: "#FFDA79", borderRadius: 10, width: "50%", display: selecttype == 'Bill' ? 'flex' : 'none', marginVertical: 5 ,textAlign: "center" }}
+                        style={{ backgroundColor: "#FFDA79", borderRadius: 10, width: "50%", display: selecttype == 'Bill' ? 'flex' : 'none', marginVertical: 5, textAlign: "center" }}
                         placeholder="ค่าไฟฟ้า"
                         placeholderTextColor="#6e6e6e"
                         onChangeText={(electricity_bill) => setElectricity_bill(electricity_bill)}
                         value={electricity_bill_input} />
 
                     <TextInput
-                        style={{ backgroundColor: "#FFDA79", borderRadius: 10, width: "50%", display: selecttype == 'Bill' ? 'flex' : 'none', marginVertical: 5 ,textAlign: "center" }}
+                        style={{ backgroundColor: "#FFDA79", borderRadius: 10, width: "50%", display: selecttype == 'Bill' ? 'flex' : 'none', marginVertical: 5, textAlign: "center" }}
                         placeholder="ค่าน้ำ"
                         placeholderTextColor="#6e6e6e"
                         onChangeText={(water_bill) => setWater_bill(water_bill)}

@@ -28,15 +28,32 @@ const Stack = createNativeStackNavigator();
 
 function NavBar() {
     const linkTo = useNavigation();
-    const user = firebase.auth().currentUser
-    if (user) {
-        const uid = firebase.auth().currentUser.uid
-        firebase.firestore().collection("Users").where('uid', '==', uid).where('Role', '==', 'admin').querySnapshot.forEach((res) => {
-            const { Role } = res.data();
-            const isRole = Role;
-        }
-        )
+    const [isRole, setIsRole] = useState("")
+
+    const uid = firebase.auth().currentUser.uid
+    const getdatafriebase = firebase.firestore().collection("Users").where('uid', '==', uid)
+
+
+    const logout = () => {
+        firebase.auth().signOut().then(() => {
+            alert("Already logout")
+            linkTo.navigate("ScreenLogin");
+
+        })
     }
+
+
+
+    getdatafriebase.get().then(querySnapshot => {
+        let all_data = ""
+
+        querySnapshot.forEach((res) => {
+            const { Role } = res.data();
+            all_data = Role
+        });
+        setIsRole(all_data)
+
+    });
 
     return (
         <View style={{ backgroundColor: "#FFDA79" }}>
@@ -90,38 +107,38 @@ function NavBar() {
                             style={{ position: "absolute", left: -25, top: -13 }}
                         />
                     } */}
+
                     <Ionicons
                         name="chatbubble-outline"
                         size={24}
                         color="black"
-                        style={{ position: "absolute", left: -80, top: -13 }}
+                        style={{ position: "absolute", left: -80, top: -13, display: isRole == "admin" ? "flex" : "none" }}
                         onPress={() => {
-                            linkTo.navigate("ReadAuth");
+                            linkTo.navigate("ScreenHor");
                         }}
                     />
-                    <MaterialIcons 
-                        name="edit" size={25} 
-                        color="black" 
-                        style={{ position: "absolute", left: -55, top: -13 }}
+                    <MaterialIcons
+                        name="edit" size={25}
+                        color="black"
+                        style={{ position: "absolute", left: -55, top: -13, display: isRole == "admin" ? "flex" : "none" }}
                         onPress={() => {
                             linkTo.navigate("ScreenNotification");
                         }}
                     />
-                    <Ionicons 
-                        name="md-exit-outline" 
-                        size={24} 
-                        color="black" 
-                        style={{ position: "absolute", left: -25, top: -13 }}
-                        onPress={() => {
-                            linkTo.navigate("ReadAuth");
-                        }}
+                    <Ionicons
+                        name="md-exit-outline"
+                        size={24}
+                        color="black"
+                        style={{ position: "absolute", left: -25, top: -13, display: isRole == "admin" ? "flex" : "none" }}
+                        onPress={logout}
+
                     />
 
-                    {/* <Ionicons
+                    <Ionicons
                         name="chatbubble-outline"
                         size={24}
                         color="black"
-                        style={{ position: "absolute", left: -80, top: -13 }}
+                        style={{ position: "absolute", left: -80, top: -13, display: isRole == "admin" ? "none" : "flex" }}
                         onPress={() => {
                             linkTo.navigate("Sceeenchat");
                         }}
@@ -130,20 +147,18 @@ function NavBar() {
                         name="user"
                         size={25}
                         color={"black"}
-                        style={{ position: "absolute", left: -50, top: -13 }}
+                        style={{ position: "absolute", left: -50, top: -13, display: isRole == "admin" ? "none" : "flex" }}
                         onPress={() => {
                             linkTo.navigate("ScreenProflie");
                         }}
                     />
-                    <Ionicons 
-                        name="md-exit-outline" 
-                        size={24} 
-                        color="black" 
-                        style={{ position: "absolute", left: -25, top: -13 }}
-                        onPress={() => {
-                            linkTo.navigate("ScreenRegisTable");
-                        }}
-                    /> */}
+                    <Ionicons
+                        name="md-exit-outline"
+                        size={24}
+                        color="black"
+                        style={{ position: "absolute", left: -25, top: -13, display: isRole == "admin" ? "none" : "flex" }}
+                        onPress={logout}
+                    />
                 </View>
             </View>
         </View>
@@ -152,19 +167,18 @@ function NavBar() {
 }
 
 export default function Navigator() {
-    // const [user, setUser] = useState(null)
-    // useEffect(() => {
-    //     setInterval(() => {
+    const [user, setUser] = useState(null)
+    useEffect(() => {
+        setInterval(() => {
 
-    //         setUser(firebase.auth().currentUser)
-    //     }, 5000)
-    //     // console.log(user)
-    // }, [])
+            setUser(firebase.auth().currentUser)
+        }, 5000)
+        // console.log(user)
+    }, [])
     return (
         <>
             <NavigationContainer>
-            {/* {user ? (<NavBar />) : (<></>)} */}
-                <NavBar />
+                {user ? (<NavBar />) : (<></>)}
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="ScreenLogin" component={ScreenLogin} />
                     <Stack.Screen name="ScreenNotification" component={ScreenNotification} />

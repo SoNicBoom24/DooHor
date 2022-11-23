@@ -10,8 +10,8 @@ export default function Create_Announcement() {
     const [selecttype, setSelecttype] = React.useState("Register");
     const [title_input, setTitle] = React.useState("");
     const [desc_input, setDesc] = React.useState("");
+    const [alldesc_input, setallDesc] = React.useState("");
     const [image, setImage] = React.useState("");
-    const [input_alldata, setInput_alldata] = React.useState("");
     /////////////////////////////
     const alltype = ['Room', 'Register', 'General'];
     const db = firebase.firestore();
@@ -31,6 +31,7 @@ export default function Create_Announcement() {
         const blob = await response.blob();
         const filename = image.uri
         var ref1 = firebase.storage().ref().child(filename).put(blob);
+        var m = Math.floor(Math.random() * 100) + 1
         try {
             await ref1;
 
@@ -49,8 +50,23 @@ export default function Create_Announcement() {
                 image: filename
             })
         }
+        else if (selecttype == 'Room') {
+            db.collection("declaration").doc("aYeT9KpFNdP2d2dDcYa9").update({
+                title: title_input,
+                desc: desc_input,
+                state: 'open',
+                image: filename
+            })
+        }
         else {
-
+            db.collection("declaration").add({
+                title: title_input,
+                desc: desc_input,
+                state: 'open',
+                image: filename,
+                all_desc: alldesc_input,
+                id: m
+            })
         }
 
 
@@ -94,6 +110,12 @@ export default function Create_Announcement() {
                     placeholder="รายละเอียด"
                     onChangeText={(desc) => setDesc(desc)}
                     value={desc_input} />
+
+                <TextInput
+                    style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "90%", marginTop: "5%", display: selecttype == 'General' }}
+                    placeholder="รายละเอียด"
+                    onChangeText={(alldesc_input) => setallDesc(alldesc_input)}
+                    value={alldesc_input} />
 
 
                 <TouchableOpacity onPress={add} >

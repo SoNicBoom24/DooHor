@@ -12,20 +12,43 @@ export default function (props) {
 class Detailroom extends Component {
     constructor() {
         super();
-        this.subjCollection = firebase.firestore().collection("declaration");
+        this.uid = firebase.auth().currentUser.uid
+
+        this.subjCollection = firebase.firestore().collection("Users").where("uid", "==", this.uid);
         this.state = {
             subject_list: [],
             image_list: [],
             student_list: [],
             Text_stundent_list: [],
-            state_list: []
+            state_list: [],
+            role: "",
+            room: "",
+            id: "",
+            Roomnameadd: "",
+            Roomid: "",
+            text: "",
+            name: ""
 
         };
     }
-    getCollection = () => {
+    getCollection = (querySnapshot) => {
         const { route } = this.props;
-        const all_data = [];
+        let checkrole = "";
+        let checkroom = "";
+        let checkid = "";
+        let keepname = "";
+        this.setState({ Roomnameadd: route.params.Roomname })
 
+        querySnapshot.forEach((res) => {
+            const { Role, room_name, first_name, last_name } = res.data();
+            checkrole = Role
+            checkroom = room_name
+            checkid = res.id
+            keepname = first_name + " " + last_name
+            this.setState({ role: checkrole, room: checkroom, id: checkid, name: keepname })
+        }
+        );
+        const all_data = [];
         firebase.firestore()
             .collection('Room')
             .where('RoomName', '==', route.params.Roomname)
@@ -33,14 +56,14 @@ class Detailroom extends Component {
             .then(querySnapshot => {
                 querySnapshot.forEach((res) => {
                     const { RoomName, building, desc, floor, id, image_room, price, student, state, Text_stundent } = res.data();
-                    all_data.push({ RoomName: RoomName, building: building, floor: floor, image_room: image_room, state: state, desc: desc, id: id, desc: desc, price: price, student: student, Text_stundent: Text_stundent });
+                    all_data.push({ RoomName: RoomName, building: building, floor: floor, image_room: image_room, state: state, desc: desc, id: id, desc: desc, price: price, student: student, Text_stundent: Text_stundent, checkroomid: res.id });
                 });
                 this.setState({ subject_list: all_data, });
                 this.setState({ image_list: all_data[0].image_room, });
                 this.setState({ student_list: all_data[0].student, });
                 this.setState({ Text_stundent_list: all_data[0].Text_stundent, });
                 this.setState({ state_list: all_data[0].state, });
-
+                this.setState({ Roomid: all_data[0].checkroomid })
             });
     };
     componentDidMount() {
@@ -53,7 +76,38 @@ class Detailroom extends Component {
         this.unsubscribe();
 
     }
-    addinRoom() {
+    addinRoom(id) {
+        console.log(this.state)
+
+        const db = firebase.firestore();
+
+        db.collection("Users").doc(id).update({
+            room_name: this.state.Roomnameadd,
+        })
+        db.collection("Room").doc(this.state.Roomid).update({
+            Text_stundent: firebase.firestore.FieldValue.arrayUnion(this.state.text),
+            student: firebase.firestore.FieldValue.arrayUnion(this.state.name),
+            state: firebase.firestore.FieldValue.arrayUnion("wait")
+        })
+        alert("ลงชื่อจองห้องสำเร็จ")
+        this.setState({ text: "" })
+
+    }
+
+    confirm() {
+        const db = firebase.firestore();
+        db.collection("Room").doc(this.state.Roomid).update({
+            state: firebase.firestore.FieldValue.arrayRemove("wait")
+        })
+        alert("ยืนยันการจองห้องพักสำเร็จ");
+    }
+
+    fail() {
+        const db = firebase.firestore();
+        db.collection("Room").doc(this.state.Roomid).update({
+            state: firebase.firestore.FieldValue.arrayUnion("fail")
+        })
+        alert("ยกเลิกการจองห้องพักสำเร็จ");
 
     }
     render() {
@@ -69,7 +123,7 @@ class Detailroom extends Component {
                         alignSelf: "center",
                         marginBottom: 20,
                     }}>
-                        <Image source={{ uri: item }} style={{height: 200}}>
+                        <Image source={{ uri: item }} style={{ height: 200 }}>
                         </Image>
                     </View>
 
@@ -110,19 +164,27 @@ class Detailroom extends Component {
                             ))}
                             <Title style={{ fontSize: 15, textAlign: 'center' }}>สถานะ </Title>
                             {this.state.state_list.map((item, i) => (
-                                <View key={i} style={{flexDirection: "row"}}>
-                                    <Paragraph  style={{ fontSize: 15 }}>{i + 1}. {item}</Paragraph>
-                                    <Text style={{color: "green", marginLeft: 10, marginTop: 2, display: item == "confirm" ? "none" : "flex"}}  >ยืนยัน</Text>
-                                    <Text style={{color: "red", marginLeft: 10, marginTop: 2}}  >ยกเลิก</Text>
+                                <View key={i} style={{ flexDirection: "row" }}>
+                                    <Paragraph style={{ fontSize: 15 }}>{i + 1}. {item}</Paragraph>
+                                    <Text style={{ color: "green", marginLeft: 10, marginTop: 2, display: item == "confirm" && this.state.role == "admin" ? "none" : "flex" }} onPress={() => this.confirm()}  >ยืนยัน</Text>
+                                    <Text style={{ color: "red", marginLeft: 10, marginTop: 2, display: this.state.role == "admin" ? "flex" : "none" }} onPress={() => this.fail()}  >ยกเลิก</Text>
                                 </View>
                             ))}
                         </Card.Content>
 
                     </Card>
+                    <TextInput
+                        style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "60%", marginTop: "2.5%", textAlign: 'center', borderWidth: 1 }}
+                        placeholder="คอมเมนท์ที่เราอยากบอก รูมเมจ"
+                        onChangeText={(detail) => this.setState({
+                            text: detail
+                        })}
+                        value={this.state.text} />
                     <Button
                         title="ลงชื่อเข้าหอพัก"
                         color="#594545"
-                        onPress={() => this.addinRoom()}
+                        onPress={() => this.addinRoom(this.state.id)}
+                        style={{ display: this.state.room != "" ? "flex" : "none" }}
                     />
 
                 </View>
