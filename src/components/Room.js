@@ -112,8 +112,5 @@ class Room extends Component {
                 }
             </View>
         )
-
     }
 }
-
-

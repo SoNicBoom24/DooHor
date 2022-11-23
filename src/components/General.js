@@ -61,7 +61,8 @@ export default class General extends Component {
                                 <Title>{item.title}</Title>
                                 <Paragraph>{item.desc}</Paragraph>
                             </Card.Content>
-                            <Card.Cover style={{ width: "90%", height: 200, alignSelf: "center", marginTop: '5%', resizeMode: "contain" }} source={{ uri: item.image_documents }} />
+                            <Card.Cover style={{ width: "90%", height: 200, alignSelf: "center", marginTop: '5%', resizeMode: "contain" }} 
+                                source={{ uri: item.image_documents }} />
                             <Card.Actions>
                             </Card.Actions>
 
