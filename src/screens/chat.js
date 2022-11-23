@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, ScrollView, Image, View } from "react-native";
+import { StyleSheet, ScrollView, Image, View, TextInput, TouchableOpacity, Text } from "react-native";
 import firebase from "../Database/firebaseDB";
 import { ListItem } from "react-native-elements";
 import { Button, Input } from "react-native-elements";
 import { Card, Title, Paragraph } from 'react-native-paper';
+import { Feather } from '@expo/vector-icons';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class Sceeenchat extends Component {
   constructor() {
@@ -81,66 +83,71 @@ class Sceeenchat extends Component {
 
   render() {
     return (
-      < ScrollView style={styles.container}>
+      <KeyboardAwareScrollView extraHeight={130} style={styles.container}>
         {this.state.message_list.map((item, i) => (
-          <View key={i}>
+          <View key={i} style={{ marginBottom: 10 }}>
             <Card style={{
-              borderRadius: 15,
-              elevation: 15,
-              padding: 10,
+              borderRadius: 10,
+              elevation: 10,
               width: "90%",
               alignSelf: 'center',
-              marginTop: "8%",
-              marginLeft: "5%",
-
+              marginBottom: 30,
+              overflow: "hidden"
             }}>
-              <Card.Content>
-                <Title>{this.state.name}</Title>
-                <Paragraph>{item.text}</Paragraph>
-                <Paragraph>เวลา : {item.id}</Paragraph>
-
-              </Card.Content>
-
+              <View style={{ padding: 10 }}>
+                <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 5 }}>{this.state.name}</Text>
+              </View>
+              <View>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    backgroundColor: "#FFB053",
+                    paddingLeft: 10, padding: 5,
+                    borderBottomLeftRadius: 10,
+                    borderBottomRightRadius: 10,
+                    paddingVertical: 5
+                  }}>
+                  {item.text}
+                  <Paragraph>เวลา : {item.id}</Paragraph>
+                </Text>
+              </View>
             </Card>
           </View>
-
-
         ))}
 
         <View style={{
           flexDirection: 'row',
-          width: window.width,
-          margin: 10,
-          padding: 4,
+          width: "90%",
+          // margin: 100,
+          padding: 8,
           bottom: 0,
-          alignItems: 'center',
+          alignSelf: 'center',
           justifyContent: 'center',
-          borderWidth: 4,
-          borderColor: '#fff',
+          // borderWidth: 4,
+          // borderColor: '#fff',
           borderRadius: 10,
-          backgroundColor: '#fff'
+          backgroundColor: '#fff',
+          marginBottom: 40,
         }}>
-          <View style={{
-            flex: 4,
-          }}>
-            <Input
+          <View style={{ flex: 1, }}>
+            <TextInput
               style={{
-                height: 40,
-                width: "100%",
-                flex: 1,
-                flexDirection: 'row'
+                height: 25,
+                flexDirection: 'row',
+                paddingLeft: 10
               }}
               placeholder={"ข้อความ"}
-              placeholderTextColor="white"
               value={this.state.message}
               onChangeText={(val) => this.inputValueUpdate(val, "message")}
             />
           </View>
-          <View style={{ flex: 1 }}>
-            <Button title="ส่งข้อความ" onPress={() => this.storeSubject()} />
+          <View style={{ alignSelf: "center", justifyContent: "center" }}>
+            <TouchableOpacity onPress={() => this.storeSubject()} >
+              <Feather name="send" size={24} color="#0d56de" />
+            </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
 
 
     );
@@ -150,7 +157,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFDA79",
-
   },
 
 });

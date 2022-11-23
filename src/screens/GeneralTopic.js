@@ -63,29 +63,32 @@ class GeneralTopic extends Component {
     render() {
 
         return (
+            <SafeAreaView style={styles.container} >
 
-            < ScrollView style={styles.container} >
-                <Text>{this.props.id}</Text>
-                {this.state.subject_list.map((item, i) => (
-                    <View key={i}>
+                <ScrollView>
+                    <Text>{this.props.id}</Text>
+                    {this.state.subject_list.map((item, i) => (
+                        <View key={i}>
 
-                        <View>
-                            <Image style={styles.img} source={{ uri: item.image }} />
-                            <SafeAreaView style={styles.description}>
-                                <Text style={{ padding: 10 }}>
-                                    {item.title}
-                                </Text>
-                                <Text style={{ padding: 10 }}>
-                                    {item.all_desc}
-                                </Text>
-                            </SafeAreaView>
-                            <FontAwesome name="trash" size={24} color="black" style={{ bottom: 0, alignSelf: "center", display: this.state.role == "admin" ? "flex" : "none" }} onPress={() => this.delete(item.id)} ess />
+                            <View>
+                                <Image style={styles.img} source={{ uri: item.image }} />
+                                <SafeAreaView style={styles.description}>
+                                    <Text style={{ padding: 10 }}>
+                                        {item.title}
+                                    </Text>
+                                    <Text style={{ padding: 10 }}>
+                                        {item.all_desc}
+                                    </Text>
+                                </SafeAreaView>
+                                <FontAwesome name="trash" size={24} color="black" style={{ bottom: 0, alignSelf: "center", display: this.state.role == "admin" ? "flex" : "none" }} onPress={() => this.delete(item.id)} />
+
+                            </View>
                         </View>
-                    </View>
 
-                ))}
+                    ))}
 
-            </ScrollView>
+                </ScrollView>
+            </SafeAreaView>
 
 
         );
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
     },
     img: {
         width: "80%",
-        height: 150,
+        height: 200,
         resizeMode: "cover",
         borderRadius: 10,
         alignSelf: "center",

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, ScrollView, SafeAreaView } from "react-native";
 
 import SwitchSelector from "react-native-switch-selector";
 
@@ -7,17 +7,18 @@ import CardHor from "../components/CardHor";
 import CardHor2 from "../components/CardHor2";
 
 const options = [
-    { label: "เครื่องปรับอากาศ", value: "1" },
     { label: "พัดลม", value: "0" },
+    { label: "เครื่องปรับอากาศ", value: "1" },
 ];
 
 export default function SelectHor() {
-    const [check, setCheck] = useState("1")
+    const [check, setCheck] = useState("0")
     const Checktype = async (value) => {
         setCheck(value)
     }
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: "#FFDA79" }}>
+        <SafeAreaView  style={{ flex: 1, backgroundColor: "#FFDA79" }}>
+        <ScrollView>
             <View style={{ alignItems: "center", paddingBottom: 30 }}>
                 <SwitchSelector
                     options={options}
@@ -35,10 +36,11 @@ export default function SelectHor() {
                         marginBottom: 5
                     }}
                     onPress={(value) => Checktype(value)}
-                />
-                {check == '1' ? (<CardHor />) : (<CardHor2 />)}
+                    />
+                {check == '0' ? (<CardHor />) : (<CardHor2 />)}
             </View>
         </ScrollView>
+        </SafeAreaView>
     );
 }
 const styles = StyleSheet.create({

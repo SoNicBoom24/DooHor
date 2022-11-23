@@ -65,8 +65,8 @@ class Announcement extends Component {
                 {this.state.subject_list.map((item, i) => (
                     <View key={i} style={{ marginTop: '5%' }}>
                         <View style={{ display: item.type == 'Register' ? 'flex' : 'none' }}>
-                            <Image style={styles.img} source={{ uri: item.image }} />
                             <TouchableOpacity onPress={() => this.ScreenRegister()}>
+                                <Image style={styles.img} source={{ uri: item.image }} />
                                 <SafeAreaView style={styles.description}>
                                     <Text style={{ padding: 10 }}>
                                         {item.title} : {item.desc}   ...กดเพื่อดูรายละเอียดเพิ่มเติม
@@ -75,8 +75,8 @@ class Announcement extends Component {
                             </TouchableOpacity>
                         </View>
                         <View style={{ display: item.type == 'Room' ? 'flex' : 'none' }}>
-                            <Image style={styles.img} source={{ uri: item.image }} />
                             <TouchableOpacity onPress={() => this.ScreenHor()}>
+                                <Image style={styles.img} source={{ uri: item.image }} />
                                 <SafeAreaView style={styles.description}>
                                     <Text style={{ padding: 10 }}>
                                         {item.title} : {item.desc}   ...กดเพื่อดูรายละเอียดเพิ่มเติม
@@ -86,8 +86,8 @@ class Announcement extends Component {
                         </View>
 
                         <View style={{ display: item.type == 'General' ? 'flex' : 'none' }}>
-                            <Image style={styles.img} source={{ uri: item.image }} />
                             <TouchableOpacity onPress={() => this.ScreenGeneralTopic(item.id)} >
+                                <Image style={styles.img} source={{ uri: item.image }} />
                                 <SafeAreaView style={styles.description}>
                                     <Text style={{ padding: 10 }}>
                                         {item.title} : {item.desc}   ...กดเพื่อดูรายละเอียดเพิ่มเติม
@@ -117,21 +117,23 @@ const styles = StyleSheet.create({
         width: "80%",
         height: 150,
         resizeMode: "cover",
-        borderRadius: 10,
         alignSelf: "center",
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
     },
     description: {
         backgroundColor: "white",
-        borderRadius: 20,
         width: "80%",
         height: "100%",
         alignSelf: "center",
-        marginTop: 10,
         flex: 1,
         marginBottom: 30,
-        borderRadius: 15,
         elevation: 15,
         padding: 10,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
+        borderColor: "pink",
+        borderTopWidth: 10,
     }
 
 });
