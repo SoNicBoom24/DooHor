@@ -18,8 +18,7 @@ export default function Login() {
             .auth()
             .signInWithEmailAndPassword(email.value, password.value)
             .then((res) => {
-                console.log('User logged-in successfully!')
-                alert("User logged-in successfully!")
+                alert("ล็อนอินสำเร็จแล้ว")
                 setEmail({ value: '', error: '' })
                 setPassword({ value: '', error: '' })
             })

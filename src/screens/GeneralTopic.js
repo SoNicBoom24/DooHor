@@ -11,12 +11,23 @@ export default function (props) {
 class GeneralTopic extends Component {
     constructor() {
         super();
-        this.subjCollection = firebase.firestore().collection("declaration");
+        this.uid = firebase.auth().currentUser.uid
+
+        this.subjCollection = firebase.firestore().collection("Users").where("uid", "==", this.uid);
         this.state = {
             subject_list: [],
+            role: ""
         };
     }
-    getCollection = () => {
+    getCollection = (querySnapshot) => {
+        let checkrole = "";
+        querySnapshot.forEach((res) => {
+            const { Role } = res.data();
+            checkrole = Role
+            this.setState({ role: checkrole })
+        }
+        );
+
         const { route } = this.props;
         const all_data = [];
         firebase.firestore()
@@ -26,7 +37,7 @@ class GeneralTopic extends Component {
             .then(querySnapshot => {
                 querySnapshot.forEach((res) => {
                     const { desc, image, title, type, state, all_desc } = res.data();
-                    all_data.push({ desc: desc, image: image, title: title, type: type, state: state, all_desc: all_desc });
+                    all_data.push({ desc: desc, image: image, title: title, type: type, state: state, all_desc: all_desc, id: res.id });
                 });
                 this.setState({ subject_list: all_data, });
 
@@ -40,7 +51,15 @@ class GeneralTopic extends Component {
     componentWillUnmount() {
         this.unsubscribe();
     }
-
+    delete(id) {
+        firestore()
+            .collection('declaration')
+            .doc(id)
+            .delete()
+            .then(() => {
+                alert("ลบ ประกาศนี้แล้ว")
+            });
+    }
     render() {
 
         return (
@@ -60,7 +79,7 @@ class GeneralTopic extends Component {
                                     {item.all_desc}
                                 </Text>
                             </SafeAreaView>
-                            <FontAwesome name="trash" size={24} color="black" style={{ bottom: 0, alignSelf: "center" }} />
+                            <FontAwesome name="trash" size={24} color="black" style={{ bottom: 0, alignSelf: "center", display: this.state.role == "admin" ? "flex" : "none" }} onPress={() => this.delete(item.id)} ess />
                         </View>
                     </View>
 

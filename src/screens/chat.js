@@ -15,7 +15,7 @@ class Sceeenchat extends Component {
       message_list: [],
       message: "",
       name: "",
-      id: firebase.firestore.FieldValue.serverTimestamp(),
+      id: Date().toLocaleString(),
     };
   }
 
@@ -28,7 +28,7 @@ class Sceeenchat extends Component {
   storeSubject() {
     this.messageCollection
       .add({
-        id: this.state.id,
+        id: this.state.id.slice(0, this.state.id.lastIndexOf("+") - 3),
         student_name: this.state.name,
         text: this.state.message,
       })
@@ -97,6 +97,7 @@ class Sceeenchat extends Component {
               <Card.Content>
                 <Title>{this.state.name}</Title>
                 <Paragraph>{item.text}</Paragraph>
+                <Paragraph>เวลา : {item.id}</Paragraph>
 
               </Card.Content>
 
