@@ -143,6 +143,16 @@ function NavBar() {
                             linkTo.navigate("Sceeenchat");
                         }}
                     />
+
+                    <Ionicons
+                        name="chatbubble-outline"
+                        size={24}
+                        color="black"
+                        style={{ position: "absolute", left: -80, top: -13, display: isRole == "admin" ? "flex" : "none" }}
+                        onPress={() => {
+                            linkTo.navigate("ReadAuth");
+                        }}
+                    />
                     <FontAwesome
                         name="user"
                         size={25}

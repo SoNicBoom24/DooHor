@@ -15,26 +15,22 @@ export default class General extends Component {
     }
     getCollection = () => {
 
-        const user = firebase.auth().currentUser
-        if (true) {
-            const all_data = [];
-            firebase.firestore()
-                .collection('office_documents')
-                .where('uid', '==', "IAIWBRrWUKfS7PNuFzxsNYseg5n2").where("type", "==", "General")
-                .get()
-                .then(querySnapshot => {
-                    querySnapshot.forEach((res) => {
-                        const { title, desc, dormitory_bill, image_documents, type } = res.data();
-                        all_data.push({ title: title, desc: desc, dormitory_bill: dormitory_bill, desc: desc, image_documents: image_documents, id: res.id, type: type });
-                    });
-                    this.setState({ subject_list: all_data, });
+        const uid = firebase.auth().currentUser.id
+        const all_data = [];
+        firebase.firestore()
+            .collection('office_documents')
+            .where('uid', '==', uid).where("type", "==", "General")
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach((res) => {
+                    const { title, desc, dormitory_bill, image_documents, type } = res.data();
+                    all_data.push({ title: title, desc: desc, dormitory_bill: dormitory_bill, desc: desc, image_documents: image_documents, id: res.id, type: type });
                 });
+                this.setState({ subject_list: all_data, });
+            });
 
 
-        }
-        else {
 
-        }
     };
     componentDidMount() {
         this.unsubscribe =
@@ -61,7 +57,7 @@ export default class General extends Component {
                                 <Title>{item.title}</Title>
                                 <Paragraph>{item.desc}</Paragraph>
                             </Card.Content>
-                            <Card.Cover style={{ width: "90%", height: 200, alignSelf: "center", marginTop: '5%', resizeMode: "contain" }} 
+                            <Card.Cover style={{ width: "90%", height: 200, alignSelf: "center", marginTop: '5%', resizeMode: "contain" }}
                                 source={{ uri: item.image_documents }} />
                             <Card.Actions>
                             </Card.Actions>

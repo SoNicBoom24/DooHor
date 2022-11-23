@@ -13,22 +13,19 @@ export default function Table_check() {
     const [check, setCheck] = React.useState(true);
 
     const all_data = []
-    const user = firebase.auth().currentUser
-    if (true) {
-        firebase.firestore()
-            .collection('office_documents').where('type', '!=', 'General')
-            .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach((res) => {
-                    const { title, type, student_name, picture_from_user } = res.data();
-                    all_data.push({ หัวข้อ: title, ประเภท: type, ชื่อนักศึกษา: student_name, picture_from_user: picture_from_user });
-                });
-                setDocument(all_data);
 
+    firebase.firestore()
+        .collection('office_documents').where('type', '!=', 'General')
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach((res) => {
+                const { title, type, student_name, picture_from_user } = res.data();
+                all_data.push({ หัวข้อ: title, ประเภท: type, ชื่อนักศึกษา: student_name, picture_from_user: picture_from_user });
             });
-    }
-    else {
-    }
+            setDocument(all_data);
+
+        });
+
     // let data_table = userdata
 
 

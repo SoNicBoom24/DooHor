@@ -18,22 +18,19 @@ export const ScoreTable = () => {
 
     const alltype = ['เพิ่มคะแนน', 'ลดคะแนน'];
     const [keep, setKeep] = useState("");
-    const user = firebase.auth().currentUser
-    if (true) {
-        firebase.firestore()
-            .collection('Users')
-            .where('Role', '==', 'user')
-            .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach((res) => {
-                    const { first_name, last_name, score, student_id, score_details, } = res.data();
-                    all_data.push({ รายชื่อนักศึกษา: first_name + " " + last_name, รหัสนักศึกษา: student_id, คะแนน: score, score_details: score_details, uid: res.id });
-                });
-                setuserdata(all_data);
+
+    firebase.firestore()
+        .collection('Users')
+        .where('Role', '==', 'user')
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach((res) => {
+                const { first_name, last_name, score, student_id, score_details, } = res.data();
+                all_data.push({ รายชื่อนักศึกษา: first_name + " " + last_name, รหัสนักศึกษา: student_id, คะแนน: score, score_details: score_details, uid: res.id });
             });
-    }
-    else {
-    }
+            setuserdata(all_data);
+        });
+
     // let data = userdata;
     // if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
     //     data = userdata.filter(x => String(x.รหัสนักศึกษา).includes(text));

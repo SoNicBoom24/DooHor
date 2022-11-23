@@ -28,23 +28,20 @@ export default function SendOffice_Documents() {
 
     const alltype = ['Bill', 'General', 'Petition'];
     const all_data = []
-    const user = firebase.auth().currentUser
-    if (true) {
-        firebase.firestore()
-            .collection('Users')
-            .where('Role', '==', 'user')
-            .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach((res) => {
-                    const { first_name, last_name, student_id, room_name, uid } = res.data();
-                    all_data.push({ ชื่อนักศึกษา: first_name + " " + last_name, รหัสนักศึกษา: student_id, ห้อง: room_name, uid: uid, });
-                });
-                setuserdata(all_data);
 
+    firebase.firestore()
+        .collection('Users')
+        .where('Role', '==', 'user')
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach((res) => {
+                const { first_name, last_name, student_id, room_name, uid } = res.data();
+                all_data.push({ ชื่อนักศึกษา: first_name + " " + last_name, รหัสนักศึกษา: student_id, ห้อง: room_name, uid: uid, });
             });
-    }
-    else {
-    }
+            setuserdata(all_data);
+
+        });
+
     // let data_table = userdata
     // if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
     //     data_table = userdata.filter(x => String(x.รหัสนักศึกษา).includes(text));

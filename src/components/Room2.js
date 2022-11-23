@@ -10,10 +10,10 @@ export default function (props) {
     const navigation = useNavigation();
     return <Room {...props} navigation={navigation} />;
 }
-
 class Room extends Component {
     constructor() {
-        super();
+
+        super()
         this.subjCollection = firebase.firestore().collection("Check")
         this.state = {
             subject_list: [],
@@ -69,14 +69,14 @@ class Room extends Component {
         return (
             <View>
                 <View style={{ marginTop: "5%" }} >
-                    <View style={{flexDirection: "row", alignSelf: "center", backgroundColor: "#242424", width: "90%", padding: 10, borderRadius: 20}}>
-                        <View style={{flexDirection: "row", marginHorizontal: "15%"}}>
+                    <View style={{ flexDirection: "row", alignSelf: "center", backgroundColor: "#242424", width: "90%", padding: 10, borderRadius: 20 }}>
+                        <View style={{ flexDirection: "row", marginHorizontal: "15%" }}>
                             <FontAwesome name="circle" size={24} color="#DF727D" />
-                            <Text style={{paddingLeft: 5, fontWeight: "bold", color: "white", fontSize: 15}}>เต็ม</Text>
+                            <Text style={{ paddingLeft: 5, fontWeight: "bold", color: "white", fontSize: 15 }}>เต็ม</Text>
                         </View>
-                        <View style={{flexDirection: "row", marginHorizontal: "15%"}}>
+                        <View style={{ flexDirection: "row", marginHorizontal: "15%" }}>
                             <FontAwesome name="circle" size={24} color="#6663F6" />
-                            <Text style={{paddingLeft: 5, fontWeight: "bold", color: "white", fontSize: 15}}>ไม่เต็ม</Text>
+                            <Text style={{ paddingLeft: 5, fontWeight: "bold", color: "white", fontSize: 15 }}>ไม่เต็ม</Text>
                         </View>
                     </View>
                     <ModalDropdown options={this.state.alltype}
@@ -84,7 +84,7 @@ class Room extends Component {
                         textStyle={{ paddingLeft: 5, paddingBottom: 5, fontSize: 14, paddingTop: 5 }}
                         dropdownStyle={{ width: "35%", borderRadius: 10, backgroundColor: "white", height: 100, overflow: "hidden", marginTop: -20 }}
                         defaultTextStyle={{ color: "#Bbbbbd" }}
-                        style={{ backgroundColor: "white", borderRadius: 10, width: "40%", marginTop: '10%', alignSelf: "center", borderWidth: 1}}
+                        style={{ backgroundColor: "white", borderRadius: 10, width: "40%", marginTop: '10%', alignSelf: "center", borderWidth: 1 }}
                         onSelect={(type) =>
                             this.setState({
                                 selecttype: this.state.alltype[type]
@@ -95,10 +95,11 @@ class Room extends Component {
                 </View>
                 {this.state.subject_list.map((item, i) => (
                     <View key={i}>
-                        <TouchableOpacity onPress={() => this.GotoRoom(item.RoomName)} style={{ marginTop: 10, display: item.floor == this.state.selecttype && item.pos == 'L' ? 'flex' : 'none' }} >
+                        <TouchableOpacity onPress={() => this.GotoRoom(item.RoomName)} style={{ marginTop: 10, display: item.floor == this.state.selecttype && item.pos == 'R' ? 'flex' : 'none' }} >
                             <View style={{
                                 flexDirection: "row",
-                                 backgroundColor: item.student == 4 ? '#DF727D' : '#6663F6', padding: 5, borderRadius: 10, width: "35%", alignSelf: "center", marginVertical: 10}}>
+                                backgroundColor: item.student == 4 ? '#DF727D' : '#6663F6', padding: 5, borderRadius: 10, width: "35%", alignSelf: "center", marginVertical: 10
+                            }}>
                                 <Text style={{ color: "white", alignSelf: "center", fontSize: 16, marginLeft: '18%' }}>
                                     {item.RoomName}
                                 </Text>

@@ -159,8 +159,12 @@ const Profile = () => {
       <ScrollView
         style={{
           flex: 1,
+          // height: Dimensions.get('window').height,
+          width: "120%",
           backgroundColor: 'white',
-          height: Dimensions.get('window').height,
+          borderRadius: 20,
+          alignSelf: "center",
+          marginBottom: 20
 
         }}>
         <Room2></Room2>

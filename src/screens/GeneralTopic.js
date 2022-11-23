@@ -3,10 +3,13 @@ import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView
 import firebase from '../Database/firebaseDB'
 import { useRoute } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function (props) {
     const route = useRoute();
-    return <GeneralTopic {...props} route={route} />;
+    const navigation = useNavigation();
+    return <GeneralTopic {...props} route={route} navigation={navigation} />;
+
 }
 class GeneralTopic extends Component {
     constructor() {
@@ -52,12 +55,14 @@ class GeneralTopic extends Component {
         this.unsubscribe();
     }
     delete(id) {
-        firestore()
+        firebase.firestore()
             .collection('declaration')
             .doc(id)
             .delete()
             .then(() => {
                 alert("ลบ ประกาศนี้แล้ว")
+                const { navigation } = this.props;
+                navigation.navigate('ScreenAnnoucement')
             });
     }
     render() {

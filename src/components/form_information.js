@@ -17,27 +17,22 @@ export default class form_information extends Component {
         };
     }
     getCollection = () => {
+        const uid = firebase.auth().currentUser.id
 
-        const user = firebase.auth().currentUser
-        if (true) {
-            const all_data = [];
-            firebase.firestore()
-                .collection('office_documents')
-                .where('uid', '==', "LvTaBmip7DUjgaZwLJnWpRIR32o1")
-                .get()
-                .then(querySnapshot => {
-                    querySnapshot.forEach((res) => {
-                        const { title, desc, dormitory_bill, image_documents, type } = res.data();
-                        all_data.push({ title: title, desc: desc, dormitory_bill: dormitory_bill, desc: desc, image_documents: image_documents, id: res.id, type: type });
-                    });
-                    this.setState({ subject_list: all_data, });
+        const all_data = [];
+        firebase.firestore()
+            .collection('office_documents')
+            .where('uid', '==', uid)
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach((res) => {
+                    const { title, desc, dormitory_bill, image_documents, type } = res.data();
+                    all_data.push({ title: title, desc: desc, dormitory_bill: dormitory_bill, desc: desc, image_documents: image_documents, id: res.id, type: type });
                 });
+                this.setState({ subject_list: all_data, });
+            });
 
 
-        }
-        else {
-
-        }
     };
     componentDidMount() {
         this.unsubscribe =

@@ -74,10 +74,10 @@ const Profile = () => {
     ///////////ดึงข้อมูลผู้ใช้
     // const user = firebase.auth().currentUser
     // if (user) {
-    //     const uid = firebase.auth().currentUser.uid
+    const uid = firebase.auth().currentUser.uid
     firebase.firestore()
         .collection('Users')
-        .where('uid', '==', "LvTaBmip7DUjgaZwLJnWpRIR32o1")
+        .where('uid', '==', uid)
         .get()
         .then(querySnapshot => {
             querySnapshot.forEach((res) => {

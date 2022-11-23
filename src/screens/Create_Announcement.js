@@ -1,4 +1,4 @@
-import { Text, TextInput, View, StyleSheet, Button, Alert, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Button, Alert, TouchableOpacity, SafeAreaView, ScrollView, Image } from 'react-native';
 import DataTable, { COL_TYPES } from 'react-native-datatable-component';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { AntDesign } from '@expo/vector-icons';
@@ -11,7 +11,7 @@ export default function Create_Announcement() {
     const [title_input, setTitle] = React.useState("");
     const [desc_input, setDesc] = React.useState("");
     const [alldesc_input, setallDesc] = React.useState("");
-    const [image, setImage] = React.useState("");
+    const [image, setImage] = React.useState(null);
     /////////////////////////////
     const alltype = ['Room', 'Register', 'General'];
     const db = firebase.firestore();
@@ -30,8 +30,8 @@ export default function Create_Announcement() {
         const response = await fetch(image.uri)
         const blob = await response.blob();
         const filename = image.uri
-        var ref1 = firebase.storage().ref().child(filename).put(blob);
-        var m = Math.floor(Math.random() * 100) + 1
+        let ref1 = firebase.storage().ref().child(filename).put(blob);
+        let m = Math.floor(Math.random() * 100) + 1
         try {
             await ref1;
 
@@ -40,7 +40,7 @@ export default function Create_Announcement() {
             console.log(e)
         }
         Alert.alert(
-            'success'
+            'เพิ่มประกาศสำเร็จ'
         )
         if (selecttype == 'Register') {
             db.collection("declaration").doc("Bfju2YmnuNB8gDcc7wmn").update({
@@ -55,7 +55,8 @@ export default function Create_Announcement() {
                 title: title_input,
                 desc: desc_input,
                 state: 'open',
-                image: filename
+                image: filename,
+                id: m
             })
         }
         else {
@@ -65,12 +66,18 @@ export default function Create_Announcement() {
                 state: 'open',
                 image: filename,
                 all_desc: alldesc_input,
-                id: m
+                id: m,
+                type: "General"
             })
-        }
 
+        }
+        setTitle("")
+        setDesc("")
+        setallDesc("")
+        setImage("")
 
     }
+    console.log(image)
     return (
         <ScrollView style={{ width: "100%", backgroundColor: "#FFDA79", borderRadius: 10, alignSelf: 'center', flex: 1 }}>
 
@@ -93,10 +100,12 @@ export default function Create_Announcement() {
                 height: "40%",
                 alignSelf: 'center'
 
+
             }}>
-                <View style={{ padding: 5, alignSelf: 'center', }} >
-                    <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginTop: '15%' }} />
+                <View style={{ padding: 5, alignSelf: 'center' }} >
+                    <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginTop: '20%' }} />
                 </View>
+
             </TouchableOpacity>
             <View style={{ padding: 20 }}>
                 <TextInput
@@ -112,8 +121,8 @@ export default function Create_Announcement() {
                     value={desc_input} />
 
                 <TextInput
-                    style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "90%", marginTop: "5%", display: selecttype == 'General' }}
-                    placeholder="รายละเอียด"
+                    style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "90%", marginTop: "5%", display: selecttype == 'General' ? "flex" : "none" }}
+                    placeholder="รายละเอียด ทั้งหมด"
                     onChangeText={(alldesc_input) => setallDesc(alldesc_input)}
                     value={alldesc_input} />
 
@@ -138,5 +147,12 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFDA79",
     },
 
-
+    img: {
+        width: "80%",
+        height: 150,
+        resizeMode: "cover",
+        alignSelf: "center",
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+    },
 });

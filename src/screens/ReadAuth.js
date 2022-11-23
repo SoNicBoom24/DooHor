@@ -14,8 +14,8 @@ export default class ReadAuth extends Component {
     getCollection = (querySnapshot) => {
         const all_data = [];
         querySnapshot.forEach((res) => {
-            const { student_id, text } = res.data();
-            all_data.push({ student_id: student_id, text: text, });
+            const { student_id, text, id } = res.data();
+            all_data.push({ student_id: student_id, text: text, id: id });
         });
         this.setState({ subject_list: all_data, });
 
@@ -39,6 +39,7 @@ export default class ReadAuth extends Component {
                         width: "90%",
                         alignSelf: 'center',
                         marginTop: "8%",
+                        marginBottom: "5%",
 
                     }}>
                         <Card.Content>
@@ -48,6 +49,8 @@ export default class ReadAuth extends Component {
                             backgroundColor: "pink", padding: 20, borderRadius: 15,
                         }}>
                             <Paragraph>{item.text}</Paragraph>
+                            <Paragraph>เวลา : {item.id}</Paragraph>
+
                         </Card.Content>
 
                     </Card>
@@ -65,7 +68,6 @@ export default class ReadAuth extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: "#FFDA79",
     },
 

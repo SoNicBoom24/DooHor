@@ -20,22 +20,19 @@ export default function RegisTable() {
     const [valueD, setValueD] = useState(0);
 
     const all_data = []
-    const user = firebase.auth().currentUser
-    if (true) {
-        firebase.firestore()
-            .collection('DataRegister')
-            .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach((res) => {
-                    const { firstName, lasstName, student_id, e_mail, age, alley_lane, bit, faculty, houseNo, imgHouse, imgIdCard, imgSelfie, moo, postCode, province, sex, district, subDistrict, village, year, Reason, score } = res.data();
-                    all_data.push({ ชื่อนักศึกษา: firstName + " " + lasstName, รหัสนักศึกษา: student_id, e_mail: e_mail, age: age, sex: sex, Reason: Reason, imgHouse: imgHouse, imgIdCard: imgIdCard, imgSelfie: imgSelfie, address: houseNo + " " + moo + " " + village + " " + alley_lane + " " + subDistrict + " " + district + " " + province + " " + postCode, education: "คณะ : " + faculty + " สาขา : " + bit + " ปี : " + year, uid: res.id, คะแนน: score });
-                });
-                setuserdata(all_data);
 
+    firebase.firestore()
+        .collection('DataRegister')
+        .get()
+        .then(querySnapshot => {
+            querySnapshot.forEach((res) => {
+                const { firstName, lasstName, student_id, e_mail, age, alley_lane, bit, faculty, houseNo, imgHouse, imgIdCard, imgSelfie, moo, postCode, province, sex, district, subDistrict, village, year, Reason, score } = res.data();
+                all_data.push({ ชื่อนักศึกษา: firstName + " " + lasstName, รหัสนักศึกษา: student_id, e_mail: e_mail, age: age, sex: sex, Reason: Reason, imgHouse: imgHouse, imgIdCard: imgIdCard, imgSelfie: imgSelfie, address: houseNo + " " + moo + " " + village + " " + alley_lane + " " + subDistrict + " " + district + " " + province + " " + postCode, education: "คณะ : " + faculty + " สาขา : " + bit + " ปี : " + year, uid: res.id, คะแนน: score });
             });
-    }
-    else {
-    }
+            setuserdata(all_data);
+
+        });
+
     // let data_table = userdata
     // if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
     //     data_table = userdata.filter(x => String(x.รหัสนักศึกษา).includes(text));

@@ -12,9 +12,12 @@ export default function (props) {
 class Announcement extends Component {
     constructor() {
         super();
+        this.user = firebase.auth().currentUser
+
         this.subjCollection = firebase.firestore().collection("declaration");
         this.state = {
             subject_list: [],
+
         };
     }
     getCollection = () => {
@@ -44,8 +47,14 @@ class Announcement extends Component {
         this.unsubscribe();
     }
     ScreenRegister() {
-        const { navigation } = this.props;
-        navigation.navigate('ScreenRegister')
+        if (this.user != "") {
+            alert("คุณเป็นสมาชิกแล้ว")
+        }
+        else {
+            const { navigation } = this.props;
+            navigation.navigate('ScreenRegister')
+        }
+
     };
     ScreenGeneralTopic(i) {
         const { navigation } = this.props;
@@ -55,8 +64,15 @@ class Announcement extends Component {
             })
     };
     ScreenHor() {
-        const { navigation } = this.props;
-        navigation.navigate('ScreenHor')
+        if (this.user != "") {
+            const { navigation } = this.props;
+            navigation.navigate('ScreenHor')
+        }
+        else {
+            alert("คุณยังไม่เเป็นสมาชิก")
+
+        }
+
     };
     render() {
         return (

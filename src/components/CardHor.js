@@ -18,25 +18,21 @@ class CardHor extends Component {
     }
     getCollection = () => {
 
-        const user = firebase.auth().currentUser
-        if (true) {
-            const all_data = [];
-            firebase.firestore()
-                .collection('Hor')
-                .get()
-                .then(querySnapshot => {
-                    querySnapshot.forEach((res) => {
-                        const { building, price, type, sex, desc, image } = res.data();
-                        all_data.push({ building: building, price: price, type: type, desc: desc, sex: sex, image: image });
-                    });
-                    this.setState({ subject_list: all_data, });
+
+        const all_data = [];
+        firebase.firestore()
+            .collection('Hor')
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach((res) => {
+                    const { building, price, type, sex, desc, image } = res.data();
+                    all_data.push({ building: building, price: price, type: type, desc: desc, sex: sex, image: image });
                 });
+                this.setState({ subject_list: all_data, });
+            });
 
 
-        }
-        else {
 
-        }
     };
     componentDidMount() {
         this.unsubscribe =
