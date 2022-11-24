@@ -135,9 +135,6 @@ export default function Register() {
         catch (e) {
             console.log(e)
         }
-        Alert.alert(
-            'success'
-        )
         setimageIdCard(null)
         setimageHouse(null)
         setimageSelfie(null)
@@ -163,17 +160,19 @@ export default function Register() {
             imgIdCard: filename1,
             imgHouse: filename2,
             imgSelfie: filename3,
-            Reason: Reason,
+            Reason: addreason,
             score: "ยังไม่ได้ประเมิน"
 
         };
+
         todoRef.add(data)
-        navigation.navigate("ScreenNotification")
+        alert("คุณลงทะเบียนสำเร็จแล้ว")
+        navigation.navigate("ScreenAnnoucement")
         // };
     }
 
     return (
-        <SafeAreaView style={{ width: "100%", backgroundColor: "#FFDA79", height: "100%"}}>
+        <SafeAreaView style={{ width: "100%", backgroundColor: "#FFDA79", height: "100%" }}>
             <KeyboardAwareScrollView extraHeight={100}>
                 <>
                     <Image style={styles.img} source={{ uri: "https://firebasestorage.googleapis.com/v0/b/doohor-af5ca.appspot.com/o/kmitl-covid-19-01.jpg?alt=media&token=2a14807f-5b50-4a32-97fe-e0abc365ba73" }} />

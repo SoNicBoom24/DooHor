@@ -85,29 +85,6 @@ function NavBar() {
                 <View style={{ display: "flex", flexDirection: "row" }}>
 
 
-                    {/* {isRole == "admin" &&
-                        <Ionicons
-                            name="chatbubble-outline"
-                            size={24}
-                            color="black"
-                            style={{ position: "absolute", left: -85, top: -13 }}
-                            onPress={() => {
-                                linkTo.navigate("");
-                            }}
-                        />
-                        <Octicons 
-                            name="feed-star" 
-                            size={25} 
-                            color="black" 
-                            style={{ position: "absolute", left: -55, top: -13 }}
-                        />
-                        <MaterialIcons 
-                            name="edit" size={25} 
-                            color="black" 
-                            style={{ position: "absolute", left: -25, top: -13 }}
-                        />
-                    } */}
-
                     <Ionicons
                         name="chatbubble-outline"
                         size={24}
@@ -182,8 +159,7 @@ export default function Navigator() {
         setInterval(() => {
 
             setUser(firebase.auth().currentUser)
-        }, 5000)
-        // console.log(user)
+        }, 3000)
     }, [])
     return (
         <>

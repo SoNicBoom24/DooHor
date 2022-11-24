@@ -4,10 +4,13 @@ import firebase from '../Database/firebaseDB'
 import { useRoute } from '@react-navigation/native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { AntDesign, Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function (props) {
     const route = useRoute();
     return <Detailroom {...props} route={route} />;
+    return <Detailroom {...props} navigation={navigation} />;
+
 }
 class Detailroom extends Component {
     constructor() {
@@ -92,23 +95,34 @@ class Detailroom extends Component {
         alert("ลงชื่อจองห้องสำเร็จ")
         this.setState({ text: "" })
 
+        const { navigation } = this.props;
+        navigation.navigate('ScreenAnnoucement')
     }
 
     confirm() {
         const db = firebase.firestore();
         db.collection("Room").doc(this.state.Roomid).update({
-            state: firebase.firestore.FieldValue.arrayUnion("fail"),
-            state: firebase.firestore.FieldValue.arrayRemove("confirm")
+            state: firebase.firestore.FieldValue.arrayRemove("wait")
+        })
+        db.collection("Room").doc(this.state.Roomid).update({
+            state: firebase.firestore.FieldValue.arrayUnion("confirm")
         })
         alert("ยืนยันการจองห้องพักสำเร็จ");
+        const { navigation } = this.props;
+        navigation.navigate('Sceeenselect')
     }
 
     fail() {
         const db = firebase.firestore();
         db.collection("Room").doc(this.state.Roomid).update({
+            state: firebase.firestore.FieldValue.arrayRemove("confirm")
+        })
+        db.collection("Room").doc(this.state.Roomid).update({
             state: firebase.firestore.FieldValue.arrayUnion("fail")
         })
         alert("ยกเลิกการจองห้องพักสำเร็จ");
+        const { navigation } = this.props;
+        navigation.navigate('Sceeenselect')
 
     }
     render() {
@@ -167,7 +181,7 @@ class Detailroom extends Component {
                             {this.state.state_list.map((item, i) => (
                                 <View key={i} style={{ flexDirection: "row" }}>
                                     <Paragraph style={{ fontSize: 15 }}>{i + 1}. {item}</Paragraph>
-                                    <Text style={{ color: "green", marginLeft: 10, marginTop: 2, display: item == "confirm" && this.state.role == "admin" ? "none" : "flex" }} onPress={() => this.confirm()}  >ยืนยัน</Text>
+                                    <Text style={{ color: "green", marginLeft: 10, marginTop: 2, display: item == "confirm" && this.state.role == "admin" ? "flex" : "none" }} onPress={() => this.confirm()}  >ยืนยัน</Text>
                                     <Text style={{ color: "red", marginLeft: 10, marginTop: 2, display: this.state.role == "admin" ? "flex" : "none" }} onPress={() => this.fail()}  >ยกเลิก</Text>
                                 </View>
                             ))}

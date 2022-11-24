@@ -47,13 +47,10 @@ class Announcement extends Component {
         this.unsubscribe();
     }
     ScreenRegister() {
-        if (this.user != "") {
-            alert("คุณเป็นสมาชิกแล้ว")
-        }
-        else {
-            const { navigation } = this.props;
-            navigation.navigate('ScreenRegister')
-        }
+
+        const { navigation } = this.props;
+        navigation.navigate('ScreenRegister')
+
 
     };
     ScreenGeneralTopic(i) {
@@ -64,15 +61,9 @@ class Announcement extends Component {
             })
     };
     ScreenHor() {
-        if (this.user != "") {
-            const { navigation } = this.props;
-            navigation.navigate('ScreenHor')
-        }
-        else {
-            alert("คุณยังไม่เเป็นสมาชิก")
 
-        }
-
+        const { navigation } = this.props;
+        navigation.navigate('ScreenHor')
     };
     render() {
         return (

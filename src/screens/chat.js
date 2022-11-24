@@ -108,8 +108,9 @@ class Sceeenchat extends Component {
                     paddingVertical: 5
                   }}>
                   {item.text}
-                  <Paragraph>เวลา : {item.id}</Paragraph>
+                  <Paragraph> เวลา : {item.id}</Paragraph>
                 </Text>
+
               </View>
             </Card>
           </View>

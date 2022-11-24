@@ -25,6 +25,7 @@ export default function Create_Announcement() {
         })
         const source = { uri: result.uri };
         setImage(source);
+        alert("อัปโหลดรูปภาพสำเร็จ")
     };
     const add = async () => {
         const response = await fetch(image.uri)
@@ -42,6 +43,7 @@ export default function Create_Announcement() {
         Alert.alert(
             'เพิ่มประกาศสำเร็จ'
         )
+        /// doc เป็นชื่อของ ตารางประกาศรีจิสกับประกาศห้อง 2 type นี้จะไม่ลบแต่แค่แก้ไขเปลี่ยนสเตจ
         if (selecttype == 'Register') {
             db.collection("declaration").doc("Bfju2YmnuNB8gDcc7wmn").update({
                 title: title_input,
