@@ -9,6 +9,8 @@ import * as ImagePicker from 'expo-image-picker';
 export default class form_information extends Component {
     constructor() {
         super();
+        this.uid = firebase.auth().currentUser.uid
+
         this.subjCollection = firebase.firestore().collection("office_documents");
         this.state = {
             subject_list: [],
@@ -17,12 +19,11 @@ export default class form_information extends Component {
         };
     }
     getCollection = () => {
-        const uid = firebase.auth().currentUser.id
 
         const all_data = [];
         firebase.firestore()
             .collection('office_documents')
-            .where('uid', '==', uid)
+            .where('uid', '==', this.uid)
             .get()
             .then(querySnapshot => {
                 querySnapshot.forEach((res) => {

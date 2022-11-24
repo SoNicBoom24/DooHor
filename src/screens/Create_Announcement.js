@@ -25,6 +25,7 @@ export default function Create_Announcement() {
         })
         const source = { uri: result.uri };
         setImage(source);
+        alert("อัปโหลดรูปภาพสำเร็จ")
     };
     const add = async () => {
         const response = await fetch(image.uri)

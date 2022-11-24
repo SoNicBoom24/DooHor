@@ -7,6 +7,8 @@ import { Card, Title, Paragraph } from 'react-native-paper';
 export default class General extends Component {
     constructor() {
         super();
+        this.uid = firebase.auth().currentUser.uid
+
         this.subjCollection = firebase.firestore().collection("office_documents");
         this.state = {
             subject_list: [],
@@ -15,11 +17,10 @@ export default class General extends Component {
     }
     getCollection = () => {
 
-        const uid = firebase.auth().currentUser.id
         const all_data = [];
         firebase.firestore()
             .collection('office_documents')
-            .where('uid', '==', uid).where("type", "==", "General")
+            .where('uid', '==', this.uid).where("type", "==", "General")
             .get()
             .then(querySnapshot => {
                 querySnapshot.forEach((res) => {

@@ -4,10 +4,13 @@ import firebase from '../Database/firebaseDB'
 import { useRoute } from '@react-navigation/native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { AntDesign, Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function (props) {
     const route = useRoute();
     return <Detailroom {...props} route={route} />;
+    return <Detailroom {...props} navigation={navigation} />;
+
 }
 class Detailroom extends Component {
     constructor() {
@@ -92,23 +95,34 @@ class Detailroom extends Component {
         alert("ลงชื่อจองห้องสำเร็จ")
         this.setState({ text: "" })
 
+        const { navigation } = this.props;
+        navigation.navigate('ScreenAnnoucement')
     }
 
     confirm() {
         const db = firebase.firestore();
         db.collection("Room").doc(this.state.Roomid).update({
-            state: firebase.firestore.FieldValue.arrayUnion("fail"),
-            state: firebase.firestore.FieldValue.arrayRemove("confirm")
+            state: firebase.firestore.FieldValue.arrayRemove("wait")
+        })
+        db.collection("Room").doc(this.state.Roomid).update({
+            state: firebase.firestore.FieldValue.arrayUnion("confirm")
         })
         alert("ยืนยันการจองห้องพักสำเร็จ");
+        const { navigation } = this.props;
+        navigation.navigate('Sceeenselect')
     }
 
     fail() {
         const db = firebase.firestore();
         db.collection("Room").doc(this.state.Roomid).update({
+            state: firebase.firestore.FieldValue.arrayRemove("confirm")
+        })
+        db.collection("Room").doc(this.state.Roomid).update({
             state: firebase.firestore.FieldValue.arrayUnion("fail")
         })
         alert("ยกเลิกการจองห้องพักสำเร็จ");
+        const { navigation } = this.props;
+        navigation.navigate('Sceeenselect')
 
     }
     render() {

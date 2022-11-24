@@ -69,7 +69,7 @@ const Profile = () => {
     let listRefArr = useRef([]);
     let listOffset = useRef({});
     let isListGliding = useRef(false);
-    const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState([]);
     const all_data = []
     ///////////ดึงข้อมูลผู้ใช้
     // const user = firebase.auth().currentUser
@@ -81,10 +81,8 @@ const Profile = () => {
         .get()
         .then(querySnapshot => {
             querySnapshot.forEach((res) => {
-                const { first_name, last_name, student_id, room_name, score } = res.data();
-                all_data.push({ first_name: first_name, last_name: last_name, student_id: student_id, room_name: room_name, score: score });
+                setUserData(res.data())
             });
-            setUserData(all_data);
         });
     // }
     // else {
