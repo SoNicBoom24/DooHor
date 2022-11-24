@@ -47,9 +47,10 @@ class Announcement extends Component {
         this.unsubscribe();
     }
     ScreenRegister() {
-
         const { navigation } = this.props;
         navigation.navigate('ScreenRegister')
+
+
 
 
     };

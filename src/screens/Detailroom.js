@@ -181,7 +181,7 @@ class Detailroom extends Component {
                             {this.state.state_list.map((item, i) => (
                                 <View key={i} style={{ flexDirection: "row" }}>
                                     <Paragraph style={{ fontSize: 15 }}>{i + 1}. {item}</Paragraph>
-                                    <Text style={{ color: "green", marginLeft: 10, marginTop: 2, display: item == "confirm" && this.state.role == "admin" ? "flex" : "none" }} onPress={() => this.confirm()}  >ยืนยัน</Text>
+                                    <Text style={{ color: "green", marginLeft: 10, marginTop: 2, display: item != "confirm" && this.state.role == "admin" ? "flex" : "none" }} onPress={() => this.confirm()}  >ยืนยัน</Text>
                                     <Text style={{ color: "red", marginLeft: 10, marginTop: 2, display: this.state.role == "admin" ? "flex" : "none" }} onPress={() => this.fail()}  >ยกเลิก</Text>
                                 </View>
                             ))}
