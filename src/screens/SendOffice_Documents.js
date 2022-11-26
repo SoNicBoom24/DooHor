@@ -41,6 +41,13 @@ export default function SendOffice_Documents() {
 
         });
 
+    let data_table = userdata
+    if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
+        data_table = userdata.filter(x => String(x.รหัสนักศึกษา).includes(text));
+    }
+    else {
+        data_table = userdata.filter(x => String(x.ชื่อนักศึกษา).includes(text));
+    }
     const Settings =
         [
             { name: 'ชื่อนักศึกษา', type: COL_TYPES.STRING, },
@@ -115,7 +122,7 @@ export default function SendOffice_Documents() {
                 <DataTable
                     colSettings={Settings}
                     noOfPages="1"
-                    data={userdata}
+                    data={data_table}
                     onclick
                     colNames={nameOfCols}
                     headerLabelStyle={{ color: 'grey', fontSize: 13 }}

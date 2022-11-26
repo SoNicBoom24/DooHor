@@ -23,6 +23,9 @@ export default function Table_check() {
             setDocument(all_data);
         });
 
+    let data_table = document
+    data_table = document.filter(x => x.ชื่อนักศึกษา.includes(text));
+
     const Settings =
         [
             { name: 'หัวข้อ', type: COL_TYPES.STRING, },
@@ -50,7 +53,7 @@ export default function Table_check() {
                 <DataTable
                     colSettings={Settings}
                     noOfPages="1"
-                    data={document}
+                    data={data_table}
                     onclick
                     colNames={nameOfCols}
                     headerLabelStyle={{ color: 'grey', fontSize: 10 }}

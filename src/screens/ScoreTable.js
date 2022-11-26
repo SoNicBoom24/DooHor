@@ -30,6 +30,14 @@ export const ScoreTable = () => {
             setuserdata(all_data);
         });
 
+    let data_table = userdata;
+    if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
+        data_table = userdata.filter(x => String(x.รหัสนักศึกษา).includes(text));
+    }
+    else {
+        data_table = userdata.filter(x => String(x.รายชื่อนักศึกษา).includes(text));
+
+    }
     const Detail = (row) => {
         Alert.alert(
             "รายละเอียดการให้คะแนน",
@@ -101,7 +109,7 @@ export const ScoreTable = () => {
                         setKeep(row.รายชื่อนักศึกษา)
                     }}
                     backgroundColor=""
-                    data={userdata}
+                    data={data_table}
                     colNames={nameOfCols}
                     headerLabelStyle={{ color: 'grey', fontSize: 10 }}
                 />
