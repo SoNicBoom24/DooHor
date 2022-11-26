@@ -1,5 +1,5 @@
-import React, { useState, Component, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
+import React, { Component } from 'react';
+import { View } from 'react-native';
 import firebase from '../Database/firebaseDB'
 import { ListItem } from 'react-native-elements'
 import { Card, Title, Paragraph } from 'react-native-paper';
@@ -8,15 +8,13 @@ export default class General extends Component {
     constructor() {
         super();
         this.uid = firebase.auth().currentUser.uid
-
         this.subjCollection = firebase.firestore().collection("office_documents");
         this.state = {
             subject_list: [],
-
         };
     }
-    getCollection = () => {
 
+    getCollection = () => {
         const all_data = [];
         firebase.firestore()
             .collection('office_documents')
@@ -29,17 +27,17 @@ export default class General extends Component {
                 });
                 this.setState({ subject_list: all_data, });
             });
-
-
-
     };
+
     componentDidMount() {
         this.unsubscribe =
             this.subjCollection.onSnapshot(this.getCollection);
     }
+
     componentWillUnmount() {
         this.unsubscribe();
     }
+
     render() {
         return (
             <View>
@@ -62,14 +60,12 @@ export default class General extends Component {
                                 source={{ uri: item.image_documents }} />
                             <Card.Actions>
                             </Card.Actions>
-
                         </Card>
                     </ListItem>
                 ))
                 }
             </View>
         )
-
     }
 }
 

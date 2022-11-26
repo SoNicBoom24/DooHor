@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, ScrollView, Image, View, TextInput, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, TextInput, TouchableOpacity, Text } from "react-native";
 import firebase from "../Database/firebaseDB";
-import { ListItem } from "react-native-elements";
-import { Button, Input } from "react-native-elements";
-import { Card, Title, Paragraph } from 'react-native-paper';
+import { Card, Paragraph } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -30,7 +28,7 @@ class Sceeenchat extends Component {
   storeSubject() {
     this.messageCollection
       .add({
-        id: this.state.id.slice(0, this.state.id.lastIndexOf("+")-10),
+        id: this.state.id.slice(0, this.state.id.lastIndexOf("+") - 10),
         student_name: this.state.name,
         text: this.state.message,
       })
@@ -55,9 +53,7 @@ class Sceeenchat extends Component {
         this.setState({
           name: all_get,
         });
-
       });
-
 
     const all_data = [];
     querySnapshot.forEach((res) => {
@@ -119,13 +115,10 @@ class Sceeenchat extends Component {
         <View style={{
           flexDirection: 'row',
           width: "90%",
-          // margin: 100,
           padding: 8,
           bottom: 0,
           alignSelf: 'center',
           justifyContent: 'center',
-          // borderWidth: 4,
-          // borderColor: '#fff',
           borderRadius: 10,
           backgroundColor: '#fff',
           marginBottom: 40,
@@ -149,8 +142,6 @@ class Sceeenchat extends Component {
           </View>
         </View>
       </KeyboardAwareScrollView>
-
-
     );
   }
 }
@@ -159,6 +150,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFDA79",
   },
-
 });
+
 export default Sceeenchat;

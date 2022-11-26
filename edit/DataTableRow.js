@@ -21,7 +21,6 @@ const DataTableRow = React.memo((props) => {
     }
     return (
         <>
-
             <View style={[styles.rowContainer, { backgroundColor }]}>
                 {
                     colNames.map((name, index) => {
@@ -36,7 +35,6 @@ const DataTableRow = React.memo((props) => {
                         } else if (textAlign == 'right') {
                             paddingRight = 13;
                             paddingLeft = 1;
-
                         }
 
                         return (
@@ -53,18 +51,13 @@ const DataTableRow = React.memo((props) => {
                                             <Text style={[styles.rowCellText, { paddingLeft, paddingRight, textAlign, color }]}>{data[name]}</Text>
 
                                         )
-
                                 }
-
                             </View>
-
                         );
                     })
                 }
             </View>
-
             <Line row width={widthOfLine} />
-
         </>
     );
 })

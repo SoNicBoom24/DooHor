@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, ScrollView, SafeAreaView } from "react-native";
-
+import { StyleSheet, View, ScrollView, SafeAreaView } from "react-native";
 import SwitchSelector from "react-native-switch-selector";
-
 import CardHor from "../components/CardHor";
 import CardHor2 from "../components/CardHor2";
 
@@ -16,33 +14,35 @@ export default function SelectHor() {
     const Checktype = async (value) => {
         setCheck(value)
     }
+
     return (
-        <SafeAreaView  style={{ flex: 1, backgroundColor: "#FFDA79" }}>
-        <ScrollView>
-            <View style={{ alignItems: "center", paddingBottom: 30 }}>
-                <SwitchSelector
-                    options={options}
-                    initial={0}
-                    textColor={"black"}
-                    selectedColor={"black"}
-                    backgroundColor={"#FFA927"}
-                    borderColor={"black"}
-                    buttonColor={"white"}
-                    style={{
-                        width: "90%",
-                        borderRadius: 20,
-                        backgroundColor: "#FFA927",
-                        padding: 5,
-                        marginBottom: 5
-                    }}
-                    onPress={(value) => Checktype(value)}
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#FFDA79" }}>
+            <ScrollView>
+                <View style={{ alignItems: "center", paddingBottom: 30 }}>
+                    <SwitchSelector
+                        options={options}
+                        initial={0}
+                        textColor={"black"}
+                        selectedColor={"black"}
+                        backgroundColor={"#FFA927"}
+                        borderColor={"black"}
+                        buttonColor={"white"}
+                        style={{
+                            width: "90%",
+                            borderRadius: 20,
+                            backgroundColor: "#FFA927",
+                            padding: 5,
+                            marginBottom: 5
+                        }}
+                        onPress={(value) => Checktype(value)}
                     />
-                {check == '0' ? (<CardHor />) : (<CardHor2 />)}
-            </View>
-        </ScrollView>
+                    {check == '0' ? (<CardHor />) : (<CardHor2 />)}
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",

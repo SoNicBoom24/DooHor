@@ -1,12 +1,11 @@
-import { Text, TextInput, View, StyleSheet, Button, Alert, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { Text, TextInput, View, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import DataTable, { COL_TYPES } from 'react-native-datatable-component';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-
 import { FontAwesome5 } from '@expo/vector-icons';
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import firebase from '../Database/firebaseDB'
 export default function SendOffice_Documents() {
     const [text, onChangeText] = React.useState("");
@@ -42,14 +41,6 @@ export default function SendOffice_Documents() {
 
         });
 
-    // let data_table = userdata
-    // if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
-    //     data_table = userdata.filter(x => String(x.รหัสนักศึกษา).includes(text));
-    // }
-    // else {
-    //     data_table = userdata.filter(x => String(x.ชื่อนักศึกษา).includes(text));
-
-    // }
     const Settings =
         [
             { name: 'ชื่อนักศึกษา', type: COL_TYPES.STRING, },
@@ -109,7 +100,6 @@ export default function SendOffice_Documents() {
 
     return (
         <ScrollView style={{ backgroundColor: "#FFDA79", width: "100%", height: "100%" }}>
-
             <View style={{ margin: 20, display: check ? 'flex' : 'none' }} >
                 <View style={{ backgroundColor: "#FFB053", width: "100%", borderRadius: 10, padding: 10 }}>
                     <View style={{ flexDirection: "row", alignSelf: 'center' }}>
@@ -118,13 +108,11 @@ export default function SendOffice_Documents() {
                     </View>
                     <Text style={{ fontSize: 14, marginTop: 10 }}>สำหรับ ส่งข้อมูลทั่วไป ใบเสร็จ หรือคำร้องไปให้นักศึกษา</Text>
                 </View>
-
                 <TextInput placeholder="ชื่อหรือรหัสนักศึกษา" style={styles.input}
                     onChangeText={onChangeText}
                     value={text}
                 />
                 <DataTable
-
                     colSettings={Settings}
                     noOfPages="1"
                     data={userdata}
@@ -137,7 +125,6 @@ export default function SendOffice_Documents() {
                         setCheck(false)
                     }}
                 />
-
             </View>
             <SafeAreaView style={{ width: "90%", backgroundColor: "pink", borderRadius: 10, alignSelf: 'center', display: check ? 'none' : 'flex', overflow: "hidden" }}>
                 <View style={{ padding: 20, backgroundColor: "#FFB053", }}>
@@ -212,11 +199,10 @@ export default function SendOffice_Documents() {
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>
-
         </ScrollView >
-
     )
 }
+
 const styles = StyleSheet.create({
     input: {
         height: 40,

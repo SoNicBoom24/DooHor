@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import firebase from '../Database/firebaseDB'
 import { useNavigation } from '@react-navigation/native';
 
@@ -17,8 +17,6 @@ class CardHor2 extends Component {
         }
     }
     getCollection = () => {
-
-
         const all_data = [];
         firebase.firestore()
             .collection('Hor')
@@ -30,14 +28,13 @@ class CardHor2 extends Component {
                 });
                 this.setState({ subject_list: all_data, });
             });
-
-
-
     };
+
     componentDidMount() {
         this.unsubscribe =
             this.subjCollection.onSnapshot(this.getCollection);
     }
+
     componentWillUnmount() {
         this.unsubscribe();
     }
@@ -50,6 +47,7 @@ class CardHor2 extends Component {
         const { navigation } = this.props;
         navigation.navigate('Sceeenselect')
     }
+
     render() {
         return (
             <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

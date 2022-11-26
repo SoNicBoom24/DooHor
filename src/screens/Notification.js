@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { color } from 'react-native-reanimated';
+import React from 'react';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
@@ -23,6 +21,7 @@ export default function Notification() {
     const ScoreTable = () => {
         navigation.navigate("ScoreTable")
     }
+
     return (
         <ScrollView style={styles.container}>
             <View>
@@ -52,7 +51,6 @@ export default function Notification() {
                         <Text style={styles.text}>ตารางตรวจสอบรูปหลักฐานข้อมูลของนักศึกษา</Text>
                     </TouchableOpacity>
                 </View>
-
             </View>
         </ScrollView>
     );
@@ -97,5 +95,4 @@ const styles = StyleSheet.create({
         color: "white",
         fontSize: 16
     }
-
 });

@@ -1,23 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  Animated,
-  Image,
-  ScrollView,
-  Button,
-  TouchableOpacity
-
-} from 'react-native';
-
-
+import { SafeAreaView, StyleSheet, View, Text, Dimensions, Animated, ScrollView } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 import Room from '../components/Room'
 import Room2 from '../components/Room2'
-///////////////////////////////////
+
 const TabBarHeight = 5;
 const HeaderHeight = 25;
 
@@ -58,7 +44,7 @@ const TabScene = ({
     </SafeAreaView>
   );
 };
-////////////////////////////////////////////////////////////
+
 const Profile = () => {
   const [tabIndex, setIndex] = useState(0);
   const [routes] = useState([
@@ -72,7 +58,6 @@ const Profile = () => {
   let listOffset = useRef({});
   let isListGliding = useRef(false);
   ///////////ดึงข้อมูลห้อง
-  //////// 
   useEffect(() => {
     scrollY.addListener(({ value }) => {
       const curRoute = routes[tabIndex].key;
@@ -140,17 +125,14 @@ const Profile = () => {
       <ScrollView
         style={{
           flex: 1,
-          // height: Dimensions.get('window').height,
           width: "120%",
           backgroundColor: 'white',
           borderRadius: 20,
           alignSelf: "center",
           marginBottom: 20
-
         }}>
         <Room></Room>
       </ScrollView>
-
     );
   };
 
@@ -159,19 +141,15 @@ const Profile = () => {
       <ScrollView
         style={{
           flex: 1,
-          // height: Dimensions.get('window').height,
           width: "120%",
           backgroundColor: 'white',
           borderRadius: 20,
           alignSelf: "center",
           marginBottom: 20
-
         }}>
         <Room2></Room2>
       </ScrollView>
-
     );
-
   };
 
   const renderLabel = ({ route, focused }) => {
@@ -201,6 +179,7 @@ const Profile = () => {
       default:
         return null;
     }
+
     return (
       <TabScene
         numCols={numCols}
@@ -231,6 +210,7 @@ const Profile = () => {
       outputRange: [HeaderHeight, 0],
       extrapolateRight: 'clamp',
     });
+
     return (
       <Animated.View
         style={{
@@ -247,7 +227,6 @@ const Profile = () => {
           }}
           style={styles.tab}
           renderLabel={renderLabel}
-
         />
       </Animated.View>
     );
@@ -286,7 +265,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 15,
     flexDirection: "row"
-
   },
   label: {
     fontSize: 16,

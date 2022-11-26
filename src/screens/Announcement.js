@@ -1,8 +1,7 @@
-import React, { useState, useEffect, Component } from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import firebase from '../Database/firebaseDB'
 import { useNavigation } from '@react-navigation/native';
-
 
 export default function (props) {
     const navigation = useNavigation();
@@ -13,16 +12,12 @@ class Announcement extends Component {
     constructor() {
         super();
         this.user = firebase.auth().currentUser
-
         this.subjCollection = firebase.firestore().collection("declaration");
         this.state = {
             subject_list: [],
-
         };
     }
     getCollection = () => {
-
-
         const all_data = [];
         firebase.firestore()
             .collection('declaration')
@@ -35,25 +30,22 @@ class Announcement extends Component {
                 });
                 this.setState({ subject_list: all_data, });
             });
-
-
-
     };
+
     componentDidMount() {
         this.unsubscribe =
             this.subjCollection.onSnapshot(this.getCollection);
     }
+
     componentWillUnmount() {
         this.unsubscribe();
     }
+
     ScreenRegister() {
         const { navigation } = this.props;
         navigation.navigate('ScreenRegister')
-
-
-
-
     };
+
     ScreenGeneralTopic(i) {
         const { navigation } = this.props;
         navigation.navigate('ScreenGeneralTopic',
@@ -61,11 +53,12 @@ class Announcement extends Component {
                 id: i
             })
     };
-    ScreenHor() {
 
+    ScreenHor() {
         const { navigation } = this.props;
         navigation.navigate('ScreenHor')
     };
+
     render() {
         return (
             < ScrollView style={styles.container} >
@@ -104,16 +97,10 @@ class Announcement extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-
-
                 ))}
-
             </ScrollView>
-
-
         );
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -143,5 +130,4 @@ const styles = StyleSheet.create({
         borderColor: "pink",
         borderTopWidth: 10,
     }
-
 });

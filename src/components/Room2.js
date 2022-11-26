@@ -1,7 +1,6 @@
-import React, { useState, Component, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
+import React, { Component, } from 'react';
+import {Text, View, TouchableOpacity } from 'react-native';
 import firebase from '../Database/firebaseDB'
-import { Card, Title, Paragraph } from 'react-native-paper';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
@@ -12,7 +11,6 @@ export default function (props) {
 }
 class Room extends Component {
     constructor() {
-
         super()
         this.subjCollection = firebase.firestore().collection("Check")
         this.state = {
@@ -43,17 +41,15 @@ class Room extends Component {
                     });
                     this.setState({ subject_list: all_data, });
                 });
-
-
         }
-        else {
-
-        }
+        else {}
     };
+
     componentDidMount() {
         this.unsubscribe =
             this.subjCollection.onSnapshot(this.getCollection);
     }
+
     componentWillUnmount() {
         this.unsubscribe();
     }
@@ -65,6 +61,7 @@ class Room extends Component {
                 Roomname: name
             })
     };
+
     render() {
         return (
             <View>
@@ -113,6 +110,5 @@ class Room extends Component {
                 }
             </View>
         )
-
     }
 }

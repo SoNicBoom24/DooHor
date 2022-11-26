@@ -1,23 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-    SafeAreaView,
-    StyleSheet,
-    View,
-    Text,
-    Dimensions,
-    Animated,
-    Image,
-    ScrollView,
-
-} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text, Dimensions, Animated, Image, ScrollView } from 'react-native';
 import { TabView, TabBar } from 'react-native-tab-view';
 import firebase from '../Database/firebaseDB'
 import Fromdata from '../components/form_information'
 import General from '../components/General';
-///////////////////////////////////
+
 const TabBarHeight = 5;
 const HeaderHeight = 250;
-const tabitem = (Dimensions.get('window').width - 30) / 2;
 
 const TabScene = ({
     numCols,
@@ -56,7 +45,7 @@ const TabScene = ({
         </SafeAreaView>
     );
 };
-////////////////////////////////////////////////////////////
+
 const Profile = () => {
     const [tabIndex, setIndex] = useState(0);
     const [routes] = useState([
@@ -70,10 +59,7 @@ const Profile = () => {
     let listOffset = useRef({});
     let isListGliding = useRef(false);
     const [userData, setUserData] = useState([]);
-    const all_data = []
-    ///////////ดึงข้อมูลผู้ใช้
-    // const user = firebase.auth().currentUser
-    // if (user) {
+
     const uid = firebase.auth().currentUser.uid
     firebase.firestore()
         .collection('Users')
@@ -84,12 +70,6 @@ const Profile = () => {
                 setUserData(res.data())
             });
         });
-    // }
-    // else {
-    //     alert("ยังไม่ได้ล็อคอิน พาส test1234")
-    // }
-
-    //////// 
 
     useEffect(() => {
         scrollY.addListener(({ value }) => {
@@ -150,6 +130,7 @@ const Profile = () => {
             outputRange: [0, -HeaderHeight],
             extrapolateRight: 'clamp',
         });
+
         return (
             <Animated.View style={[styles.header, { transform: [{ translateY: y }] }]}>
                 <Image style={styles.img} source={{ uri: "https://www.digitaltrends.com/wp-content/uploads/2022/08/Chainsaw-Man-trailer.jpg" }} />
@@ -172,7 +153,6 @@ const Profile = () => {
                 }}>
                 <General></General>
             </ScrollView>
-
         );
     };
 
@@ -184,12 +164,9 @@ const Profile = () => {
                     height: "100%",
                     marginBottom: 20,
                     flex: 1,
-                    // backgroundColor: 'pink',
                 }}>
                 <Fromdata></Fromdata>
-
             </ScrollView>
-
         );
     };
 
@@ -266,7 +243,6 @@ const Profile = () => {
                     }}
                     style={styles.tab}
                     renderLabel={renderLabel}
-
                 />
             </Animated.View>
         );
@@ -305,7 +281,6 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         padding: 15,
         flexDirection: "row"
-
     },
     label: {
         fontSize: 16,

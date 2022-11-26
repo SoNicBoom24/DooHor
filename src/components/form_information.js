@@ -1,5 +1,5 @@
-import React, { useState, Component, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, TouchableOpacity } from 'react-native';
 import firebase from '../Database/firebaseDB'
 import { ListItem } from 'react-native-elements'
 import { Card, Title, Paragraph } from 'react-native-paper';
@@ -19,7 +19,6 @@ export default class form_information extends Component {
         };
     }
     getCollection = () => {
-
         const all_data = [];
         firebase.firestore()
             .collection('office_documents')
@@ -32,16 +31,17 @@ export default class form_information extends Component {
                 });
                 this.setState({ subject_list: all_data, });
             });
-
-
     };
+
     componentDidMount() {
         this.unsubscribe =
             this.subjCollection.onSnapshot(this.getCollection);
     }
+
     componentWillUnmount() {
         this.unsubscribe();
     }
+
     async pickImage(i) {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -53,20 +53,17 @@ export default class form_information extends Component {
         this.setState({
             check: i,
             upload: source
-
         });
     };
     async add(i) {
         console.log(this.state.subject_list[i].id)
         const db = firebase.firestore();
-
         const response = await fetch(this.state.upload.uri)
         const blob = await response.blob();
         const filename = this.state.upload.uri
         var ref1 = firebase.storage().ref().child(filename).put(blob);
         try {
             await ref1;
-
         }
         catch (e) {
             console.log(e)
@@ -86,6 +83,7 @@ export default class form_information extends Component {
             check: -1
         });
     };
+
     render() {
         return (
             <View>
@@ -135,7 +133,6 @@ export default class form_information extends Component {
                 }
             </View>
         )
-
     }
 }
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button, ScrollView, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 
 import imgDooHor from "../../assets/logoDooHor.png";
 import { FontAwesome, MaterialIcons, Ionicons, Octicons } from "@expo/vector-icons";
@@ -29,7 +28,6 @@ const Stack = createNativeStackNavigator();
 function NavBar() {
     const linkTo = useNavigation();
     const [isRole, setIsRole] = useState("")
-
     const uid = firebase.auth().currentUser.uid
     const getdatafriebase = firebase.firestore().collection("Users").where('uid', '==', uid)
 
@@ -38,21 +36,16 @@ function NavBar() {
         firebase.auth().signOut().then(() => {
             alert("Already logout")
             linkTo.navigate("ScreenLogin");
-
         })
     }
 
-
-
     getdatafriebase.get().then(querySnapshot => {
         let all_data = ""
-
         querySnapshot.forEach((res) => {
             const { Role } = res.data();
             all_data = Role
         });
         setIsRole(all_data)
-
     });
 
     return (
@@ -150,7 +143,6 @@ function NavBar() {
             </View>
         </View>
     );
-    // }
 }
 
 export default function Navigator() {

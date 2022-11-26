@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import firebase from '../Database/firebaseDB'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Login() {
     const [email, setEmail] = useState({ value: '', error: '' })
     const [password, setPassword] = useState({ value: '', error: '' })
-
     const navigation = useNavigation();
-
     const onLoginPressed = () => {
         firebase
             .auth()
@@ -23,12 +20,12 @@ export default function Login() {
                 setPassword({ value: '', error: '' })
             })
         navigation.navigate("ScreenAnnoucement")
-
     }
+
     const onPressed = () => {
         navigation.navigate("ScreenAnnoucement")
-
     }
+
     return (
         <SafeAreaView style={{ width: "100%", backgroundColor: "#FFB053", height: "100%" }} >
             <KeyboardAwareScrollView extraHeight={100}>

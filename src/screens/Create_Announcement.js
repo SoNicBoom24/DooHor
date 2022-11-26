@@ -1,5 +1,4 @@
-import { Text, TextInput, View, StyleSheet, Button, Alert, TouchableOpacity, SafeAreaView, ScrollView, Image } from 'react-native';
-import DataTable, { COL_TYPES } from 'react-native-datatable-component';
+import { Text, TextInput, View, StyleSheet, Alert, TouchableOpacity,ScrollView } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
@@ -12,7 +11,6 @@ export default function Create_Announcement() {
     const [desc_input, setDesc] = React.useState("");
     const [alldesc_input, setallDesc] = React.useState("");
     const [image, setImage] = React.useState(null);
-    /////////////////////////////
     const alltype = ['Room', 'Register', 'General'];
     const db = firebase.firestore();
 
@@ -35,11 +33,11 @@ export default function Create_Announcement() {
         let m = Math.floor(Math.random() * 100) + 1
         try {
             await ref1;
-
         }
         catch (e) {
             console.log(e)
         }
+
         Alert.alert(
             'เพิ่มประกาศสำเร็จ'
         )
@@ -71,18 +69,15 @@ export default function Create_Announcement() {
                 id: m,
                 type: "General"
             })
-
         }
         setTitle("")
         setDesc("")
         setallDesc("")
         setImage("")
-
     }
     console.log(image)
     return (
         <ScrollView style={{ width: "100%", backgroundColor: "#FFDA79", borderRadius: 10, alignSelf: 'center', flex: 1 }}>
-
             <View style={{ padding: 20 }}>
                 <ModalDropdown options={alltype}
                     defaultValue={"ประเภท ของประกาศ"}
@@ -101,15 +96,13 @@ export default function Create_Announcement() {
                 width: "80%",
                 height: "40%",
                 alignSelf: 'center'
-
-
             }}>
                 <View style={{ padding: 5, alignSelf: 'center' }} >
                     <AntDesign name="upload" size={24} color="black" style={{ backgroundColor: "white", padding: 5, borderRadius: 10, marginTop: '20%' }} />
                 </View>
-
             </TouchableOpacity>
             <View style={{ padding: 20 }}>
+
                 <TextInput
                     style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "50%", }}
                     placeholder="หัวข้อ"
@@ -137,8 +130,6 @@ export default function Create_Announcement() {
                     </View>
                 </TouchableOpacity>
             </View>
-
-
         </ScrollView>
     );
 }
@@ -148,7 +139,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#FFDA79",
     },
-
     img: {
         width: "80%",
         height: 150,

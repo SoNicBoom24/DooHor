@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import ModalDropdown from 'react-native-modal-dropdown';
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import firebase from "../Database/firebaseDB";
-
 
 export default function Register() {
     const navigation = useNavigation();
@@ -37,7 +36,6 @@ export default function Register() {
     const [imageIdCard, setimageIdCard] = useState(null);
     const [imageHouse, setimageHouse] = useState(null);
     const [imageSelfie, setimageSelfie] = useState(null);
-
 
     const pickImage_IdCard = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -72,44 +70,7 @@ export default function Register() {
         setimageSelfie(source);
     };
 
-    // const uploadImage = async () => {
-    //     const response_IdCard = await fetch(imageIdCard.uri)
-    //     const response_House = await fetch(imageHouse.uri)
-    //     const response_Selfie = await fetch(imageSelfie.uri)
-    //     const blob1 = await response_IdCard.blob();
-    //     const blob2 = await response_House.blob();
-    //     const blob3 = await response_Selfie.blob();
-    //     const filename1 = imageIdCard.uri
-    //     const filename2 = imageHouse.uri
-    //     const filename3 = imageSelfie.uri
-    //     var ref1 = firebase.storage().ref().child(filename1).put(blob1);
-    //     var ref2 = firebase.storage().ref().child(filename2).put(blob2);
-    //     var ref3 = firebase.storage().ref().child(filename3).put(blob3);
-    //     ////มันคือไอ url ของไฟลเบส
-    //     console.log(filename1);
-    //     console.log(filename2);
-    //     console.log(filename3);
-
-    //     try {
-    //         await ref1;
-    //         await ref2;
-    //         await ref3;
-    //     }
-    //     catch (e) {
-    //         console.log(e)
-    //     }
-    //     Alert.alert(
-    //         'success'
-    //     )
-    //     setimageIdCard(null)
-    //     setimageHouse(null)
-    //     setimageSelfie(null)
-
-    // }
-
-
     const addField = async () => {
-        // if (addDataFirstName && addDataFirstName.length > 0) {
         const response_IdCard = await fetch(imageIdCard.uri)
         const response_House = await fetch(imageHouse.uri)
         const response_Selfie = await fetch(imageSelfie.uri)
@@ -122,7 +83,7 @@ export default function Register() {
         var ref1 = firebase.storage().ref().child(filename1).put(blob1);
         var ref2 = firebase.storage().ref().child(filename2).put(blob2);
         var ref3 = firebase.storage().ref().child(filename3).put(blob3);
-        ////มันคือไอ url ของไฟลเบส
+        //// url ของไฟลเบส
         console.log(filename1);
         console.log(filename2);
         console.log(filename3);
@@ -168,7 +129,6 @@ export default function Register() {
         todoRef.add(data)
         alert("คุณลงทะเบียนสำเร็จแล้ว")
         navigation.navigate("ScreenAnnoucement")
-        // };
     }
 
     return (
@@ -351,7 +311,6 @@ export default function Register() {
                                 </Text>
                             </View>
                         </TouchableOpacity>
-
                     </View>
                 </>
             </KeyboardAwareScrollView>
@@ -376,6 +335,5 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 10,
         width: "48%",
-
     },
 });

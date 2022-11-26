@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Component } from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, ScrollView } from 'react-native';
 import firebase from '../Database/firebaseDB'
 import { Card, Title, Paragraph } from 'react-native-paper';
 
@@ -24,14 +24,15 @@ export default class ReadAuth extends Component {
         this.unsubscribe =
             this.subjCollection.onSnapshot(this.getCollection);
     }
+
     componentWillUnmount() {
         this.unsubscribe();
     }
+
     render() {
         return (
             < ScrollView style={styles.container} >
                 {this.state.subject_list.map((item, i) => (
-
                     <Card key={i} style={{
                         borderRadius: 15,
                         elevation: 15,
@@ -40,7 +41,6 @@ export default class ReadAuth extends Component {
                         alignSelf: 'center',
                         marginTop: "8%",
                         marginBottom: "5%",
-
                     }}>
                         <Card.Content>
                             <Title>รหัสนักศึกษา : {item.student_id}</Title>
@@ -50,25 +50,16 @@ export default class ReadAuth extends Component {
                         }}>
                             <Paragraph>{item.text}</Paragraph>
                             <Paragraph>เวลา : {item.id}</Paragraph>
-
                         </Card.Content>
-
                     </Card>
-
-
                 ))}
-
             </ScrollView>
-
-
         );
     }
-
 }
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#FFDA79",
     },
-
 });

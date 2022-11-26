@@ -1,9 +1,8 @@
-import { Text, TextInput, View, StyleSheet, Button, Alert, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, TextInput, View, StyleSheet, Alert, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import DataTable, { COL_TYPES } from 'react-native-datatable-component';
 import React, { useState } from "react";
 import firebase from '../Database/firebaseDB'
 import ModalDropdown from 'react-native-modal-dropdown';
-
 
 export const ScoreTable = () => {
     const [text, onChangeText] = useState("");
@@ -31,14 +30,6 @@ export const ScoreTable = () => {
             setuserdata(all_data);
         });
 
-    // let data = userdata;
-    // if (text[0] in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) {
-    //     data = userdata.filter(x => String(x.รหัสนักศึกษา).includes(text));
-    // }
-    // else {
-    //     data = userdata.filter(x => String(x.รายชื่อนักศึกษา).includes(text));
-
-    // }
     const Detail = (row) => {
         Alert.alert(
             "รายละเอียดการให้คะแนน",
@@ -56,9 +47,9 @@ export const ScoreTable = () => {
                     text: 'กลับ'
                 }
             ],
-
         )
     }
+
     const add = () => {
         const db = firebase.firestore();
         const value1 = parseInt(score_begin);
@@ -94,10 +85,9 @@ export const ScoreTable = () => {
             { name: 'รายละเอียดการให้คะแนน', type: COL_TYPES.Button, },
         ]
     const nameOfCols = ['รายชื่อนักศึกษา', 'รหัสนักศึกษา', "คะแนน", "รายละเอียดการให้คะแนน"];
+
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#FFDA79' }}>
-
-
             <TextInput placeholder="ชื่อหรือรหัสนักศึกษา" style={styles.input}
                 onChangeText={onChangeText}
                 value={text}
@@ -114,17 +104,13 @@ export const ScoreTable = () => {
                     data={userdata}
                     colNames={nameOfCols}
                     headerLabelStyle={{ color: 'grey', fontSize: 10 }}
-
                 />
             </View>
             <SafeAreaView style={{ width: "90%", backgroundColor: "#FFB053", borderRadius: 10, alignSelf: 'center', marginBottom: 20, overflow: "hidden" }}>
                 <View style={{ padding: 20 }}>
-
                     <View style={{ width: "90%" }}>
                         <Text style={{ padding: 20, fontSize: 18, display: uid_edit == '' ? 'flex' : 'none', alignSelf: 'center' }}> โปรดเลือกนักศึกษา ที่ให้คะแนน</Text>
                         <Text style={{ padding: 20, fontSize: 18, display: uid_edit != '' ? 'flex' : 'none', alignSelf: 'center' }}> นักศึกษาที่เลือก : {keep}</Text>
-
-
                         <TouchableOpacity style={{ display: uid_edit != '' ? 'flex' : 'none' }} onPress={back} >
                             <View style={{ backgroundColor: "red", borderRadius: 10, width: "40%", alignSelf: "center", marginVertical: 10, marginTop: "2.5%" }}>
                                 <Text style={{ color: "white", alignSelf: "center", fontSize: 16, }}>
@@ -132,15 +118,12 @@ export const ScoreTable = () => {
                                 </Text>
                             </View>
                         </TouchableOpacity>
-
-
                     </View>
                     <TextInput
                         style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "60%", alignSelf: 'center', marginTop: "2.5%", textAlign: 'center', borderWidth: 1 }}
                         placeholder="รายละเอียดการให้คะแนน"
                         onChangeText={(score_details) => setaddDetail_score(score_details)}
                         value={adddetail_score} />
-
 
                     <TextInput
                         style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "60%", alignSelf: 'center', marginTop: "2.5%", textAlign: 'center', borderWidth: 1 }}
@@ -157,7 +140,6 @@ export const ScoreTable = () => {
                         style={{ backgroundColor: "white", borderRadius: 10, width: "60%", alignSelf: "center", marginTop: "2.5%", textAlign: 'center', borderWidth: 1, padding: 5 }}
                         onSelect={(type) => setSelecttype(alltype[type])}
                         value={selecttype}
-
                     />
 
                     <TouchableOpacity onPress={add} >
@@ -170,9 +152,9 @@ export const ScoreTable = () => {
                 </View>
             </SafeAreaView>
         </ScrollView >
-
     )
 }
+
 const styles = StyleSheet.create({
     input: {
         height: 40,

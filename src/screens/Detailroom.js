@@ -1,10 +1,8 @@
-import React, { useState, useEffect, Component } from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Button, Image, SafeAreaView, ScrollView, TextInput } from 'react-native';
 import firebase from '../Database/firebaseDB'
 import { useRoute } from '@react-navigation/native';
 import { Card, Title, Paragraph } from 'react-native-paper';
-import { AntDesign, Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
 
 export default function (props) {
     const route = useRoute();
@@ -16,7 +14,6 @@ class Detailroom extends Component {
     constructor() {
         super();
         this.uid = firebase.auth().currentUser.uid
-
         this.subjCollection = firebase.firestore().collection("Users").where("uid", "==", this.uid);
         this.state = {
             subject_list: [],
@@ -31,7 +28,6 @@ class Detailroom extends Component {
             Roomid: "",
             text: "",
             name: ""
-
         };
     }
     getCollection = (querySnapshot) => {
@@ -72,18 +68,15 @@ class Detailroom extends Component {
     componentDidMount() {
         this.unsubscribe =
             this.subjCollection.onSnapshot(this.getCollection);
-        // alert(this.props.id)
-
     }
+
     componentWillUnmount() {
         this.unsubscribe();
-
     }
+
     addinRoom(id) {
         console.log(this.state)
-
         const db = firebase.firestore();
-
         db.collection("Users").doc(id).update({
             room_name: this.state.Roomnameadd,
         })
@@ -94,7 +87,6 @@ class Detailroom extends Component {
         })
         alert("ลงชื่อจองห้องสำเร็จ")
         this.setState({ text: "" })
-
         const { navigation } = this.props;
         navigation.navigate('ScreenAnnoucement')
     }
@@ -123,8 +115,8 @@ class Detailroom extends Component {
         alert("ยกเลิกการจองห้องพักสำเร็จ");
         const { navigation } = this.props;
         navigation.navigate('Sceeenselect')
-
     }
+
     render() {
         return (
             < ScrollView style={styles.container} >
@@ -141,9 +133,7 @@ class Detailroom extends Component {
                         <Image source={{ uri: item }} style={{ height: 200 }}>
                         </Image>
                     </View>
-
                 ))}
-
                 {this.state.subject_list.map((item, i) => (
                     <View key={i} style={{ marginTop: 10 }}>
                         <View>
@@ -154,24 +144,18 @@ class Detailroom extends Component {
                                 <Text style={{ padding: 10 }}>
                                     {item.desc}
                                 </Text>
-
                             </SafeAreaView>
                         </View>
                     </View>
-
                 ))}
-
                 <View style={{ alignItems: "center", marginBottom: 20, }}>
-
                     <Card style={{
                         borderRadius: 15, width: "95%", marginBottom: 10,
                     }} >
-
                         <Card.Content
                         ><Title style={{ fontSize: 15, textAlign: 'center' }}>รายชื่อนักศึกษา </Title>
                             {this.state.student_list.map((item, i) => (
                                 <Paragraph key={i} style={{ fontSize: 15 }}>{i + 1}. {item}</Paragraph>
-
                             ))}
                             <Title style={{ fontSize: 15, textAlign: 'center' }}>คำแนะนำตัว </Title>
                             {this.state.Text_stundent_list.map((item, i) => (
@@ -186,7 +170,6 @@ class Detailroom extends Component {
                                 </View>
                             ))}
                         </Card.Content>
-
                     </Card>
                     <TextInput
                         style={{ backgroundColor: "white", padding: 5, borderRadius: 10, width: "60%", marginTop: "2.5%", textAlign: 'center', borderWidth: 1 }}
@@ -201,15 +184,10 @@ class Detailroom extends Component {
                         onPress={() => this.addinRoom(this.state.id)}
                         style={{ display: this.state.room != "" ? "flex" : "none" }}
                     />
-
                 </View>
-
             </ScrollView>
-
-
         );
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -218,7 +196,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFDA79",
         width: "100%"
     },
-
     description: {
         backgroundColor: "white",
         borderRadius: 20,
@@ -231,5 +208,4 @@ const styles = StyleSheet.create({
         elevation: 15,
         padding: 10,
     }
-
 });

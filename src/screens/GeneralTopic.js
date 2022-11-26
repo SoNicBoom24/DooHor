@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Component } from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions, Switch, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image, SafeAreaView, ScrollView } from 'react-native';
 import firebase from '../Database/firebaseDB'
 import { useRoute } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
@@ -15,7 +15,6 @@ class GeneralTopic extends Component {
     constructor() {
         super();
         this.uid = firebase.auth().currentUser.uid
-
         this.subjCollection = firebase.firestore().collection("Users").where("uid", "==", this.uid);
         this.state = {
             subject_list: [],
@@ -49,7 +48,6 @@ class GeneralTopic extends Component {
     componentDidMount() {
         this.unsubscribe =
             this.subjCollection.onSnapshot(this.getCollection);
-        // alert(this.props.id)
     }
     componentWillUnmount() {
         this.unsubscribe();
@@ -66,15 +64,12 @@ class GeneralTopic extends Component {
             });
     }
     render() {
-
         return (
             <SafeAreaView style={styles.container} >
-
                 <ScrollView>
                     <Text>{this.props.id}</Text>
                     {this.state.subject_list.map((item, i) => (
                         <View key={i}>
-
                             <View>
                                 <Image style={styles.img} source={{ uri: item.image }} />
                                 <SafeAreaView style={styles.description}>
@@ -85,20 +80,16 @@ class GeneralTopic extends Component {
                                         {item.all_desc}
                                     </Text>
                                 </SafeAreaView>
-                                <FontAwesome name="trash" size={24} color="black" style={{ bottom: 0, alignSelf: "center", display: this.state.role == "admin" ? "flex" : "none" }} onPress={() => this.delete(item.id)} />
-
+                                <FontAwesome name="trash" size={24} color="black" 
+                                    style={{ bottom: 0, alignSelf: "center", display: this.state.role == "admin" ? "flex" : "none" }} 
+                                    onPress={() => this.delete(item.id)} />
                             </View>
                         </View>
-
                     ))}
-
                 </ScrollView>
             </SafeAreaView>
-
-
         );
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -126,5 +117,4 @@ const styles = StyleSheet.create({
         elevation: 15,
         padding: 10,
     }
-
 });

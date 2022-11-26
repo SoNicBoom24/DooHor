@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Button, Alert } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Button } from 'react-native';
 
-const Button_Row = React.memo((props) => { //props: initialVal
+const Button_Row = React.memo((props) => {
     const { initialVal, handleOnRowSelect, info } = props;
     return (
         <TouchableOpacity style={styles.touchableOpacity}>
