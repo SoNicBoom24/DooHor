@@ -26,12 +26,10 @@ export default function Table_check() {
 
         });
 
-    // let data_table = userdata
+    let data_table = document
+    data_table = document.filter(x => x.ชื่อนักศึกษา.includes(text));
 
 
-    //     data_table = userdata.filter(x => String(x.stundet_name).includes(text));
-
-    // }
     const Settings =
         [
             { name: 'หัวข้อ', type: COL_TYPES.STRING, },
@@ -64,7 +62,7 @@ export default function Table_check() {
 
                     colSettings={Settings}
                     noOfPages="1"
-                    data={document}
+                    data={data_table}
                     onclick
                     colNames={nameOfCols}
                     headerLabelStyle={{ color: 'grey', fontSize: 10 }}
