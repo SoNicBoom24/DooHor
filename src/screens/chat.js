@@ -30,7 +30,7 @@ class Sceeenchat extends Component {
   storeSubject() {
     this.messageCollection
       .add({
-        id: this.state.id.slice(0, this.state.id.lastIndexOf("+") - 3),
+        id: this.state.id.slice(0, this.state.id.lastIndexOf("+")-10),
         student_name: this.state.name,
         text: this.state.message,
       })
