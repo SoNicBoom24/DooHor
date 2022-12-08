@@ -3,12 +3,15 @@ import React, { Component } from "react";
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { StyleSheet, View, TextInput, TouchableOpacity, Text } from "react-native";
 import firebase from "../Database/firebaseDB";
 import { Card, Paragraph } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 =======
+=======
+>>>>>>> parent of 7a76d23 (Add files via upload)
 =======
 >>>>>>> parent of 7a76d23 (Add files via upload)
 =======
@@ -22,6 +25,9 @@ import { Button, Input } from "react-native-elements";
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 7a76d23 (Add files via upload)
+=======
 >>>>>>> parent of 7a76d23 (Add files via upload)
 =======
 >>>>>>> parent of 7a76d23 (Add files via upload)
@@ -90,8 +96,11 @@ class Sceeenchat extends Component {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       const { student_name, text, id } = res.data();
 =======
+=======
+>>>>>>> parent of 7a76d23 (Add files via upload)
 =======
 >>>>>>> parent of 7a76d23 (Add files via upload)
 =======
@@ -125,6 +134,7 @@ class Sceeenchat extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -224,10 +234,15 @@ export default Sceeenchat;
 =======
 >>>>>>> parent of 7a76d23 (Add files via upload)
 =======
+=======
+>>>>>>> parent of 7a76d23 (Add files via upload)
       <ScrollView >
 
 
 
+<<<<<<< HEAD
+>>>>>>> parent of 7a76d23 (Add files via upload)
+=======
 >>>>>>> parent of 7a76d23 (Add files via upload)
         {this.state.message_list.map((item, i) => {
           return (
@@ -255,6 +270,9 @@ export default Sceeenchat;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 7a76d23 (Add files via upload)
+=======
 >>>>>>> parent of 7a76d23 (Add files via upload)
 =======
 >>>>>>> parent of 7a76d23 (Add files via upload)
