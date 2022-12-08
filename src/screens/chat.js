@@ -1,9 +1,16 @@
 import React, { Component } from "react";
+<<<<<<< HEAD
 import { StyleSheet, View, TextInput, TouchableOpacity, Text } from "react-native";
 import firebase from "../Database/firebaseDB";
 import { Card, Paragraph } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+=======
+import { ScrollView, Image } from "react-native";
+import firebase from "../Database/firebaseDB";
+import { ListItem } from "react-native-elements";
+import { Button, Input } from "react-native-elements";
+>>>>>>> parent of 7a76d23 (Add files via upload)
 
 class Sceeenchat extends Component {
   constructor() {
@@ -36,6 +43,10 @@ class Sceeenchat extends Component {
         this.setState({
           message: "",
         });
+        Alert.alert(
+          "Adding Alert",
+          "New subject was added!! Pls check your DB!!"
+        );
       });
   }
 
@@ -57,13 +68,21 @@ class Sceeenchat extends Component {
 
     const all_data = [];
     querySnapshot.forEach((res) => {
+<<<<<<< HEAD
       const { student_name, text, id } = res.data();
+=======
+      //   console.log("res: ", res);
+      //   console.log("res.data() : ", res.data());
+
+      const { student_id, text } = res.data();
+>>>>>>> parent of 7a76d23 (Add files via upload)
       all_data.push({
         student_name,
         text,
         id
       });
     });
+    // console.log("all_data : ", all_data);
     this.setState({
       message_list: all_data,
     });
@@ -79,6 +98,7 @@ class Sceeenchat extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <KeyboardAwareScrollView extraHeight={130} style={styles.container}>
         {this.state.message_list.map((item, i) => (
           <View key={i} style={{ marginBottom: 10 }}>
@@ -106,12 +126,17 @@ class Sceeenchat extends Component {
                   {item.text}
                   <Paragraph> เวลา : {item.id}</Paragraph>
                 </Text>
+=======
+      <ScrollView >
+
+>>>>>>> parent of 7a76d23 (Add files via upload)
 
               </View>
             </Card>
           </View>
         ))}
 
+<<<<<<< HEAD
         <View style={{
           flexDirection: 'row',
           width: "90%",
@@ -153,3 +178,28 @@ const styles = StyleSheet.create({
 });
 
 export default Sceeenchat;
+=======
+        {this.state.message_list.map((item, i) => {
+          return (
+            <ListItem key={i} bottomDivider>
+              <ListItem.Content>
+                <ListItem.Title>{item.student_id}</ListItem.Title>
+                <ListItem.Subtitle>{item.text}</ListItem.Subtitle>
+              </ListItem.Content>
+              <ListItem.Chevron />
+            </ListItem>
+          );
+        })}
+        <Input
+          placeholder={"ข้อความ"}
+          value={this.state.message}
+          onChangeText={(val) => this.inputValueUpdate(val, "message")}
+        />
+        <Button title="ส่งข้อความ" onPress={() => this.storeSubject()} />
+      </ScrollView>
+    );
+  }
+}
+
+export default Sceeenchat;
+>>>>>>> parent of 7a76d23 (Add files via upload)
