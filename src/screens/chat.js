@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { StyleSheet, View, TextInput, TouchableOpacity, Text } from "react-native";
 import firebase from "../Database/firebaseDB";
 import { Card, Paragraph } from 'react-native-paper';
@@ -9,11 +10,16 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 =======
 =======
 >>>>>>> parent of 7a76d23 (Add files via upload)
+=======
+>>>>>>> parent of 7a76d23 (Add files via upload)
 import { ScrollView, Image } from "react-native";
 import firebase from "../Database/firebaseDB";
 import { ListItem } from "react-native-elements";
 import { Button, Input } from "react-native-elements";
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 7a76d23 (Add files via upload)
+=======
 >>>>>>> parent of 7a76d23 (Add files via upload)
 =======
 >>>>>>> parent of 7a76d23 (Add files via upload)
@@ -76,8 +82,11 @@ class Sceeenchat extends Component {
     querySnapshot.forEach((res) => {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       const { student_name, text, id } = res.data();
 =======
+=======
+>>>>>>> parent of 7a76d23 (Add files via upload)
 =======
 >>>>>>> parent of 7a76d23 (Add files via upload)
       //   console.log("res: ", res);
@@ -107,6 +116,7 @@ class Sceeenchat extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       <KeyboardAwareScrollView extraHeight={130} style={styles.container}>
@@ -142,9 +152,14 @@ class Sceeenchat extends Component {
 >>>>>>> parent of 7a76d23 (Add files via upload)
 =======
       <ScrollView >
+=======
+      <ScrollView >
 
 >>>>>>> parent of 7a76d23 (Add files via upload)
 
+>>>>>>> parent of 7a76d23 (Add files via upload)
+
+<<<<<<< HEAD
               </View>
             </Card>
           </View>
@@ -196,6 +211,8 @@ export default Sceeenchat;
 =======
 =======
 >>>>>>> parent of 7a76d23 (Add files via upload)
+=======
+>>>>>>> parent of 7a76d23 (Add files via upload)
         {this.state.message_list.map((item, i) => {
           return (
             <ListItem key={i} bottomDivider>
@@ -220,6 +237,9 @@ export default Sceeenchat;
 
 export default Sceeenchat;
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 7a76d23 (Add files via upload)
+=======
 >>>>>>> parent of 7a76d23 (Add files via upload)
 =======
 >>>>>>> parent of 7a76d23 (Add files via upload)
