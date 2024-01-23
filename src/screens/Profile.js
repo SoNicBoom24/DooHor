@@ -61,6 +61,7 @@ const Profile = () => {
     const [userData, setUserData] = useState([]);
 
     const uid = firebase.auth().currentUser.uid
+    useEffect(() => {
     firebase.firestore()
         .collection('Users')
         .where('uid', '==', uid)
@@ -70,7 +71,7 @@ const Profile = () => {
                 setUserData(res.data())
             });
         });
-
+    }, []);
     useEffect(() => {
         scrollY.addListener(({ value }) => {
             const curRoute = routes[tabIndex].key;
