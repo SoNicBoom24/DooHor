@@ -62,15 +62,15 @@ const Profile = () => {
 
     const uid = firebase.auth().currentUser.uid
     useEffect(() => {
-    firebase.firestore()
-        .collection('Users')
-        .where('uid', '==', uid)
-        .get()
-        .then(querySnapshot => {
-            querySnapshot.forEach((res) => {
-                setUserData(res.data())
+        firebase.firestore()
+            .collection('Users')
+            .where('uid', '==', uid)
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach((res) => {
+                    setUserData(res.data())
+                });
             });
-        });
     }, []);
     useEffect(() => {
         scrollY.addListener(({ value }) => {
